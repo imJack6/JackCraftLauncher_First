@@ -1,6 +1,6 @@
 using Avalonia.Controls;
 
-namespace JackCraftLauncher.CrossPlatform;
+namespace JackCraftLauncher.CrossPlatform.Views;
 
 public partial class MainWindow : Window
 {

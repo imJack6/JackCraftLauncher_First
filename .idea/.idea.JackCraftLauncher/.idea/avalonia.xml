@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="JackCraftLauncher.CrossPlatform/App.axaml" value="JackCraftLauncher.CrossPlatform/JackCraftLauncher.CrossPlatform.csproj" />
+        <entry key="JackCraftLauncher.CrossPlatform/Views/MainWindow.axaml" value="JackCraftLauncher.CrossPlatform/JackCraftLauncher.CrossPlatform.csproj" />
+        <entry key="JackCraftLauncher.CrossPlatform/Views/MyControls/WindowsControlButton.axaml" value="JackCraftLauncher.CrossPlatform/JackCraftLauncher.CrossPlatform.csproj" />
+        <entry key="JackCraftLauncher.CrossPlatform/Views/Themes/DarkResourceDictionary.axaml" value="JackCraftLauncher.CrossPlatform/JackCraftLauncher.CrossPlatform.csproj" />
+        <entry key="JackCraftLauncher.CrossPlatform/Views/Themes/LightResourceDictionary.axaml" value="JackCraftLauncher.CrossPlatform/JackCraftLauncher.CrossPlatform.csproj" />
+      </map>
+    </option>
+  </component>
+</project>

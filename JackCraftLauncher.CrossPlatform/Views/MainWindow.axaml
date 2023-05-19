@@ -1,0 +1,89 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:myControls="clr-namespace:JackCraftLauncher.CrossPlatform.Views.MyControls"
+        mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="350"
+        MinWidth="400" MinHeight="250"
+        x:Class="JackCraftLauncher.CrossPlatform.Views.MainWindow"
+        Icon="/Assets/Logo/JackCraft-2-64p.png"
+        ExtendClientAreaToDecorationsHint="True"
+        ExtendClientAreaChromeHints="NoChrome"
+        ExtendClientAreaTitleBarHeightHint="-1"
+        Background="{DynamicResource DefaultWindowBackground1}"
+        Foreground="{DynamicResource DefaultForeground}"
+        Title="JackCraft Launcher (跨平台版本)">
+    <Window.Styles>
+        <Style Selector="TabControl:normal /template/ ContentPresenter">
+            <Style.Animations>
+                <Animation Duration="0:0:0.5" FillMode="Forward" Easing="CubicEaseOut">
+                    <KeyFrame Cue="0%">
+                        <Setter Property="TranslateTransform.X" Value="100" />
+                        <Setter Property="Opacity" Value="0" />
+                    </KeyFrame>
+                    <KeyFrame Cue="100%">
+                        <Setter Property="TranslateTransform.X" Value="0" />
+                        <Setter Property="Opacity" Value="1" />
+                    </KeyFrame>
+                </Animation>
+            </Style.Animations>
+        </Style>
+    </Window.Styles>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="45"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition MinWidth="45" Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0"
+              Grid.Column="0"
+              Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0"
+                        Orientation="Horizontal">
+                <Image Source="/Assets/Logo/JackCraft-2-64p.png"
+                       Margin="10,5"/>
+                <TextBlock Text="JackCraft Launcher"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"/>
+            </StackPanel>
+            
+            <StackPanel Grid.Column="2"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Right"
+                        Spacing="5"
+                        Margin="20">
+                <Button Background="#FEBC2E" CornerRadius="50" Width="20" Height="20"/>
+                <Button Background="#28C840" CornerRadius="50" Width="20" Height="20"/>
+                <Button Background="#FF5F57" CornerRadius="50" Width="30" Height="20"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1"
+              Grid.Column="0">
+            
+        </Grid>
+        <Border Grid.Row="1"
+                Grid.Column="1"
+                CornerRadius="10,0,0,0"
+                ClipToBounds="True"
+                Background="{DynamicResource DefaultWindowBackground2}">
+            <myControls:AnimateTabControl>
+                <TabItem Header="Test1">
+                    123
+                </TabItem>
+                <TabItem Header="Test2">
+                    456
+                </TabItem>
+            </myControls:AnimateTabControl>
+        </Border>
+        
+    </Grid>
+</Window>
