@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JackCraftLauncher.Windows", "JackCraftLauncher.Windows\JackCraftLauncher.Windows.csproj", "{215319A9-142A-4626-B0A3-28E4471D4848}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JackCraftLauncher.CrossPlatform", "JackCraftLauncher.CrossPlatform\JackCraftLauncher.CrossPlatform.csproj", "{C7959055-8CAC-4A49-9383-E08937F97CF3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjBobcat", "ProjBobcat\ProjBobcat\ProjBobcat\ProjBobcat.csproj", "{104F9919-DE60-4956-9B70-52670A4611C2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{215319A9-142A-4626-B0A3-28E4471D4848}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{215319A9-142A-4626-B0A3-28E4471D4848}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{215319A9-142A-4626-B0A3-28E4471D4848}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{215319A9-142A-4626-B0A3-28E4471D4848}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7959055-8CAC-4A49-9383-E08937F97CF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7959055-8CAC-4A49-9383-E08937F97CF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7959055-8CAC-4A49-9383-E08937F97CF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7959055-8CAC-4A49-9383-E08937F97CF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{104F9919-DE60-4956-9B70-52670A4611C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{104F9919-DE60-4956-9B70-52670A4611C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{104F9919-DE60-4956-9B70-52670A4611C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{104F9919-DE60-4956-9B70-52670A4611C2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
