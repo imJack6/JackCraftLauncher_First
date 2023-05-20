@@ -34,4 +34,8 @@ public class LaunchCoreHandler
     {
         return _core;
     }
+    public void SetCore(DefaultGameCore newCore)
+    {
+        _core = newCore;
+    }
 }
