@@ -41,3 +41,7 @@
 | 游戏启动		| 制作中	|
 | 游戏日志		| 制作中	|
 | ......		| ...	|
+
+---------------------
+
+![Rider](https://img.shields.io/badge/%E4%BD%BF%E7%94%A8_Rider-000000.svg?style=for-the-badge&logo=rider&logoColor=white)
