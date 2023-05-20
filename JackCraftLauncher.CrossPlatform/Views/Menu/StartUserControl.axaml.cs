@@ -25,11 +25,12 @@ public partial class StartUserControl : UserControl
 
     private async void StartJavaGameButton_OnClick(object? sender, RoutedEventArgs e)
     {
-        /*ViewLogWindow logWindow = new ViewLogWindow();
+        ViewLogWindow logWindow = new ViewLogWindow();
         logWindow.Show();
         logWindow.AddLog("[00:01:00][Render thread/Info]: Test Message");
         logWindow.AddLog("[00:01:00][Render thread/ERROR]: test err");
-        logWindow.AddLog("[00:01:00][Render thread/warn]: test warning");*/
+        logWindow.AddLog("[00:01:00][Render thread/warn]: test warning");
+        logWindow.AddLog("[00:01:00][aa");
         if (ThemeHandler.GetTheme().Equals(ThemeVariant.Dark))
             ThemeHandler.SetTheme(ThemeVariant.Light);
         else if (ThemeHandler.GetTheme().Equals(ThemeVariant.Light))
@@ -41,12 +42,10 @@ public partial class StartUserControl : UserControl
         }
         else
         {
-            
         }
     }
     private void RefreshLocalGameComboListButton_OnClick(object? sender, RoutedEventArgs e)
     {
         GameHandler.RefreshLocalGameList();
     }
-
 }
