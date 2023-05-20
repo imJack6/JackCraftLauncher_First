@@ -9,7 +9,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceInclude Source="/Views/Themes/DarkResourceDictionary.axaml"/>
+                <ResourceInclude Source="/Views/Themes/LightResourceDictionary.axaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

@@ -1,0 +1,85 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="using:JackCraftLauncher.CrossPlatform.Views.MyControls">
+    <Design.PreviewWith>
+        <Border Padding="20">
+            <StackPanel Spacing="5">
+                <RadioButton Classes="MenuRadioButton" Content="A" GroupName="Testaaa"/>
+                <RadioButton Classes="MenuRadioButton" IsChecked="True" Content="B" GroupName="Testaaa"/>
+                <RadioButton Classes="MenuRadioButton" MinWidth="40">
+                    <Path Stretch="Fill" MaxWidth="15" MaxHeight="15" Fill="{DynamicResource DefaultForeground}" Data="M630.8 944c-13.8 3.6-28-3.8-33-17-11.2-29.4-38.8-48.4-70-48.4-31.2 0-58.8 19-70 48.4-5.2 13.2-19.2 20.6-33 17-38.4-9.8-75.2-25-109.4-45.2-12.2-7.2-17-22.6-11.4-35.4 12.8-28.8 6.8-61.6-15.4-83.8-22.2-22.2-55-28.2-83.8-15.4-13 5.8-28.2 1-35.4-11.2-20.2-34-35.4-70.8-45.2-109.4-3.6-13.8 3.8-28 17-33 29.4-11.2 48.4-38.8 48.4-70 0-31.2-19-58.8-48.4-70-13.2-5.2-20.6-19.2-17-33 9.8-38.6 25-75.4 45.4-109.4 7.2-12.2 22.4-17 35.4-11.2 28.8 12.8 61.6 6.8 83.8-15.4 22-22 28.2-55 15.4-83.8-5.8-13-1-28.2 11.2-35.4 34-20.2 70.8-35.4 109.4-45.2 13.8-3.6 28 3.8 33 17 11.2 29.4 38.8 48.4 70 48.4 31.2 0 58.8-19 70-48.4 5.2-13.2 19.2-20.6 33-17 38.4 9.8 75.2 25 109.4 45.2 12.2 7.2 17 22.6 11.4 35.4-12.8 28.8-6.8 61.6 15.4 83.8 22.2 22.2 55 28.2 83.8 15.4 13-5.8 28.2-1 35.4 11.2 20.2 34 35.4 70.8 45.2 109.4 3.6 13.8-3.8 28-17 33-29.4 11.2-48.4 38.8-48.4 70 0 31.2 19 58.8 48.4 70 13.2 5 20.6 19.2 17 33-9.8 38.6-25 75.4-45.4 109.4-7.2 12.2-22.4 17-35.4 11.2-28.8-12.8-61.6-6.8-83.8 15.4-22.2 22.2-28.2 55-15.4 83.8 5.8 13 1 28.2-11.2 35.4-34.2 20.2-70.8 35.4-109.4 45.2z m-267.6-82.8c17.4 8.8 35.2 16.2 53.8 22.2 23.8-37.8 65-61 110.8-61s87 23.4 110.8 61c18.4-6 36.4-13.4 53.6-22.2-10-43.4 2.8-89 35.2-121.4 31.8-31.8 78.2-44.6 121.4-35 8.8-17.2 16.4-35.2 22.2-53.8-37.8-23.6-61-64.8-61-110.8 0-45.8 23.4-87 61-110.8-6-18.4-13.4-36.4-22.2-53.6-43.4 10-89-2.8-121.4-35.2-31.8-31.8-44.6-78.2-35-121.4-17.4-8.8-35.2-16.2-53.8-22.2-23.8 37.8-65 61-110.8 61s-87-23.4-110.8-61c-18.4 6-36.4 13.4-53.6 22.2 10 43.4-2.8 89-35.2 121.4-31.8 31.8-78.2 44.6-121.4 35-8.8 17.2-16.4 35.2-22.2 53.8 37.8 23.8 61 65 61 110.8s-23.4 87-61 110.8c6 18.4 13.4 36.4 22.2 53.6 43.4-10 89 2.8 121.4 35.2 31.8 32 44.6 78.2 35 121.4z m173.2-189.8c-79.2 5-144.8-60.4-139.6-139.6 4.2-65.4 57-118.4 122.4-122.4 79.2-5 144.8 60.4 139.6 139.6-4.2 65.4-57 118.2-122.4 122.4z m-3.8-206.2c-45.4-3-83 34.8-80.2 80.2 2.4 37.4 32.8 67.8 70.2 70.2 45.4 3 83-34.8 80.2-80.2-2.2-37.4-32.6-67.8-70.2-70.2z"/>
+                </RadioButton>
+            </StackPanel>
+        </Border>
+    </Design.PreviewWith>
+    <Style Selector="Border.DefaultBorder">
+        <Setter Property="Transitions">
+            <Transitions>
+                <BrushTransition Property="Background" Duration="0:0:.1"/>
+            </Transitions>
+        </Setter>
+    </Style>
+    <Style Selector="RadioButton.MenuRadioButton">
+        <Setter Property="BorderBrush" Value="{DynamicResource RadioButtonBorderBrush}" />
+        <Setter Property="Padding" Value="10,10" />
+        <Setter Property="MinWidth" Value="40" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}"/>
+        <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
+        <Setter Property="Transitions">
+            <Transitions>
+                <TransformOperationsTransition Property="RenderTransform" Duration="0:0:.05" />
+            </Transitions>
+        </Setter>
+        <Setter Property="Template">
+            <ControlTemplate TargetType="RadioButton">
+                <Border Name="RootBorder"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        Background="Transparent"
+                        Classes="DefaultBorder"
+                        CornerRadius="5"
+                        ClipToBounds="True">
+                    <Grid>
+                        <Border Name="ColorBorder"
+                                Classes="DefaultBorder"/>
+                        <Border Name="MaskBorder"
+                                Classes="DefaultBorder"/>
+                        <Border Name="CheckBorder"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Stretch"
+                                Width="4"
+                                Height="15"
+                                CornerRadius="10"/>
+                        <ContentPresenter
+                            Name="PART_ContentPresenter"
+                            Margin="{TemplateBinding Padding}"
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                            Content="{TemplateBinding Content}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                            RecognizesAccessKey="True" />
+                    </Grid>     
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+        
+    <Style Selector="RadioButton.MenuRadioButton:pressed">
+        <Setter Property="RenderTransform" Value="scale(0.90)" />
+    </Style>
+    
+    <Style Selector="RadioButton.MenuRadioButton:pointerover /template/ Border#MaskBorder">
+        <Setter Property="Background" Value="#44000000" />
+    </Style>
+    
+    <Style Selector="RadioButton.MenuRadioButton:checked /template/ Border#ColorBorder">
+        <Setter Property="Background" Value="#44000000"/>
+    </Style>
+    <Style Selector="RadioButton.MenuRadioButton:checked /template/ Border#CheckBorder">
+        <Setter Property="Background" Value="#4CC2FF"/>
+    </Style>
+</Styles>
