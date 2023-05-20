@@ -10,6 +10,7 @@ using JackCraftLauncher.CrossPlatform.Class.Launch;
 using JackCraftLauncher.CrossPlatform.Views.MyControls;
 using JackCraftLauncher.CrossPlatform.Views.MyWindow;
 using JackCraftLauncher.CrossPlatform.Views.Themes;
+using ProjBobcat.Class.Model;
 
 namespace JackCraftLauncher.CrossPlatform.Views.Menu;
 
@@ -25,19 +26,15 @@ public partial class StartUserControl : UserControl
 
     private async void StartJavaGameButton_OnClick(object? sender, RoutedEventArgs e)
     {
-        if (ThemeHandler.GetTheme().Equals(ThemeVariant.Dark))
-            ThemeHandler.SetTheme(ThemeVariant.Light);
-        else if (ThemeHandler.GetTheme().Equals(ThemeVariant.Light))
-            ThemeHandler.SetTheme(ThemeVariant.Dark);
         if (SelectJavaGameVersionComboBox.SelectedIndex == -1)
-        {
             await MyDialog.ShowDialog(MainWindow.Instance.RootGrid,"提示","没有选择启动版本");
-            return;
-        }
         else
-        {
-            
-        }
+            if (SettingsUserControl.Instance.StartJavaSelectComboBox.SelectedIndex == -1)
+                await MyDialog.ShowDialog(MainWindow.Instance.RootGrid,"提示","没有选择启动 Java");
+            else
+            {
+                GameHandler.StartGame(GlobalVariable.LocalGameList[SelectJavaGameVersionComboBox.SelectedIndex]);
+            }
     }
     private void RefreshLocalGameComboListButton_OnClick(object? sender, RoutedEventArgs e)
     {

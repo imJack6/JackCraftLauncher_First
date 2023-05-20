@@ -2,6 +2,8 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 using Avalonia.Controls;
+using Avalonia.Input;
+using Avalonia.Interactivity;
 using Avalonia.Layout;
 using Avalonia.Media;
 
@@ -13,8 +15,34 @@ public partial class ViewLogWindow : Window
     {
         InitializeComponent();
     }
-
-    public async void AddLog(string log)
+    #region 窗体控制按钮事件
+    private void TitleBar_PointerPressed(object sender, PointerPressedEventArgs e)
+    {
+        if (e.ClickCount <= 1)
+            BeginMoveDrag(e);
+        else if (e.ClickCount == 2)
+            if (this.WindowState == WindowState.Maximized)
+                this.WindowState = WindowState.Normal;
+            else if (this.WindowState == WindowState.Normal)
+                this.WindowState = WindowState.Maximized;
+    }
+    private void CloseButton_Click(object sender, RoutedEventArgs e)
+    {
+        Close();
+    }
+    private void MaximizeButton_Click(object sender, RoutedEventArgs e)
+    {
+        if (this.WindowState == WindowState.Maximized)
+            this.WindowState = WindowState.Normal;
+        else if (this.WindowState == WindowState.Normal)
+            this.WindowState = WindowState.Maximized;
+    }
+    private void MinimizeButton_Click(object sender, RoutedEventArgs e)
+    {
+        this.WindowState = WindowState.Minimized;
+    }
+    #endregion
+    public void AddLog(string log)
     {
         var stackPanel = new StackPanel { Orientation = Orientation.Horizontal };
 

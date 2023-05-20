@@ -1,18 +1,38 @@
-﻿using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Markup.Xaml;
+﻿using Avalonia.Controls;
+using Avalonia.Interactivity;
+using Avalonia.Styling;
+using JackCraftLauncher.CrossPlatform.Class.Launch;
+using JackCraftLauncher.CrossPlatform.Views.Themes;
 
 namespace JackCraftLauncher.CrossPlatform.Views.Menu;
 
 public partial class SettingsUserControl : UserControl
 {
+    public static SettingsUserControl Instance;
+
     public SettingsUserControl()
     {
+        Instance = this;
         InitializeComponent();
+        //GameHandler.RefreshLocalJavaList();
     }
 
-    private void InitializeComponent()
+    private void ThemeSelectComboBox_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
-        AvaloniaXamlLoader.Load(this);
+        if (ThemeSelectComboBox != null)
+            switch (ThemeSelectComboBox.SelectedIndex)
+            {
+                case 0:
+                    ThemeHandler.SetTheme(ThemeVariant.Light);
+                    break;
+                case 1:
+                    ThemeHandler.SetTheme(ThemeVariant.Dark);
+                    break;
+            }
+    }
+
+    private void RefreshLocalJavaComboBoxButton_OnClick(object? sender, RoutedEventArgs e)
+    {
+        GameHandler.RefreshLocalJavaList();
     }
 }

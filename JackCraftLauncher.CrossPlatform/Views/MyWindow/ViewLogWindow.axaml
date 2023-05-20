@@ -18,12 +18,21 @@
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
         <Border Grid.Row="0"
-                Background="{DynamicResource DefaultWindowBackground1}">
+                Background="{DynamicResource DefaultWindowBackground1}"
+                PointerPressed="TitleBar_PointerPressed">
             <Grid>
                 <TextBlock Text="日志显示"
                            HorizontalAlignment="Left"
                            VerticalAlignment="Center"
                            Margin="15,0"/>
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Right"
+                            Spacing="5"
+                            Margin="10">
+                    <Button Background="#FEBC2E" Click="MinimizeButton_Click" CornerRadius="50" Width="25" Height="20"/>
+                    <Button Background="#28C840" Click="MaximizeButton_Click" CornerRadius="50" Width="25" Height="20"/>
+                    <Button Background="#FF5F57" Click="CloseButton_Click" CornerRadius="50" Width="35" Height="20"/>
+                </StackPanel>
             </Grid>
         </Border>
         <ListBox Grid.Row="1"
