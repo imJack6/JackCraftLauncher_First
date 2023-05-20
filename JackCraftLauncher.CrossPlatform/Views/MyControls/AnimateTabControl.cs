@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reactive;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Metadata;
@@ -15,9 +16,10 @@ namespace JackCraftLauncher.CrossPlatform.Views.MyControls
         {
             PseudoClasses.Add(":normal");
             this.GetObservable(SelectedContentProperty).Subscribe(OnContentChanged);
+            //this.GetObservable(SelectedContentProperty).Subscribe(Observer.Create<object>(OnContentChanged));
         }
 
-        private void OnContentChanged(object obj)
+        private void OnContentChanged(object? obj)
         {
             if (AnimateOnChange)
             {
