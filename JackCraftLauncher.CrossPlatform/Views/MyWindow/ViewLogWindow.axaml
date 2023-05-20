@@ -1,0 +1,33 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="350" d:DesignHeight="400" Width="350" Height="400"
+        x:Class="JackCraftLauncher.CrossPlatform.Views.MyWindow.ViewLogWindow"
+        Icon="/Assets/Logo/JackCraft-2-64p.png"
+        ExtendClientAreaToDecorationsHint="True"
+        ExtendClientAreaChromeHints="NoChrome"
+        ExtendClientAreaTitleBarHeightHint="-1"
+        Background="{DynamicResource DefaultWindowBackground1}"
+        Foreground="{DynamicResource DefaultForeground}"
+        Title="日志显示 (PID:?)">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0"
+                Background="{DynamicResource DefaultWindowBackground1}">
+            <Grid>
+                <TextBlock Text="日志显示"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           Margin="15,0"/>
+            </Grid>
+        </Border>
+        <ListBox Grid.Row="1"
+                 Name="LogListBox"
+                 Background="{DynamicResource DefaultWindowBackground2}"/>
+    </Grid>
+</Window>

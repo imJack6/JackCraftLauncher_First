@@ -6,14 +6,19 @@
         <entry key="JackCraftLauncher.CrossPlatform/App.axaml" value="JackCraftLauncher.CrossPlatform/JackCraftLauncher.CrossPlatform.csproj" />
         <entry key="JackCraftLauncher.CrossPlatform/Views/MainWindow.axaml" value="JackCraftLauncher.CrossPlatform/JackCraftLauncher.CrossPlatform.csproj" />
         <entry key="JackCraftLauncher.CrossPlatform/Views/Menu/DownloadUserControl.axaml" value="JackCraftLauncher.CrossPlatform/JackCraftLauncher.CrossPlatform.csproj" />
+        <entry key="JackCraftLauncher.CrossPlatform/Views/Menu/SettingsUserControl.axaml" value="JackCraftLauncher.CrossPlatform/JackCraftLauncher.CrossPlatform.csproj" />
         <entry key="JackCraftLauncher.CrossPlatform/Views/Menu/StartUserControl.axaml" value="JackCraftLauncher.CrossPlatform/JackCraftLauncher.CrossPlatform.csproj" />
         <entry key="JackCraftLauncher.CrossPlatform/Views/Menu/UserUserControl.axaml" value="JackCraftLauncher.CrossPlatform/JackCraftLauncher.CrossPlatform.csproj" />
         <entry key="JackCraftLauncher.CrossPlatform/Views/MyControls/MenuRadioButton.axaml" value="JackCraftLauncher.CrossPlatform/JackCraftLauncher.CrossPlatform.csproj" />
+        <entry key="JackCraftLauncher.CrossPlatform/Views/MyControls/MyDialog.axaml" value="JackCraftLauncher.CrossPlatform/JackCraftLauncher.CrossPlatform.csproj" />
         <entry key="JackCraftLauncher.CrossPlatform/Views/MyControls/TestControl.axaml" value="JackCraftLauncher.CrossPlatform/JackCraftLauncher.CrossPlatform.csproj" />
         <entry key="JackCraftLauncher.CrossPlatform/Views/MyControls/WindowsControlButton.axaml" value="JackCraftLauncher.CrossPlatform/JackCraftLauncher.CrossPlatform.csproj" />
+        <entry key="JackCraftLauncher.CrossPlatform/Views/MyWindow.axaml" value="JackCraftLauncher.CrossPlatform/JackCraftLauncher.CrossPlatform.csproj" />
+        <entry key="JackCraftLauncher.CrossPlatform/Views/MyWindow/ViewLogWindow.axaml" value="JackCraftLauncher.CrossPlatform/JackCraftLauncher.CrossPlatform.csproj" />
         <entry key="JackCraftLauncher.CrossPlatform/Views/PathResourceDictionary.axaml" value="JackCraftLauncher.CrossPlatform/JackCraftLauncher.CrossPlatform.csproj" />
         <entry key="JackCraftLauncher.CrossPlatform/Views/Themes/DarkResourceDictionary.axaml" value="JackCraftLauncher.CrossPlatform/JackCraftLauncher.CrossPlatform.csproj" />
         <entry key="JackCraftLauncher.CrossPlatform/Views/Themes/LightResourceDictionary.axaml" value="JackCraftLauncher.CrossPlatform/JackCraftLauncher.CrossPlatform.csproj" />
+        <entry key="JackCraftLauncher.CrossPlatform/Views/Window/ViewLogWindow.axaml" value="JackCraftLauncher.CrossPlatform/JackCraftLauncher.CrossPlatform.csproj" />
       </map>
     </option>
   </component>

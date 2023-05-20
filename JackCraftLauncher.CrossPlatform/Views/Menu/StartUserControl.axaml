@@ -2,9 +2,53 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:myControls="clr-namespace:JackCraftLauncher.CrossPlatform.Views.MyControls"
+             xmlns:class="clr-namespace:JackCraftLauncher.CrossPlatform.Class"
              mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="300"
              x:Class="JackCraftLauncher.CrossPlatform.Views.Menu.StartUserControl">
     <Grid>
-        
+        <myControls:AnimateTabControl TabStripPlacement="Right">
+            <TabItem Header="Java">
+                <Grid>
+                    <ComboBox PlaceholderText="选择启动版本"
+                              Name="SelectJavaGameVersionComboBox"
+                              HorizontalAlignment="Stretch"
+                              Height="35"
+                              ItemsSource="{Binding Source={x:Static class:GlobalVariable.LocalGameList}}"
+                              Margin="0,5,40,0"
+                              CornerRadius="10"
+                              HorizontalContentAlignment="Center">
+                        <!--<ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>-->
+                    </ComboBox>
+                    <Button HorizontalAlignment="Right"
+                            VerticalAlignment="Top"
+                            Margin="0,5,0,0"
+                            CornerRadius="50"
+                            Click="RefreshLocalGameComboListButton_OnClick"
+                            Width="35"
+                            Height="35">
+                        <Path Stretch="Fill" MaxWidth="15" MaxHeight="15" Fill="{DynamicResource DefaultForeground}" Data="M960 416V192l-73.056 73.056a447.712 447.712 0 0 0-373.6-201.088C265.92 63.968 65.312 264.544 65.312 512S265.92 960.032 513.344 960.032a448.064 448.064 0 0 0 415.232-279.488 38.368 38.368 0 1 0-71.136-28.896 371.36 371.36 0 0 1-344.096 231.584C308.32 883.232 142.112 717.024 142.112 512S308.32 140.768 513.344 140.768c132.448 0 251.936 70.08 318.016 179.84L736 416h224z"/>
+                    </Button>
+                    <Button Content="启动游戏"
+                            FontSize="16"
+                            Name="StartJavaGameButton"
+                            Height="45"
+                            CornerRadius="10"
+                            Margin="0,0,0,10"
+                            Click="StartJavaGameButton_OnClick"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Bottom"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Bedrock">
+                test2
+            </TabItem>
+        </myControls:AnimateTabControl>
     </Grid>
 </UserControl>

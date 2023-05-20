@@ -20,11 +20,11 @@
             <Style.Animations>
                 <Animation Duration="0:0:0.5" FillMode="Forward" Easing="CubicEaseOut">
                     <KeyFrame Cue="0%">
-                        <Setter Property="TranslateTransform.X" Value="100" />
+                        <!--<Setter Property="TranslateTransform.X" Value="100" />-->
                         <Setter Property="Opacity" Value="0" />
                     </KeyFrame>
                     <KeyFrame Cue="100%">
-                        <Setter Property="TranslateTransform.X" Value="0" />
+                        <!--<Setter Property="TranslateTransform.X" Value="0" />-->
                         <Setter Property="Opacity" Value="1" />
                     </KeyFrame>
                 </Animation>
@@ -33,83 +33,85 @@
         <StyleInclude Source="/Views/MyControls/MenuRadioButton.axaml"/>
     </Window.Styles>
     
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="45"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition MinWidth="45" Width="Auto" MaxWidth="160"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <!--标题栏-->
-        <Grid Grid.Row="0"
-              Grid.Column="0"
-              Grid.ColumnSpan="2"
-              Background="Transparent"
-              PointerPressed="TitleBar_PointerPressed">
+    <Grid Name="RootGrid">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="20"/>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition MinWidth="45" Width="Auto" MaxWidth="160"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <StackPanel Grid.Column="0"
-                        Orientation="Horizontal">
-                <Image Source="/Assets/Logo/JackCraft-2-64p.png"
-                       Margin="10,5" />
-                <TextBlock Text="JackCraft Launcher"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Center"/>
-            </StackPanel>
-            
-            <StackPanel Grid.Column="2"
-                        Orientation="Horizontal"
-                        HorizontalAlignment="Right"
-                        Spacing="5"
-                        Margin="10">
-                <Button Background="#FEBC2E" Click="MinimizeButton_Click" CornerRadius="50" Width="25" Height="20"/>
-                <Button Background="#28C840" Click="MaximizeButton_Click" CornerRadius="50" Width="25" Height="20"/>
-                <Button Background="#FF5F57" Click="CloseButton_Click" CornerRadius="50" Width="35" Height="20"/>
-            </StackPanel>
-        </Grid>
-        <!--菜单栏-->
-        <Grid Grid.Row="1"
-              Grid.Column="0">
-            <RadioButton HorizontalAlignment="Center" VerticalAlignment="Top" Classes="MenuRadioButton" Click="MenuRadioButton_Click" Name="UserRadioButton" ToolTip.Tip="用户" MinWidth="40" GroupName="MenuRadioButtonGroup">
-                <Path Stretch="Fill" MaxWidth="15" MaxHeight="15" Fill="{DynamicResource DefaultForeground}" Data="M642.8 531.8c64.3-42.6 106.9-115.4 106.9-198.1C749.7 202.6 643.1 96 512 96S274.3 202.6 274.3 333.7c0 82.7 42.6 155.6 106.9 198.1C215.8 582.9 96 727.7 96 898.3c0 16.4 13.3 29.7 29.7 29.7s29.7-13.3 29.7-29.7c0-180.2 159.9-326.9 356.6-326.9 196.6 0 356.6 146.6 356.6 326.9 0 16.4 13.3 29.7 29.7 29.7s29.7-13.3 29.7-29.7c0-170.6-119.8-315.4-285.2-366.5zM333.7 333.7c0-98.3 80-178.3 178.3-178.3s178.3 80 178.3 178.3S610.3 512 512 512s-178.3-80-178.3-178.3z"/>
-            </RadioButton>
-            <StackPanel Spacing="5" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <RadioButton IsChecked="True" Classes="MenuRadioButton" Click="MenuRadioButton_Click" Name="StartRadioButton" ToolTip.Tip="开始" MinWidth="40" GroupName="MenuRadioButtonGroup">
-                    <Path Stretch="Fill" MaxWidth="15" MaxHeight="15" Fill="{DynamicResource DefaultForeground}" Data="M290.8 916.1c-3.2 0-6.5-0.7-9.5-2.3-7.1-3.6-11.5-10.8-11.5-18.7V135c0-7.9 4.5-15.2 11.5-18.7 7.1-3.6 15.6-2.9 21.9 1.8l515.3 380c5.4 4 8.5 10.2 8.5 16.9s-3 13-8.4 17L303.3 912c-3.7 2.7-8.1 4.1-12.5 4.1z m21-739.5v676.9l458.9-338.4-458.9-338.5z"/>
+            <!--标题栏-->
+            <Grid Grid.Row="0"
+                  Grid.Column="0"
+                  Grid.ColumnSpan="2"
+                  Background="Transparent"
+                  PointerPressed="TitleBar_PointerPressed">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0"
+                            Orientation="Horizontal">
+                    <Image Source="/Assets/Logo/JackCraft-2-64p.png"
+                           Margin="10,5" />
+                    <TextBlock Text="JackCraft Launcher"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
+                </StackPanel>
+                
+                <StackPanel Grid.Column="2"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Right"
+                            Spacing="5"
+                            Margin="10">
+                    <Button Background="#FEBC2E" Click="MinimizeButton_Click" CornerRadius="50" Width="25" Height="20"/>
+                    <Button Background="#28C840" Click="MaximizeButton_Click" CornerRadius="50" Width="25" Height="20"/>
+                    <Button Background="#FF5F57" Click="CloseButton_Click" CornerRadius="50" Width="35" Height="20"/>
+                </StackPanel>
+            </Grid>
+            <!--菜单栏-->
+            <Grid Grid.Row="1"
+                  Grid.Column="0">
+                <RadioButton HorizontalAlignment="Center" VerticalAlignment="Top" Classes="MenuRadioButton" Click="MenuRadioButton_Click" Name="UserRadioButton" ToolTip.Tip="用户" MinWidth="40" GroupName="MenuRadioButtonGroup">
+                    <Path Stretch="Fill" MaxWidth="15" MaxHeight="15" Fill="{DynamicResource DefaultForeground}" Data="M642.8 531.8c64.3-42.6 106.9-115.4 106.9-198.1C749.7 202.6 643.1 96 512 96S274.3 202.6 274.3 333.7c0 82.7 42.6 155.6 106.9 198.1C215.8 582.9 96 727.7 96 898.3c0 16.4 13.3 29.7 29.7 29.7s29.7-13.3 29.7-29.7c0-180.2 159.9-326.9 356.6-326.9 196.6 0 356.6 146.6 356.6 326.9 0 16.4 13.3 29.7 29.7 29.7s29.7-13.3 29.7-29.7c0-170.6-119.8-315.4-285.2-366.5zM333.7 333.7c0-98.3 80-178.3 178.3-178.3s178.3 80 178.3 178.3S610.3 512 512 512s-178.3-80-178.3-178.3z"/>
                 </RadioButton>
-                <RadioButton Classes="MenuRadioButton" Click="MenuRadioButton_Click" Name="DownloadRadioButton" ToolTip.Tip="下载" MinWidth="40" GroupName="MenuRadioButtonGroup">
-                    <Path Stretch="Fill" MaxWidth="15" MaxHeight="15" Fill="{DynamicResource DefaultForeground}" Data="M995.84 1024 28.16 1024C12.8 1024 0 1011.2 0 995.84l0 0c0-15.36 12.8-28.16 28.16-28.16l967.68 0c15.36 0 28.16 12.8 28.16 28.16l0 0C1024 1011.2 1011.2 1024 995.84 1024zM926.72 376.32 926.72 376.32c-10.24-10.24-30.72-10.24-40.96 0L537.6 721.92 537.6 28.16C537.6 12.8 527.36 0 512 0s-25.6 12.8-25.6 28.16l0 693.76L138.24 376.32c-10.24-10.24-30.72-10.24-40.96 0-10.24 10.24-10.24 28.16 0 40.96l394.24 394.24c2.56 2.56 2.56 2.56 5.12 2.56 0 0 2.56 2.56 2.56 2.56 7.68 2.56 15.36 2.56 23.04 0 2.56 0 2.56-2.56 2.56-2.56 2.56 0 5.12-2.56 5.12-2.56l394.24-394.24C936.96 404.48 936.96 386.56 926.72 376.32z"/>
+                <StackPanel Spacing="5" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <RadioButton IsChecked="True" Classes="MenuRadioButton" Click="MenuRadioButton_Click" Name="StartRadioButton" ToolTip.Tip="开始" MinWidth="40" GroupName="MenuRadioButtonGroup">
+                        <Path Stretch="Fill" MaxWidth="15" MaxHeight="15" Fill="{DynamicResource DefaultForeground}" Data="M290.8 916.1c-3.2 0-6.5-0.7-9.5-2.3-7.1-3.6-11.5-10.8-11.5-18.7V135c0-7.9 4.5-15.2 11.5-18.7 7.1-3.6 15.6-2.9 21.9 1.8l515.3 380c5.4 4 8.5 10.2 8.5 16.9s-3 13-8.4 17L303.3 912c-3.7 2.7-8.1 4.1-12.5 4.1z m21-739.5v676.9l458.9-338.4-458.9-338.5z"/>
+                    </RadioButton>
+                    <RadioButton Classes="MenuRadioButton" Click="MenuRadioButton_Click" Name="DownloadRadioButton" ToolTip.Tip="下载" MinWidth="40" GroupName="MenuRadioButtonGroup">
+                        <Path Stretch="Fill" MaxWidth="15" MaxHeight="15" Fill="{DynamicResource DefaultForeground}" Data="M995.84 1024 28.16 1024C12.8 1024 0 1011.2 0 995.84l0 0c0-15.36 12.8-28.16 28.16-28.16l967.68 0c15.36 0 28.16 12.8 28.16 28.16l0 0C1024 1011.2 1011.2 1024 995.84 1024zM926.72 376.32 926.72 376.32c-10.24-10.24-30.72-10.24-40.96 0L537.6 721.92 537.6 28.16C537.6 12.8 527.36 0 512 0s-25.6 12.8-25.6 28.16l0 693.76L138.24 376.32c-10.24-10.24-30.72-10.24-40.96 0-10.24 10.24-10.24 28.16 0 40.96l394.24 394.24c2.56 2.56 2.56 2.56 5.12 2.56 0 0 2.56 2.56 2.56 2.56 7.68 2.56 15.36 2.56 23.04 0 2.56 0 2.56-2.56 2.56-2.56 2.56 0 5.12-2.56 5.12-2.56l394.24-394.24C936.96 404.48 936.96 386.56 926.72 376.32z"/>
+                    </RadioButton>
+                </StackPanel>
+                <RadioButton Classes="MenuRadioButton" Click="MenuRadioButton_Click" Name="SettingsRadioButton" ToolTip.Tip="设置" GroupName="MenuRadioButtonGroup" Margin="0,0,0,5" MinWidth="40" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                    <Path Stretch="Fill" MaxWidth="15" MaxHeight="15" Fill="{DynamicResource DefaultForeground}" Data="M630.8 944c-13.8 3.6-28-3.8-33-17-11.2-29.4-38.8-48.4-70-48.4-31.2 0-58.8 19-70 48.4-5.2 13.2-19.2 20.6-33 17-38.4-9.8-75.2-25-109.4-45.2-12.2-7.2-17-22.6-11.4-35.4 12.8-28.8 6.8-61.6-15.4-83.8-22.2-22.2-55-28.2-83.8-15.4-13 5.8-28.2 1-35.4-11.2-20.2-34-35.4-70.8-45.2-109.4-3.6-13.8 3.8-28 17-33 29.4-11.2 48.4-38.8 48.4-70 0-31.2-19-58.8-48.4-70-13.2-5.2-20.6-19.2-17-33 9.8-38.6 25-75.4 45.4-109.4 7.2-12.2 22.4-17 35.4-11.2 28.8 12.8 61.6 6.8 83.8-15.4 22-22 28.2-55 15.4-83.8-5.8-13-1-28.2 11.2-35.4 34-20.2 70.8-35.4 109.4-45.2 13.8-3.6 28 3.8 33 17 11.2 29.4 38.8 48.4 70 48.4 31.2 0 58.8-19 70-48.4 5.2-13.2 19.2-20.6 33-17 38.4 9.8 75.2 25 109.4 45.2 12.2 7.2 17 22.6 11.4 35.4-12.8 28.8-6.8 61.6 15.4 83.8 22.2 22.2 55 28.2 83.8 15.4 13-5.8 28.2-1 35.4 11.2 20.2 34 35.4 70.8 45.2 109.4 3.6 13.8-3.8 28-17 33-29.4 11.2-48.4 38.8-48.4 70 0 31.2 19 58.8 48.4 70 13.2 5 20.6 19.2 17 33-9.8 38.6-25 75.4-45.4 109.4-7.2 12.2-22.4 17-35.4 11.2-28.8-12.8-61.6-6.8-83.8 15.4-22.2 22.2-28.2 55-15.4 83.8 5.8 13 1 28.2-11.2 35.4-34.2 20.2-70.8 35.4-109.4 45.2z m-267.6-82.8c17.4 8.8 35.2 16.2 53.8 22.2 23.8-37.8 65-61 110.8-61s87 23.4 110.8 61c18.4-6 36.4-13.4 53.6-22.2-10-43.4 2.8-89 35.2-121.4 31.8-31.8 78.2-44.6 121.4-35 8.8-17.2 16.4-35.2 22.2-53.8-37.8-23.6-61-64.8-61-110.8 0-45.8 23.4-87 61-110.8-6-18.4-13.4-36.4-22.2-53.6-43.4 10-89-2.8-121.4-35.2-31.8-31.8-44.6-78.2-35-121.4-17.4-8.8-35.2-16.2-53.8-22.2-23.8 37.8-65 61-110.8 61s-87-23.4-110.8-61c-18.4 6-36.4 13.4-53.6 22.2 10 43.4-2.8 89-35.2 121.4-31.8 31.8-78.2 44.6-121.4 35-8.8 17.2-16.4 35.2-22.2 53.8 37.8 23.8 61 65 61 110.8s-23.4 87-61 110.8c6 18.4 13.4 36.4 22.2 53.6 43.4-10 89 2.8 121.4 35.2 31.8 32 44.6 78.2 35 121.4z m173.2-189.8c-79.2 5-144.8-60.4-139.6-139.6 4.2-65.4 57-118.4 122.4-122.4 79.2-5 144.8 60.4 139.6 139.6-4.2 65.4-57 118.2-122.4 122.4z m-3.8-206.2c-45.4-3-83 34.8-80.2 80.2 2.4 37.4 32.8 67.8 70.2 70.2 45.4 3 83-34.8 80.2-80.2-2.2-37.4-32.6-67.8-70.2-70.2z"/>
                 </RadioButton>
-            </StackPanel>
-            <RadioButton Classes="MenuRadioButton" Click="MenuRadioButton_Click" Name="SettingsRadioButton" ToolTip.Tip="设置" GroupName="MenuRadioButtonGroup" Margin="0,0,0,5" MinWidth="40" HorizontalAlignment="Center" VerticalAlignment="Bottom">
-                <Path Stretch="Fill" MaxWidth="15" MaxHeight="15" Fill="{DynamicResource DefaultForeground}" Data="M630.8 944c-13.8 3.6-28-3.8-33-17-11.2-29.4-38.8-48.4-70-48.4-31.2 0-58.8 19-70 48.4-5.2 13.2-19.2 20.6-33 17-38.4-9.8-75.2-25-109.4-45.2-12.2-7.2-17-22.6-11.4-35.4 12.8-28.8 6.8-61.6-15.4-83.8-22.2-22.2-55-28.2-83.8-15.4-13 5.8-28.2 1-35.4-11.2-20.2-34-35.4-70.8-45.2-109.4-3.6-13.8 3.8-28 17-33 29.4-11.2 48.4-38.8 48.4-70 0-31.2-19-58.8-48.4-70-13.2-5.2-20.6-19.2-17-33 9.8-38.6 25-75.4 45.4-109.4 7.2-12.2 22.4-17 35.4-11.2 28.8 12.8 61.6 6.8 83.8-15.4 22-22 28.2-55 15.4-83.8-5.8-13-1-28.2 11.2-35.4 34-20.2 70.8-35.4 109.4-45.2 13.8-3.6 28 3.8 33 17 11.2 29.4 38.8 48.4 70 48.4 31.2 0 58.8-19 70-48.4 5.2-13.2 19.2-20.6 33-17 38.4 9.8 75.2 25 109.4 45.2 12.2 7.2 17 22.6 11.4 35.4-12.8 28.8-6.8 61.6 15.4 83.8 22.2 22.2 55 28.2 83.8 15.4 13-5.8 28.2-1 35.4 11.2 20.2 34 35.4 70.8 45.2 109.4 3.6 13.8-3.8 28-17 33-29.4 11.2-48.4 38.8-48.4 70 0 31.2 19 58.8 48.4 70 13.2 5 20.6 19.2 17 33-9.8 38.6-25 75.4-45.4 109.4-7.2 12.2-22.4 17-35.4 11.2-28.8-12.8-61.6-6.8-83.8 15.4-22.2 22.2-28.2 55-15.4 83.8 5.8 13 1 28.2-11.2 35.4-34.2 20.2-70.8 35.4-109.4 45.2z m-267.6-82.8c17.4 8.8 35.2 16.2 53.8 22.2 23.8-37.8 65-61 110.8-61s87 23.4 110.8 61c18.4-6 36.4-13.4 53.6-22.2-10-43.4 2.8-89 35.2-121.4 31.8-31.8 78.2-44.6 121.4-35 8.8-17.2 16.4-35.2 22.2-53.8-37.8-23.6-61-64.8-61-110.8 0-45.8 23.4-87 61-110.8-6-18.4-13.4-36.4-22.2-53.6-43.4 10-89-2.8-121.4-35.2-31.8-31.8-44.6-78.2-35-121.4-17.4-8.8-35.2-16.2-53.8-22.2-23.8 37.8-65 61-110.8 61s-87-23.4-110.8-61c-18.4 6-36.4 13.4-53.6 22.2 10 43.4-2.8 89-35.2 121.4-31.8 31.8-78.2 44.6-121.4 35-8.8 17.2-16.4 35.2-22.2 53.8 37.8 23.8 61 65 61 110.8s-23.4 87-61 110.8c6 18.4 13.4 36.4 22.2 53.6 43.4-10 89 2.8 121.4 35.2 31.8 32 44.6 78.2 35 121.4z m173.2-189.8c-79.2 5-144.8-60.4-139.6-139.6 4.2-65.4 57-118.4 122.4-122.4 79.2-5 144.8 60.4 139.6 139.6-4.2 65.4-57 118.2-122.4 122.4z m-3.8-206.2c-45.4-3-83 34.8-80.2 80.2 2.4 37.4 32.8 67.8 70.2 70.2 45.4 3 83-34.8 80.2-80.2-2.2-37.4-32.6-67.8-70.2-70.2z"/>
-            </RadioButton>
+            </Grid>
+            <!--内容-->
+            <Border Grid.Row="1"
+                    Grid.Column="1"
+                    CornerRadius="10,0,0,0"
+                    ClipToBounds="True"
+                    Background="{DynamicResource DefaultWindowBackground2}">
+                <myControls:AnimateTabControl Name="MenuTabControl" SelectedIndex="1">
+                    <TabItem Header="用户" IsVisible="False">
+                        <menu:UserUserControl/>
+                    </TabItem>
+                    <TabItem Header="开始" IsVisible="False">
+                        <menu:StartUserControl/>
+                    </TabItem>
+                    <TabItem Header="下载" IsVisible="False">
+                        <menu:DownloadUserControl/>
+                    </TabItem>
+                    <TabItem Header="设置" IsVisible="False">
+                        <menu:SettingsUserControl/>
+                    </TabItem>
+                </myControls:AnimateTabControl>
+            </Border>
         </Grid>
-        <!--内容-->
-        <Border Grid.Row="1"
-                Grid.Column="1"
-                CornerRadius="10,0,0,0"
-                ClipToBounds="True"
-                Background="{DynamicResource DefaultWindowBackground2}">
-            <myControls:AnimateTabControl Name="MenuTabControl" SelectedIndex="1">
-                <TabItem Header="用户" IsVisible="False">
-                    <menu:UserUserControl/>
-                </TabItem>
-                <TabItem Header="开始" IsVisible="False">
-                    <menu:StartUserControl/>
-                </TabItem>
-                <TabItem Header="下载" IsVisible="False">
-                    <menu:DownloadUserControl/>
-                </TabItem>
-                <TabItem Header="设置" IsVisible="False">
-                    <menu:SettingsUserControl/>
-                </TabItem>
-            </myControls:AnimateTabControl>
-        </Border>
     </Grid>
 </Window>

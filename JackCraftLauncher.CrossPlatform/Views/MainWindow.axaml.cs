@@ -1,13 +1,16 @@
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
+using JackCraftLauncher.CrossPlatform.Class.Launch;
 
 namespace JackCraftLauncher.CrossPlatform.Views;
 
 public partial class MainWindow : Window
 {
+    public static MainWindow Instance;
     public MainWindow()
     {
+        Instance = this;
         InitializeComponent();
     }
     
