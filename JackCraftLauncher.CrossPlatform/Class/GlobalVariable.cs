@@ -9,4 +9,5 @@ public static class GlobalVariable
 {
     public static LaunchCoreHandler LaunchCore = new LaunchCoreHandler();
     public static List<VersionInfo> LocalGameList = new List<VersionInfo>();
+    public static List<string> LocalJavaList = new List<string>();
 }
