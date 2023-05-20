@@ -6,11 +6,13 @@ using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Layout;
 using Avalonia.Media;
+using ProjBobcat.Class.Model;
 
 namespace JackCraftLauncher.CrossPlatform.Views.MyWindow;
 
 public partial class ViewLogWindow : Window
 {
+    public LaunchResult LaunchResult;
     public ViewLogWindow()
     {
         InitializeComponent();
@@ -44,10 +46,9 @@ public partial class ViewLogWindow : Window
     #endregion
     public void AddLog(string log)
     {
-        var stackPanel = new StackPanel { Orientation = Orientation.Horizontal };
-
+        var warpPanel = new WrapPanel();
+        
         #region 没有多余符号
-
         /*List<string> output1 = new List<string>();
         // 使用正则表达式匹配出每个部分
         Regex regex1 = new Regex(@"^\[(\d\d:\d\d:\d\d)\]\[(.+?)\/(.+?)\]: (.+)$");
@@ -66,17 +67,44 @@ public partial class ViewLogWindow : Window
         // output1[2] = "Info"
         // output1[3] = "Test Message"
         */
-
         #endregion
 
         #region 有多余符号
 
-        var output = Regex.Split(log, @"(\[)|(\]\[)|(/)|(]: )")
+        var launchOutput = Regex.Split(log, @"(\[ )|( \] )")
+            .Where(match => !string.IsNullOrWhiteSpace(match))
+            .ToList();
+        // 结果：
+        // launchOutput[0] = "[ "
+        // launchOutput[1] = "启动器"
+        // launchOutput[2] = " ] "
+        // launchOutput[3] = "[00:00:00][Render thread/Info]: Test Message"
+        string logContent = log;
+        if (launchOutput.Count == 4)
+        {
+            logContent = launchOutput[3];
+            for (var i = 0; i < launchOutput.Count - 1; i++)
+            {
+                var textBlock = new TextBlock { Text = launchOutput[i], FontSize = 15 };
+                switch (i)
+                {
+                    case 1:
+                        textBlock.Foreground = this.FindResource("DefaultLogTimeForeground") as IBrush;
+                        break;
+                    default:
+                        textBlock.Foreground = this.FindResource("DefaultForeground") as IBrush;
+                        break;
+                }
+                warpPanel.Children.Add(textBlock);
+            }
+        }
+
+        var output = Regex.Split(logContent, @"(\[)|(\]\[)|(/)|(]: )")
             .Where(match => !string.IsNullOrWhiteSpace(match))
             .ToList();
         // 结果：
         // output[0] = "["
-        // output[1] = "00:01:00"
+        // output[1] = "00:00:00"
         // output[2] = "]["
         // output[3] = "Render thread"
         // output[4] = "/"
@@ -88,7 +116,7 @@ public partial class ViewLogWindow : Window
 
         for (var i = 0; i < output.Count; i++)
         {
-            var textBlock = new TextBlock { Text = output[i] };
+            var textBlock = new TextBlock { Text = output[i], FontSize = 15};
             switch (i)
             {
                 case 1:
@@ -110,9 +138,26 @@ public partial class ViewLogWindow : Window
                     break;
             }
 
-            stackPanel.Children.Add(textBlock);
+            warpPanel.Children.Add(textBlock);
         }
+        
+        LogListBox.Items.Add(warpPanel);
+        /*if (AutomaticScrollingToggleButton.IsChecked == true)
+            //LogListBox.ScrollIntoView(stackPanel);
+            LogListBox.ScrollIntoView(warpPanel);*/
+        /*LogListBox.SelectedIndex = LogListBox.ItemCount - 1;
+        LogListBox.AutoScrollToSelectedItem = false;
+        LogListBox.ScrollIntoView(warpPanel);*/
+    }
 
-        LogListBox.Items.Add(stackPanel);
+    private void LogListBox_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
+    { 
+        if (LogListBox.SelectedIndex != -1)
+            LogListBox.SelectedIndex = -1;
+    }
+
+    private void CloseGameButton_OnClick(object? sender, RoutedEventArgs e)
+    {
+        LaunchResult.GameProcess!.Kill();
     }
 }

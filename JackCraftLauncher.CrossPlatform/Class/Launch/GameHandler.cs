@@ -40,7 +40,6 @@ public class GameHandler
     public static async void StartGame(VersionInfo versionInfo)
     {
         DefaultGameCore core = GlobalVariable.LaunchCore.GetCore();
-        ViewLogWindow logWindow = new ViewLogWindow();
         LaunchSettings launchSettings = new LaunchSettings
         {
             FallBackGameArguments = new GameArguments // 游戏启动参数缺省值，适用于以该启动设置启动的所有游戏，对于具体的某个游戏，可以设置（见下）具体的启动参数，如果所设置的具体参数出现缺失，将使用这个补全
@@ -70,20 +69,36 @@ public class GameHandler
             Username = "JCLTest",
             LauncherAccountParser = core.VersionLocator.LauncherAccountParser // launcher_profiles.json解析组件
         };
-        core.LaunchLogEventDelegate += async (sender, args) =>
-        {
-            //await Dispatcher.UIThread.InvokeAsync(async () => { logWindow.AddLog(args.Item); });
+        ViewLogWindow logWindow = new ViewLogWindow();
+        core.LaunchLogEventDelegate += (sender, args) =>
+        { 
+            Dispatcher.UIThread.InvokeAsync( () =>
+            {
+                if (logWindow.IsVisible)
+                    logWindow.AddLog($"[ 启动器 ] {args.Item}");
+            });
         };
         core.GameLogEventDelegate += async (sender, args) =>
         {
-            await Dispatcher.UIThread.InvokeAsync(async () => { logWindow.AddLog(args.RawContent); });
+            Dispatcher.UIThread.InvokeAsync( () =>
+            {
+                if (logWindow.IsVisible)
+                    logWindow.AddLog($"[ 游戏 ] {args.RawContent}");
+            });
         };
         core.GameExitEventDelegate += (sender, args) =>
         {
-            logWindow.AddLog("游戏已退出");
+            Dispatcher.UIThread.InvokeAsync( () =>
+            {
+                if (logWindow.IsVisible)
+                    logWindow.AddLog("[ 启动器 ] 游戏已退出");
+            });
         };
         logWindow.Show();
         var result = await core.LaunchTaskAsync(launchSettings).ConfigureAwait(true); // 返回游戏启动结果，以及异常信息（如果存在）
+        logWindow.Title = $"日志显示 (PID:{result.GameProcess!.Id})";
+        logWindow.TitleTextBlock.Text = $"日志显示 (PID:{result.GameProcess!.Id})";
+        logWindow.LaunchResult = result;
     }
 
     public static async Task<DefaultResourceCompleter> GetResourceCompletion(VersionInfo versionInfo)
