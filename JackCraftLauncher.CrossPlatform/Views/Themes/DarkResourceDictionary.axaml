@@ -3,4 +3,9 @@
     <SolidColorBrush x:Key="DefaultWindowBackground1" Color="#202020"/>
     <SolidColorBrush x:Key="DefaultWindowBackground2" Color="#191919"/>
     <SolidColorBrush x:Key="DefaultForeground" Color="#E7E9EB"/>
+    <SolidColorBrush x:Key="DefaultLogTimeForeground" Color="DarkGray"/>
+    <SolidColorBrush x:Key="DefaultLogThreadForeground" Color="DarkGoldenrod"/>
+    <SolidColorBrush x:Key="DefaultLogInfoForeground" Color="Green"/>
+    <SolidColorBrush x:Key="DefaultLogWarnForeground" Color="Yellow"/>
+    <SolidColorBrush x:Key="DefaultLogErrorForeground" Color="#FFCC0000"/>
 </ResourceDictionary>
