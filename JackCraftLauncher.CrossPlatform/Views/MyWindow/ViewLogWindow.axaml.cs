@@ -1,10 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Layout;
+using Avalonia.Markup.Xaml.MarkupExtensions;
 using Avalonia.Media;
 using ProjBobcat.Class.Model;
 
@@ -78,7 +82,7 @@ public partial class ViewLogWindow : Window
         // launchOutput[0] = "[ "
         // launchOutput[1] = "启动器"
         // launchOutput[2] = " ] "
-        // launchOutput[3] = "[00:00:00][Render thread/Info]: Test Message"
+        // launchOutput[3] = "[00:00:00] [Render thread/Info]: Test Message"
         string logContent = log;
         if (launchOutput.Count == 4)
         {
@@ -99,13 +103,13 @@ public partial class ViewLogWindow : Window
             }
         }
 
-        var output = Regex.Split(logContent, @"(\[)|(\]\[)|(/)|(]: )")
+        var output = Regex.Split(logContent, @"(\[)|(\] \[)|(/)|(]: )")
             .Where(match => !string.IsNullOrWhiteSpace(match))
             .ToList();
         // 结果：
         // output[0] = "["
         // output[1] = "00:00:00"
-        // output[2] = "]["
+        // output[2] = "] ["
         // output[3] = "Render thread"
         // output[4] = "/"
         // output[5] = "Info"

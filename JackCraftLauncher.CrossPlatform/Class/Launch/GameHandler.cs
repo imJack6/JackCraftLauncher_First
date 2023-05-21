@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Avalonia.Threading;
 using Flurl.Http;
+using JackCraftLauncher.CrossPlatform.Class;
+using JackCraftLauncher.CrossPlatform.Class.Launch;
 using JackCraftLauncher.CrossPlatform.Views.Menu;
 using JackCraftLauncher.CrossPlatform.Views.MyWindow;
 using Newtonsoft.Json;
@@ -13,7 +15,9 @@ using ProjBobcat.Class.Model.LauncherProfile;
 using ProjBobcat.Class.Model.Mojang;
 using ProjBobcat.DefaultComponent;
 using ProjBobcat.DefaultComponent.Authenticator;
+using ProjBobcat.DefaultComponent.Launch;
 using ProjBobcat.DefaultComponent.Launch.GameCore;
+using ProjBobcat.DefaultComponent.Logging;
 using ProjBobcat.DefaultComponent.ResourceInfoResolver;
 using ProjBobcat.Interface;
 
@@ -39,7 +43,14 @@ public class GameHandler
     
     public static async void StartGame(VersionInfo versionInfo)
     {
-        DefaultGameCore core = GlobalVariable.LaunchCore.GetCore();
+        DefaultGameCore core = new DefaultGameCore()
+        {
+            ClientToken = GlobalVariable.LaunchCore.GetCore().ClientToken,
+            RootPath = GlobalVariable.LaunchCore.GetCore().RootPath,
+            VersionLocator = GlobalVariable.LaunchCore.GetCore().VersionLocator,
+            GameLogResolver = new DefaultGameLogResolver()
+        };
+        
         LaunchSettings launchSettings = new LaunchSettings
         {
             FallBackGameArguments = new GameArguments // 游戏启动参数缺省值，适用于以该启动设置启动的所有游戏，对于具体的某个游戏，可以设置（见下）具体的启动参数，如果所设置的具体参数出现缺失，将使用这个补全
@@ -96,9 +107,9 @@ public class GameHandler
         };
         logWindow.Show();
         var result = await core.LaunchTaskAsync(launchSettings).ConfigureAwait(true); // 返回游戏启动结果，以及异常信息（如果存在）
+        logWindow.LaunchResult = result;
         logWindow.Title = $"日志显示 (PID:{result.GameProcess!.Id})";
         logWindow.TitleTextBlock.Text = $"日志显示 (PID:{result.GameProcess!.Id})";
-        logWindow.LaunchResult = result;
     }
 
     public static async Task<DefaultResourceCompleter> GetResourceCompletion(VersionInfo versionInfo)
