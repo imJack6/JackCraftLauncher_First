@@ -2,10 +2,11 @@ using System.Net;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using JackCraftLauncher.CrossPlatform.Views;
 
 namespace JackCraftLauncher.CrossPlatform;
 
-public partial class App : Application
+public class App : Application
 {
     public override void Initialize()
     {
@@ -16,9 +17,7 @@ public partial class App : Application
     public override void OnFrameworkInitializationCompleted()
     {
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
-        {
-            desktop.MainWindow = new Views.MainWindow();
-        }
+            desktop.MainWindow = new MainWindow();
 
         base.OnFrameworkInitializationCompleted();
     }

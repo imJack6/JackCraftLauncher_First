@@ -1,40 +1,38 @@
 ﻿using System;
-using System.Reactive;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Metadata;
 using Avalonia.Styling;
 
-namespace JackCraftLauncher.CrossPlatform.Views.MyControls
+namespace JackCraftLauncher.CrossPlatform.Views.MyControls;
+
+[PseudoClasses(":normal")]
+public class AnimateTabControl : TabControl, IStyleable
 {
-    [PseudoClasses(":normal")]
-    public class AnimateTabControl : TabControl, IStyleable
+    public static readonly StyledProperty<bool> AnimateOnChangeProperty =
+        AvaloniaProperty.Register<AnimateTabControl, bool>(nameof(AnimateOnChange), true);
+
+    public AnimateTabControl()
     {
-        Type IStyleable.StyleKey => typeof(TabControl);
+        PseudoClasses.Add(":normal");
+        this.GetObservable(SelectedContentProperty).Subscribe(OnContentChanged);
+        //this.GetObservable(SelectedContentProperty).Subscribe(Observer.Create<object>(OnContentChanged));
+    }
 
-        public AnimateTabControl()
+    public bool AnimateOnChange
+    {
+        get => GetValue(AnimateOnChangeProperty);
+        set => SetValue(AnimateOnChangeProperty, value);
+    }
+
+    Type IStyleable.StyleKey => typeof(TabControl);
+
+    private void OnContentChanged(object? obj)
+    {
+        if (AnimateOnChange)
         {
+            PseudoClasses.Remove(":normal");
             PseudoClasses.Add(":normal");
-            this.GetObservable(SelectedContentProperty).Subscribe(OnContentChanged);
-            //this.GetObservable(SelectedContentProperty).Subscribe(Observer.Create<object>(OnContentChanged));
         }
-
-        private void OnContentChanged(object? obj)
-        {
-            if (AnimateOnChange)
-            {
-                PseudoClasses.Remove(":normal");
-                PseudoClasses.Add(":normal");
-            }
-        }
-
-        public bool AnimateOnChange
-        {
-            get => GetValue(AnimateOnChangeProperty);
-            set => SetValue(AnimateOnChangeProperty, value);
-        }
-
-        public static readonly StyledProperty<bool> AnimateOnChangeProperty =
-            AvaloniaProperty.Register<AnimateTabControl, bool>(nameof(AnimateOnChange), true);
     }
 }

@@ -4,8 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Avalonia.Threading;
 using Flurl.Http;
-using JackCraftLauncher.CrossPlatform.Class;
-using JackCraftLauncher.CrossPlatform.Class.Launch;
 using JackCraftLauncher.CrossPlatform.Views.Menu;
 using JackCraftLauncher.CrossPlatform.Views.MyWindow;
 using Newtonsoft.Json;
@@ -15,7 +13,6 @@ using ProjBobcat.Class.Model.LauncherProfile;
 using ProjBobcat.Class.Model.Mojang;
 using ProjBobcat.DefaultComponent;
 using ProjBobcat.DefaultComponent.Authenticator;
-using ProjBobcat.DefaultComponent.Launch;
 using ProjBobcat.DefaultComponent.Launch.GameCore;
 using ProjBobcat.DefaultComponent.Logging;
 using ProjBobcat.DefaultComponent.ResourceInfoResolver;
@@ -28,43 +25,47 @@ public class GameHandler
     public static void RefreshLocalGameList()
     {
         GlobalVariable.LocalGameList = GlobalVariable.LaunchCore.GetCore().VersionLocator.GetAllGames().ToList();
-        StartUserControl.Instance.SelectJavaGameVersionComboBox.ItemsSource = GlobalVariable.LocalGameList.Select(x => x.Name ?? x.Id);
+        StartUserControl.Instance.SelectJavaGameVersionComboBox.ItemsSource =
+            GlobalVariable.LocalGameList.Select(x => x.Name ?? x.Id);
     }
+
     public static async void RefreshLocalJavaList()
     {
         SettingsUserControl.Instance.StartJavaSelectComboBox.PlaceholderText = "正在搜寻Java，此过程可能需要花费较长时间";
         SettingsUserControl.Instance.RefreshLocalJavaComboBoxButton.IsEnabled = false;
-        IAsyncEnumerable<string> javaList = ProjBobcat.Class.Helper.SystemInfoHelper.FindJava(false);
+        var javaList = SystemInfoHelper.FindJava();
         GlobalVariable.LocalJavaList = await javaList.ToListAsync();
         SettingsUserControl.Instance.StartJavaSelectComboBox.ItemsSource = GlobalVariable.LocalJavaList;
         SettingsUserControl.Instance.StartJavaSelectComboBox.PlaceholderText = "选择 Java";
         SettingsUserControl.Instance.RefreshLocalJavaComboBoxButton.IsEnabled = true;
     }
-    
+
     public static async void StartGame(VersionInfo versionInfo)
     {
-        DefaultGameCore core = new DefaultGameCore()
+        var core = new DefaultGameCore
         {
             ClientToken = GlobalVariable.LaunchCore.GetCore().ClientToken,
             RootPath = GlobalVariable.LaunchCore.GetCore().RootPath,
             VersionLocator = GlobalVariable.LaunchCore.GetCore().VersionLocator,
             GameLogResolver = new DefaultGameLogResolver()
         };
-        
-        LaunchSettings launchSettings = new LaunchSettings
+
+        var launchSettings = new LaunchSettings
         {
-            FallBackGameArguments = new GameArguments // 游戏启动参数缺省值，适用于以该启动设置启动的所有游戏，对于具体的某个游戏，可以设置（见下）具体的启动参数，如果所设置的具体参数出现缺失，将使用这个补全
-            {
-                GcType = GcType.G1Gc, // GC类型
-                JavaExecutable = SettingsUserControl.Instance.StartJavaSelectComboBox.SelectedItem!.ToString()!, // Java路径
-                Resolution = new ResolutionModel // 游戏窗口分辨率
+            FallBackGameArguments =
+                new GameArguments // 游戏启动参数缺省值，适用于以该启动设置启动的所有游戏，对于具体的某个游戏，可以设置（见下）具体的启动参数，如果所设置的具体参数出现缺失，将使用这个补全
                 {
-                    Height = 600, // 高度
-                    Width = 800 // 宽度
+                    GcType = GcType.G1Gc, // GC类型
+                    JavaExecutable =
+                        SettingsUserControl.Instance.StartJavaSelectComboBox.SelectedItem!.ToString()!, // Java路径
+                    Resolution = new ResolutionModel // 游戏窗口分辨率
+                    {
+                        Height = 600, // 高度
+                        Width = 800 // 宽度
+                    },
+                    MinMemory = 2048, // 最小内存
+                    MaxMemory = 4196 // 最大内存
                 },
-                MinMemory = 2048, // 最小内存
-                MaxMemory = 4196 // 最大内存
-            },
             Version = versionInfo.Id!, // 需要启动的游戏ID，例如1.7.10或者1.15.2
             //VersionInsulation = false, // 版本隔离
             //GamePath = core.RootPath!, // 游戏根目录
@@ -73,17 +74,17 @@ public class GameHandler
             GameResourcePath = core.RootPath!, // 资源根目录
             GameName = versionInfo.Name, // 游戏名称
             VersionLocator = core.VersionLocator, // 游戏定位器 
-            LauncherName = "JackCraft Launcher",
+            LauncherName = "JackCraft Launcher"
         };
         launchSettings.Authenticator = new OfflineAuthenticator
         {
             Username = "JCLTest",
             LauncherAccountParser = core.VersionLocator.LauncherAccountParser // launcher_profiles.json解析组件
         };
-        ViewLogWindow logWindow = new ViewLogWindow();
+        var logWindow = new ViewLogWindow();
         core.LaunchLogEventDelegate += (sender, args) =>
-        { 
-            Dispatcher.UIThread.InvokeAsync( () =>
+        {
+            Dispatcher.UIThread.InvokeAsync(() =>
             {
                 if (logWindow.IsVisible)
                     logWindow.AddLog($"[ 启动器 ] {args.Item}");
@@ -91,7 +92,7 @@ public class GameHandler
         };
         core.GameLogEventDelegate += async (sender, args) =>
         {
-            Dispatcher.UIThread.InvokeAsync( () =>
+            Dispatcher.UIThread.InvokeAsync(() =>
             {
                 if (logWindow.IsVisible)
                     logWindow.AddLog($"[ 游戏 ] {args.RawContent}");
@@ -99,7 +100,7 @@ public class GameHandler
         };
         core.GameExitEventDelegate += (sender, args) =>
         {
-            Dispatcher.UIThread.InvokeAsync( () =>
+            Dispatcher.UIThread.InvokeAsync(() =>
             {
                 if (logWindow.IsVisible)
                     logWindow.AddLog("[ 启动器 ] 游戏已退出");
@@ -114,11 +115,11 @@ public class GameHandler
 
     public static async Task<DefaultResourceCompleter> GetResourceCompletion(VersionInfo versionInfo)
     {
-        string versionManifest = await DownloadSourceHandler
+        var versionManifest = await DownloadSourceHandler
             .GetDownloadSource(DownloadSourceHandler.DownloadTargetEnum.VersionInfoV1, null).GetStringAsync();
         var manifest = JsonConvert.DeserializeObject<VersionManifest>(versionManifest);
         var versions = manifest!.Versions;
-        string basePath = GlobalVariable.LaunchCore.GetCore().RootPath!;
+        var basePath = GlobalVariable.LaunchCore.GetCore().RootPath!;
         // Assets 解析器
         var resolverAsset = new AssetInfoResolver
         {
@@ -159,7 +160,7 @@ public class GameHandler
             CheckLocalFiles = true
         };
         // 资源补全器
-        DefaultResourceCompleter completer = new DefaultResourceCompleter
+        var completer = new DefaultResourceCompleter
         {
             MaxDegreeOfParallelism = Convert.ToInt16(SettingsUserControl.Instance.MaxDegreeOfParallelismSlider.Value),
             ResourceInfoResolvers = new List<IResourceInfoResolver>
@@ -173,7 +174,7 @@ public class GameHandler
             CheckFile = true,
             DownloadParts = Convert.ToInt16(SettingsUserControl.Instance.TotalDownloadSegmentsForLargeFileSlider.Value)
         };
-        
+
         return completer;
     }
 }

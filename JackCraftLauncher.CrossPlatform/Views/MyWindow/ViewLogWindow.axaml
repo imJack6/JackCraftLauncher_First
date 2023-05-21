@@ -3,7 +3,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="350" d:DesignHeight="400" Width="350" Height="400"
-        xmlns:local="clr-namespace:JackCraftLauncher.CrossPlatform.Views.MyWindow"
         x:Class="JackCraftLauncher.CrossPlatform.Views.MyWindow.ViewLogWindow"
         Icon="/Assets/Logo/JackCraft-2-64p.png"
         ExtendClientAreaToDecorationsHint="True"
@@ -13,13 +12,13 @@
         Foreground="{DynamicResource DefaultForeground}"
         Title="日志显示 (PID:?)">
     <Window.Styles>
-        <StyleInclude Source="/Views/MyControls/MenuRadioButton.axaml"/>
+        <StyleInclude Source="/Views/MyControls/MenuRadioButton.axaml" />
     </Window.Styles>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition/>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="50" />
+            <RowDefinition />
+            <RowDefinition Height="50" />
         </Grid.RowDefinitions>
         <Border Grid.Row="0"
                 Background="{DynamicResource DefaultWindowBackground1}"
@@ -29,14 +28,14 @@
                            Name="TitleTextBlock"
                            HorizontalAlignment="Left"
                            VerticalAlignment="Center"
-                           Margin="15,0"/>
+                           Margin="15,0" />
                 <StackPanel Orientation="Horizontal"
                             HorizontalAlignment="Right"
                             Spacing="5"
                             Margin="10">
-                    <Button Background="#FEBC2E" Click="MinimizeButton_Click" CornerRadius="50" Width="25" Height="20"/>
-                    <Button Background="#28C840" Click="MaximizeButton_Click" CornerRadius="50" Width="25" Height="20"/>
-                    <Button Background="#FF5F57" Click="CloseButton_Click" CornerRadius="50" Width="35" Height="20"/>
+                    <Button Background="#FEBC2E" Click="MinimizeButton_Click" CornerRadius="50" Width="25" Height="20" />
+                    <Button Background="#28C840" Click="MaximizeButton_Click" CornerRadius="50" Width="25" Height="20" />
+                    <Button Background="#FF5F57" Click="CloseButton_Click" CornerRadius="50" Width="35" Height="20" />
                 </StackPanel>
             </Grid>
         </Border>
@@ -46,13 +45,14 @@
                      Background="{DynamicResource DefaultWindowBackground2}">
                 <ListBox.Styles>
                     <Style Selector="ListBoxItem">
-                        <Setter Property="Padding" Value="1"/>
-                        <Setter Property="Margin" Value="4,0,0,0"/>
+                        <Setter Property="Padding" Value="1" />
+                        <Setter Property="Margin" Value="4,0,0,0" />
                     </Style>
                 </ListBox.Styles>
                 <ListBox.ItemsPanel>
-                    <ItemsPanelTemplate >
-                        <StackPanel Height="{Binding RelativeSource={RelativeSource AncestorType=StackPanel}, Path=Height}"/>
+                    <ItemsPanelTemplate>
+                        <StackPanel
+                            Height="{Binding RelativeSource={RelativeSource AncestorType=StackPanel}, Path=Height}" />
                     </ItemsPanelTemplate>
                 </ListBox.ItemsPanel>
             </ListBox>
@@ -65,7 +65,8 @@
             <Button Click="CloseGameButton_OnClick"
                     Background="#88FF0000"
                     Margin="10,0">
-                <Path Width="20" Height="20" Stretch="Fill" Fill="{DynamicResource DefaultForeground}" Data="M390.095238 141.336381v78.019048C275.553524 267.068952 195.047619 380.123429 195.047619 512c0 175.055238 141.897143 316.952381 316.952381 316.952381s316.952381-141.897143 316.952381-316.952381c0-131.85219-80.505905-244.882286-195.047619-292.644571l0.024381-78.019048C789.650286 192.536381 902.095238 339.139048 902.095238 512c0 215.454476-174.640762 390.095238-390.095238 390.095238S121.904762 727.454476 121.904762 512C121.904762 339.139048 234.349714 192.512 390.095238 141.336381zM548.571429 85.333333v438.857143h-73.142858v-438.857143h73.142858z"/>
+                <Path Width="20" Height="20" Stretch="Fill" Fill="{DynamicResource DefaultForeground}"
+                      Data="M390.095238 141.336381v78.019048C275.553524 267.068952 195.047619 380.123429 195.047619 512c0 175.055238 141.897143 316.952381 316.952381 316.952381s316.952381-141.897143 316.952381-316.952381c0-131.85219-80.505905-244.882286-195.047619-292.644571l0.024381-78.019048C789.650286 192.536381 902.095238 339.139048 902.095238 512c0 215.454476-174.640762 390.095238-390.095238 390.095238S121.904762 727.454476 121.904762 512C121.904762 339.139048 234.349714 192.512 390.095238 141.336381zM548.571429 85.333333v438.857143h-73.142858v-438.857143h73.142858z" />
             </Button>
         </Grid>
     </Grid>

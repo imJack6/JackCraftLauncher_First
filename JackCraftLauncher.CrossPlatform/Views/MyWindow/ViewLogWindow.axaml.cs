@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Design;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
-using Avalonia.Layout;
-using Avalonia.Markup.Xaml.MarkupExtensions;
 using Avalonia.Media;
 using ProjBobcat.Class.Model;
 
@@ -17,42 +12,18 @@ namespace JackCraftLauncher.CrossPlatform.Views.MyWindow;
 public partial class ViewLogWindow : Window
 {
     public LaunchResult LaunchResult;
+
     public ViewLogWindow()
     {
         InitializeComponent();
     }
-    #region 窗体控制按钮事件
-    private void TitleBar_PointerPressed(object sender, PointerPressedEventArgs e)
-    {
-        if (e.ClickCount <= 1)
-            BeginMoveDrag(e);
-        else if (e.ClickCount == 2)
-            if (this.WindowState == WindowState.Maximized)
-                this.WindowState = WindowState.Normal;
-            else if (this.WindowState == WindowState.Normal)
-                this.WindowState = WindowState.Maximized;
-    }
-    private void CloseButton_Click(object sender, RoutedEventArgs e)
-    {
-        Close();
-    }
-    private void MaximizeButton_Click(object sender, RoutedEventArgs e)
-    {
-        if (this.WindowState == WindowState.Maximized)
-            this.WindowState = WindowState.Normal;
-        else if (this.WindowState == WindowState.Normal)
-            this.WindowState = WindowState.Maximized;
-    }
-    private void MinimizeButton_Click(object sender, RoutedEventArgs e)
-    {
-        this.WindowState = WindowState.Minimized;
-    }
-    #endregion
+
     public void AddLog(string log)
     {
         var warpPanel = new WrapPanel();
-        
+
         #region 没有多余符号
+
         /*List<string> output1 = new List<string>();
         // 使用正则表达式匹配出每个部分
         Regex regex1 = new Regex(@"^\[(\d\d:\d\d:\d\d)\]\[(.+?)\/(.+?)\]: (.+)$");
@@ -71,6 +42,7 @@ public partial class ViewLogWindow : Window
         // output1[2] = "Info"
         // output1[3] = "Test Message"
         */
+
         #endregion
 
         #region 有多余符号
@@ -83,7 +55,7 @@ public partial class ViewLogWindow : Window
         // launchOutput[1] = "启动器"
         // launchOutput[2] = " ] "
         // launchOutput[3] = "[00:00:00] [Render thread/Info]: Test Message"
-        string logContent = log;
+        var logContent = log;
         if (launchOutput.Count == 4)
         {
             logContent = launchOutput[3];
@@ -99,6 +71,7 @@ public partial class ViewLogWindow : Window
                         textBlock.Foreground = this.FindResource("DefaultForeground") as IBrush;
                         break;
                 }
+
                 warpPanel.Children.Add(textBlock);
             }
         }
@@ -120,7 +93,7 @@ public partial class ViewLogWindow : Window
 
         for (var i = 0; i < output.Count; i++)
         {
-            var textBlock = new TextBlock { Text = output[i], FontSize = 15};
+            var textBlock = new TextBlock { Text = output[i], FontSize = 15 };
             switch (i)
             {
                 case 1:
@@ -144,7 +117,7 @@ public partial class ViewLogWindow : Window
 
             warpPanel.Children.Add(textBlock);
         }
-        
+
         LogListBox.Items.Add(warpPanel);
         /*if (AutomaticScrollingToggleButton.IsChecked == true)
             //LogListBox.ScrollIntoView(stackPanel);
@@ -155,7 +128,7 @@ public partial class ViewLogWindow : Window
     }
 
     private void LogListBox_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
-    { 
+    {
         if (LogListBox.SelectedIndex != -1)
             LogListBox.SelectedIndex = -1;
     }
@@ -164,4 +137,37 @@ public partial class ViewLogWindow : Window
     {
         LaunchResult.GameProcess!.Kill();
     }
+
+    #region 窗体控制按钮事件
+
+    private void TitleBar_PointerPressed(object sender, PointerPressedEventArgs e)
+    {
+        if (e.ClickCount <= 1)
+            BeginMoveDrag(e);
+        else if (e.ClickCount == 2)
+            if (WindowState == WindowState.Maximized)
+                WindowState = WindowState.Normal;
+            else if (WindowState == WindowState.Normal)
+                WindowState = WindowState.Maximized;
+    }
+
+    private void CloseButton_Click(object sender, RoutedEventArgs e)
+    {
+        Close();
+    }
+
+    private void MaximizeButton_Click(object sender, RoutedEventArgs e)
+    {
+        if (WindowState == WindowState.Maximized)
+            WindowState = WindowState.Normal;
+        else if (WindowState == WindowState.Normal)
+            WindowState = WindowState.Maximized;
+    }
+
+    private void MinimizeButton_Click(object sender, RoutedEventArgs e)
+    {
+        WindowState = WindowState.Minimized;
+    }
+
+    #endregion
 }

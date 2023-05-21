@@ -48,16 +48,16 @@
                                       Margin="100,0,50,0"
                                       HorizontalAlignment="Stretch"
                                       SelectedIndex="1"
-                                      PlaceholderText="选择下载源" >
-                                <ComboBoxItem Content="MCBBS源 (国内较快，但资源可能不是最新)"/>
-                                <ComboBoxItem Content="BMCL源 (国内较快，但资源可能不是最新)"/>
-                                <ComboBoxItem Content="官方源 (国内可能较慢，但资源是最新)"/>
+                                      PlaceholderText="选择下载源">
+                                <ComboBoxItem Content="MCBBS源 (国内较快，但资源可能不是最新)" />
+                                <ComboBoxItem Content="BMCL源 (国内较快，但资源可能不是最新)" />
+                                <ComboBoxItem Content="官方源 (国内可能较慢，但资源是最新)" />
                             </ComboBox>
                         </Grid>
                         <Grid>
                             <TextBlock Margin="20,15"
                                        Text="并行程度"
-                                       FontSize="16" ToolTip.Tip="同时检查游戏资源的数量"/>
+                                       FontSize="16" ToolTip.Tip="同时检查游戏资源的数量" />
                             <Slider Value="8"
                                     Minimum="1"
                                     Maximum="16"
@@ -67,15 +67,15 @@
                                     HorizontalAlignment="Stretch"
                                     IsSnapToTickEnabled="True"
                                     TickPlacement="BottomRight"
-                                    TickFrequency="1"/>
+                                    TickFrequency="1" />
                             <TextBlock Text="{Binding ElementName=MaxDegreeOfParallelismSlider, Path=Value}"
                                        Margin="0,15,60,0"
-                                       HorizontalAlignment="Right"/>
+                                       HorizontalAlignment="Right" />
                         </Grid>
                         <Grid>
                             <TextBlock Margin="20,15"
                                        Text="分片数量"
-                                       FontSize="16" ToolTip.Tip="大文件下载时的分片数量"/>
+                                       FontSize="16" ToolTip.Tip="大文件下载时的分片数量" />
                             <Slider Value="16"
                                     Minimum="1"
                                     Maximum="32"
@@ -85,15 +85,15 @@
                                     HorizontalAlignment="Stretch"
                                     IsSnapToTickEnabled="True"
                                     TickPlacement="BottomRight"
-                                    TickFrequency="1"/>
+                                    TickFrequency="1" />
                             <TextBlock Text="{Binding ElementName=TotalDownloadSegmentsForLargeFileSlider, Path=Value}"
                                        Margin="0,15,60,0"
-                                       HorizontalAlignment="Right"/>
+                                       HorizontalAlignment="Right" />
                         </Grid>
                         <Grid>
                             <TextBlock Margin="20,15"
                                        Text="重试次数"
-                                       FontSize="16"/>
+                                       FontSize="16" />
                             <Slider Value="2"
                                     Minimum="0"
                                     Maximum="10"
@@ -103,10 +103,10 @@
                                     HorizontalAlignment="Stretch"
                                     IsSnapToTickEnabled="True"
                                     TickPlacement="BottomRight"
-                                    TickFrequency="1"/>
+                                    TickFrequency="1" />
                             <TextBlock Text="{Binding ElementName=TotalRetrySlider, Path=Value}"
                                        Margin="0,15,60,0"
-                                       HorizontalAlignment="Right"/>
+                                       HorizontalAlignment="Right" />
                         </Grid>
                     </StackPanel>
                 </StackPanel>

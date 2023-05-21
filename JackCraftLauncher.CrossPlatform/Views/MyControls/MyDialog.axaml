@@ -3,62 +3,71 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-			 Background="Transparent" Name="RootUserControl"
+             Background="Transparent" Name="RootUserControl"
              x:Class="JackCraftLauncher.CrossPlatform.Views.MyControls.MyDialog">
-	<UserControl.Styles>
-		<Style Selector="Grid.root">
-			<Style.Animations>
-				<Animation Duration="0:0:0.3">
-					<KeyFrame Cue="0%">
-						<Setter Property="Opacity" Value="0.0"/>
-					</KeyFrame>
-					<KeyFrame Cue="100%">
-						<Setter Property="Opacity" Value="1.0"/>
-					</KeyFrame>
-				</Animation>
-			</Style.Animations>
-		</Style>
-		<Style Selector="Border.bar">
-			<Style.Animations>
-				<Animation Duration="0:0:0.5">
-					<KeyFrame Cue="0%">
-						<Setter Property="MaxWidth" Value="0.0"/>
-					</KeyFrame>
-					<KeyFrame Cue="100%">
-						<Setter Property="MaxWidth" Value="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=Width}"/>
-					</KeyFrame>
-				</Animation>
-			</Style.Animations>
-		</Style>
-	</UserControl.Styles>
-	<Grid Classes="root">
-		<Grid Background="#33000000" PointerPressed="TitleBar_PointerPressed"/>
-		<Border Margin="100"
-				HorizontalAlignment="Stretch"
-				VerticalAlignment="Center"
-				BoxShadow="0 0 20 0 Gray"
-				CornerRadius="15"
-				Background="{DynamicResource DefaultWindowBackground1}">
-			<Grid>
-				<Grid.RowDefinitions>
-					<RowDefinition Height="50"/>
-					<RowDefinition Height="*"/>
-					<RowDefinition Height="50"/>
-				</Grid.RowDefinitions>
-				<Grid Grid.Row="0">
-					<TextBlock FontSize="24" Foreground="{DynamicResource DefaultForeground}" Margin="25,7" Name="Title" Text="Title 标题"/>
-					<Border Name="BorderBar" Classes="bar" Background="DarkGoldenrod" Margin="25,0" Height="2" VerticalAlignment="Bottom" HorizontalAlignment="Stretch"/>
-				</Grid>
-				<Grid Grid.Row="1">
-					<TextBlock Margin="25,5" Foreground="{DynamicResource DefaultForeground}" TextWrapping="Wrap" Name="Content" FontSize="15" Text="Content 内容"/>
-				</Grid>
-				<Grid Grid.Row="2">
-					<StackPanel Margin="10,0" VerticalAlignment="Center" HorizontalAlignment="Right" Orientation="Horizontal">
-						<Button Width="60" CornerRadius="5" BorderThickness="1" Height="30" HorizontalContentAlignment="Center" Foreground="{DynamicResource DefaultForeground}" Content="确定" Name="YesButton" Click="ButtonClick_Click" Margin="0,0,5,0"/>
-						<Button Width="60" CornerRadius="5" BorderThickness="1" Height="30" HorizontalContentAlignment="Center" Foreground="{DynamicResource DefaultForeground}" Content="取消" Name="NoButton" Click="ButtonClick_Click" Margin="5,0,15,0"/>
-					</StackPanel>
-				</Grid>
-			</Grid>
-		</Border>
-	</Grid>
+    <UserControl.Styles>
+        <Style Selector="Grid.root">
+            <Style.Animations>
+                <Animation Duration="0:0:0.3">
+                    <KeyFrame Cue="0%">
+                        <Setter Property="Opacity" Value="0.0" />
+                    </KeyFrame>
+                    <KeyFrame Cue="100%">
+                        <Setter Property="Opacity" Value="1.0" />
+                    </KeyFrame>
+                </Animation>
+            </Style.Animations>
+        </Style>
+        <Style Selector="Border.bar">
+            <Style.Animations>
+                <Animation Duration="0:0:0.5">
+                    <KeyFrame Cue="0%">
+                        <Setter Property="MaxWidth" Value="0.0" />
+                    </KeyFrame>
+                    <KeyFrame Cue="100%">
+                        <Setter Property="MaxWidth"
+                                Value="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=Width}" />
+                    </KeyFrame>
+                </Animation>
+            </Style.Animations>
+        </Style>
+    </UserControl.Styles>
+    <Grid Classes="root">
+        <Grid Background="#33000000" PointerPressed="TitleBar_PointerPressed" />
+        <Border Margin="100"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Center"
+                BoxShadow="0 0 20 0 Gray"
+                CornerRadius="15"
+                Background="{DynamicResource DefaultWindowBackground1}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="50" />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <TextBlock FontSize="24" Foreground="{DynamicResource DefaultForeground}" Margin="25,7"
+                               Name="Title" Text="Title 标题" />
+                    <Border Name="BorderBar" Classes="bar" Background="DarkGoldenrod" Margin="25,0" Height="2"
+                            VerticalAlignment="Bottom" HorizontalAlignment="Stretch" />
+                </Grid>
+                <Grid Grid.Row="1">
+                    <TextBlock Margin="25,5" Foreground="{DynamicResource DefaultForeground}" TextWrapping="Wrap"
+                               Name="Content" FontSize="15" Text="Content 内容" />
+                </Grid>
+                <Grid Grid.Row="2">
+                    <StackPanel Margin="10,0" VerticalAlignment="Center" HorizontalAlignment="Right"
+                                Orientation="Horizontal">
+                        <Button Width="60" CornerRadius="5" BorderThickness="1" Height="30"
+                                HorizontalContentAlignment="Center" Foreground="{DynamicResource DefaultForeground}"
+                                Content="确定" Name="YesButton" Click="ButtonClick_Click" Margin="0,0,5,0" />
+                        <Button Width="60" CornerRadius="5" BorderThickness="1" Height="30"
+                                HorizontalContentAlignment="Center" Foreground="{DynamicResource DefaultForeground}"
+                                Content="取消" Name="NoButton" Click="ButtonClick_Click" Margin="5,0,15,0" />
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
 </UserControl>

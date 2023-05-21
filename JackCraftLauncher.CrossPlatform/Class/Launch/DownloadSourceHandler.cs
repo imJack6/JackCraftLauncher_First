@@ -23,10 +23,10 @@ public class DownloadSourceHandler
         MinecraftAssetsIndex
     }
 
-    public static string GetDownloadSource(DownloadTargetEnum target, DownloadSourceEnum? source, string? minecraftVersion = "1.0")
+    public static string GetDownloadSource(DownloadTargetEnum target, DownloadSourceEnum? source,
+        string? minecraftVersion = "1.0")
     {
         if (source == null)
-        {
             switch (SettingsUserControl.Instance.DownloadSourceSelectComboBox.SelectedIndex)
             {
                 case 0:
@@ -42,7 +42,7 @@ public class DownloadSourceHandler
                     source = DownloadSourceEnum.BMCL;
                     break;
             }
-        }
+
         var baseUrl = source switch
         {
             DownloadSourceEnum.MCBBS => "https://download.mcbbs.net",
@@ -70,7 +70,9 @@ public class DownloadSourceHandler
             DownloadTargetEnum.MinecraftAssetsIndex => $"{baseUrl}/",
             _ => throw new InvalidDataException($"Selected target field {target} does not exist.")
         };
+
         #region Old
+
         /*switch (source)
         {
             case DownloadSourceEnum.BMCL:
@@ -120,6 +122,7 @@ public class DownloadSourceHandler
             default:
                 throw new InvalidDataException($"Selected mirror field {source} does not found");
         }*/
+
         #endregion
     }
 

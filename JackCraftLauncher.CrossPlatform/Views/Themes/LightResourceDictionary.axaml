@@ -1,11 +1,11 @@
 ﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <SolidColorBrush x:Key="DefaultWindowBackground1" Color="#E9E9E9"/>
-    <SolidColorBrush x:Key="DefaultWindowBackground2" Color="#F8F8F8"/>
-    <SolidColorBrush x:Key="DefaultForeground" Color="#18191C"/>
-    <SolidColorBrush x:Key="DefaultLogTimeForeground" Color="#888888"/>
-    <SolidColorBrush x:Key="DefaultLogThreadForeground" Color="#d09c1d"/>
-    <SolidColorBrush x:Key="DefaultLogInfoForeground" Color="Green"/>
-    <SolidColorBrush x:Key="DefaultLogWarnForeground" Color="#BFBF00"/>
-    <SolidColorBrush x:Key="DefaultLogErrorForeground" Color="#cd2323"/>
+    <SolidColorBrush x:Key="DefaultWindowBackground1" Color="#E9E9E9" />
+    <SolidColorBrush x:Key="DefaultWindowBackground2" Color="#F8F8F8" />
+    <SolidColorBrush x:Key="DefaultForeground" Color="#18191C" />
+    <SolidColorBrush x:Key="DefaultLogTimeForeground" Color="#888888" />
+    <SolidColorBrush x:Key="DefaultLogThreadForeground" Color="#d09c1d" />
+    <SolidColorBrush x:Key="DefaultLogInfoForeground" Color="Green" />
+    <SolidColorBrush x:Key="DefaultLogWarnForeground" Color="#BFBF00" />
+    <SolidColorBrush x:Key="DefaultLogErrorForeground" Color="#cd2323" />
 </ResourceDictionary>

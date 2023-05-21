@@ -1,23 +1,24 @@
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
-using JackCraftLauncher.CrossPlatform.Class.Launch;
 
 namespace JackCraftLauncher.CrossPlatform.Views;
 
 public partial class MainWindow : Window
 {
     public static MainWindow Instance;
+
     public MainWindow()
     {
         Instance = this;
         InitializeComponent();
     }
-    
+
     #region 菜单按钮事件
+
     private void MenuRadioButton_Click(object sender, RoutedEventArgs e)
     {
-        RadioButton checkedButton = (RadioButton)sender;
+        var checkedButton = (RadioButton)sender;
         switch (checkedButton.Name)
         {
             case "UserRadioButton":
@@ -34,32 +35,39 @@ public partial class MainWindow : Window
                 break;
         }
     }
+
     #endregion
+
     #region 窗体控制按钮事件
+
     private void TitleBar_PointerPressed(object sender, PointerPressedEventArgs e)
     {
         if (e.ClickCount <= 1)
             BeginMoveDrag(e);
         else if (e.ClickCount == 2)
-            if (this.WindowState == WindowState.Maximized)
-                this.WindowState = WindowState.Normal;
-            else if (this.WindowState == WindowState.Normal)
-                this.WindowState = WindowState.Maximized;
+            if (WindowState == WindowState.Maximized)
+                WindowState = WindowState.Normal;
+            else if (WindowState == WindowState.Normal)
+                WindowState = WindowState.Maximized;
     }
+
     private void CloseButton_Click(object sender, RoutedEventArgs e)
     {
         Close();
     }
+
     private void MaximizeButton_Click(object sender, RoutedEventArgs e)
     {
-        if (this.WindowState == WindowState.Maximized)
-            this.WindowState = WindowState.Normal;
-        else if (this.WindowState == WindowState.Normal)
-            this.WindowState = WindowState.Maximized;
+        if (WindowState == WindowState.Maximized)
+            WindowState = WindowState.Normal;
+        else if (WindowState == WindowState.Normal)
+            WindowState = WindowState.Maximized;
     }
+
     private void MinimizeButton_Click(object sender, RoutedEventArgs e)
     {
-        this.WindowState = WindowState.Minimized;
+        WindowState = WindowState.Minimized;
     }
+
     #endregion
 }

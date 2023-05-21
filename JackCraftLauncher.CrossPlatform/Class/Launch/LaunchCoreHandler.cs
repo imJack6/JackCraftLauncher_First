@@ -7,17 +7,17 @@ namespace JackCraftLauncher.CrossPlatform.Class.Launch;
 
 public class LaunchCoreHandler
 {
-    private DefaultGameCore _core = new DefaultGameCore();
+    private DefaultGameCore _core = new();
 
     public LaunchCoreHandler()
     {
         Init();
     }
-    
+
     public void Init()
     {
-        Guid clientToken = new Guid("11451419-1981-0114-5141-919810114514");
-        string rootPath = "JCL/.minecraft/";
+        var clientToken = new Guid("11451419-1981-0114-5141-919810114514");
+        var rootPath = "JCL/.minecraft/";
         _core = new DefaultGameCore
         {
             ClientToken = clientToken,
@@ -30,10 +30,12 @@ public class LaunchCoreHandler
             GameLogResolver = new DefaultGameLogResolver()
         };
     }
+
     public DefaultGameCore GetCore()
     {
         return _core;
     }
+
     public void SetCore(DefaultGameCore newCore)
     {
         _core = newCore;

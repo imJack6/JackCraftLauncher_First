@@ -4,37 +4,47 @@ using Avalonia.Controls;
 using Avalonia.Markup.Xaml.Styling;
 using Avalonia.Styling;
 
-namespace JackCraftLauncher.CrossPlatform.Views.Themes
+namespace JackCraftLauncher.CrossPlatform.Views.Themes;
+
+public class ThemeHandler
 {
-    public class ThemeHandler
+    public static void SetTheme(ThemeVariant theme)
     {
-        public static void SetTheme(ThemeVariant theme)
+        if (theme.Equals(ThemeVariant.Dark))
         {
-            if (theme.Equals(ThemeVariant.Dark))
-            {
-                //ResourceInclude resourceInclude = new ResourceInclude(new Uri("/Views/Themes/DarkResourceDictionary.axaml"));
-                var resourceDictionary = new ResourceDictionary();
-                var resourceInclude = new ResourceInclude(new Uri("avares://JackCraftLauncher.CrossPlatform/Views/Themes/LightResourceDictionary.axaml"))
+            //ResourceInclude resourceInclude = new ResourceInclude(new Uri("/Views/Themes/DarkResourceDictionary.axaml"));
+            var resourceDictionary = new ResourceDictionary();
+            var resourceInclude =
+                new ResourceInclude(
+                    new Uri("avares://JackCraftLauncher.CrossPlatform/Views/Themes/LightResourceDictionary.axaml"))
                 {
-                    Source = new Uri("avares://JackCraftLauncher.CrossPlatform/Views/Themes/DarkResourceDictionary.axaml") // 新的资源路径
+                    Source = new Uri(
+                        "avares://JackCraftLauncher.CrossPlatform/Views/Themes/DarkResourceDictionary.axaml") // 新的资源路径
                 };
-                resourceDictionary.MergedDictionaries.Add(resourceInclude);
-                Application.Current.Resources = resourceDictionary;
-                //Application.Current!.Resources.MergedDictionaries[0] = resourceInclude;
-            }
-            else if (theme.Equals(ThemeVariant.Light))
-            {
-                var resourceDictionary = new ResourceDictionary();
-                var resourceInclude = new ResourceInclude(new Uri("avares://JackCraftLauncher.CrossPlatform/Views/Themes/DarkResourceDictionary.axaml"))
-                {
-                    Source = new Uri("avares://JackCraftLauncher.CrossPlatform/Views/Themes/LightResourceDictionary.axaml") // 新的资源路径
-                };
-                resourceDictionary.MergedDictionaries.Add(resourceInclude);
-                Application.Current.Resources = resourceDictionary;
-                //Application.Current!.Resources.MergedDictionaries[0] = resourceInclude;
-            }
-            Application.Current!.RequestedThemeVariant = theme;
+            resourceDictionary.MergedDictionaries.Add(resourceInclude);
+            Application.Current.Resources = resourceDictionary;
+            //Application.Current!.Resources.MergedDictionaries[0] = resourceInclude;
         }
-        public static ThemeVariant GetTheme() => Application.Current!.RequestedThemeVariant!;
+        else if (theme.Equals(ThemeVariant.Light))
+        {
+            var resourceDictionary = new ResourceDictionary();
+            var resourceInclude =
+                new ResourceInclude(
+                    new Uri("avares://JackCraftLauncher.CrossPlatform/Views/Themes/DarkResourceDictionary.axaml"))
+                {
+                    Source = new Uri(
+                        "avares://JackCraftLauncher.CrossPlatform/Views/Themes/LightResourceDictionary.axaml") // 新的资源路径
+                };
+            resourceDictionary.MergedDictionaries.Add(resourceInclude);
+            Application.Current.Resources = resourceDictionary;
+            //Application.Current!.Resources.MergedDictionaries[0] = resourceInclude;
+        }
+
+        Application.Current!.RequestedThemeVariant = theme;
+    }
+
+    public static ThemeVariant GetTheme()
+    {
+        return Application.Current!.RequestedThemeVariant!;
     }
 }

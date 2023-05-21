@@ -4,7 +4,5 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="300"
              x:Class="JackCraftLauncher.CrossPlatform.Views.Menu.UserUserControl">
-    <Grid>
-        
-    </Grid>
+    <Grid />
 </UserControl>
