@@ -16,7 +16,6 @@
 ---------------------
 
 ![Codefactor Grade](https://img.shields.io/codefactor/grade/github/imJack6/JackCraftLauncher?logo=codefactor&style=for-the-badge)
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/b4e2bb5868af4cd0b08db8d7b555de7b)](https://app.codacy.com/gh/imJack6/JackCraftLauncher/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 
 ![Alt](https://repobeats.axiom.co/api/embed/993d2a1760013210fdb331dd9aff324a6b2ed82f.svg)
 
