@@ -29,7 +29,6 @@ public class DownloadSourceHandler
         if (source == null)
         {
             if (SettingsUserControl.Instance != null)
-            {
                 switch (SettingsUserControl.Instance.DownloadSourceSelectComboBox.SelectedIndex)
                 {
                     case 0:
@@ -45,11 +44,8 @@ public class DownloadSourceHandler
                         source = DownloadSourceEnum.BMCL;
                         break;
                 }
-            }
             else
-            {
                 source = DownloadSourceEnum.BMCL;
-            }
         }
 
 

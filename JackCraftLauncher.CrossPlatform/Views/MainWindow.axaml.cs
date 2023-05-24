@@ -1,7 +1,6 @@
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
-using JackCraftLauncher.CrossPlatform.Class.Launch;
 
 namespace JackCraftLauncher.CrossPlatform.Views;
 

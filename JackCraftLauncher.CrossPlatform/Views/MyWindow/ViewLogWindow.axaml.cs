@@ -117,9 +117,10 @@ public partial class ViewLogWindow : Window
 
             warpPanel.Children.Add(textBlock);
         }
+
         LogListBox.Items.Add(warpPanel);
-        
-        ScrollViewer listboxScroll = (ScrollViewer)LogListBox.Scroll!;
+
+        var listboxScroll = (ScrollViewer)LogListBox.Scroll!;
         if (AutomaticScrollingToggleButton.IsChecked == true)
             listboxScroll.ScrollToEnd();
 

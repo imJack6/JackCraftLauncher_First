@@ -12,7 +12,8 @@
             <Border Margin="10,10,10,0" Background="#11000000" CornerRadius="15" Padding="10,10" ClipToBounds="True">
                 <StackPanel>
                     <TextBlock Text="最新版本" FontSize="13" />
-                    <Button Name="LatestReleaseVersionButton" HorizontalAlignment="Stretch" Background="Transparent" CornerRadius="50">
+                    <Button Name="LatestReleaseVersionButton" HorizontalAlignment="Stretch" Background="Transparent"
+                            CornerRadius="50">
                         <Grid Margin="10,0">
                             <Image Source="\Assets\Icons\Grass_Block.png"
                                    Margin="0,0,0,0"
@@ -26,7 +27,8 @@
                                        Margin="50,0,0,0" />
                         </Grid>
                     </Button>
-                    <Button Name="LatestSnapshotVersionButton" HorizontalAlignment="Stretch" Background="Transparent" CornerRadius="50">
+                    <Button Name="LatestSnapshotVersionButton" HorizontalAlignment="Stretch" Background="Transparent"
+                            CornerRadius="50">
                         <Grid Margin="10,0">
                             <Image Source="\Assets\Icons\Impulse_Command_Block.gif"
                                    Margin="0,0,0,0"
@@ -48,22 +50,26 @@
                         <Expander.Header>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock>正式版 (</TextBlock>
-                                <TextBlock Text="{Binding ElementName=ReleaseVersionListBox, Path=ItemCount}"/>
+                                <TextBlock Text="{Binding ElementName=ReleaseVersionListBox, Path=ItemCount}" />
                                 <TextBlock>)</TextBlock>
                             </StackPanel>
                         </Expander.Header>
-                        <ListBox Name="ReleaseVersionListBox" ItemsSource="{Binding Source={x:Static class:GlobalVariable.ReleaseVersionDownloadList}}">
+                        <ListBox Name="ReleaseVersionListBox"
+                                 ItemsSource="{Binding Source={x:Static class:GlobalVariable.ReleaseVersionDownloadList}}">
                             <ListBox.ItemsPanel>
                                 <ItemsPanelTemplate>
-                                    <VirtualizingStackPanel/>
+                                    <VirtualizingStackPanel />
                                 </ItemsPanelTemplate>
                             </ListBox.ItemsPanel>
                             <ListBox.ItemTemplate>
                                 <DataTemplate x:DataType="listTemplate:DefaultDownloadList">
                                     <Grid>
-                                        <Image Source="\Assets\Icons\Grass_Block.png" Margin="10,0,0,0" Height="35" HorizontalAlignment="Left"/>
-                                        <TextBlock Text="{Binding Path=Version}" FontSize="15" Margin="50,0,0,0" HorizontalAlignment="Left"/>
-                                        <TextBlock Text="{Binding Path=Time}" FontSize="12" Margin="51,20,0,0" HorizontalAlignment="Left"/>
+                                        <Image Source="\Assets\Icons\Grass_Block.png" Margin="10,0,0,0" Height="35"
+                                               HorizontalAlignment="Left" />
+                                        <TextBlock Text="{Binding Path=Version}" FontSize="15" Margin="50,0,0,0"
+                                                   HorizontalAlignment="Left" />
+                                        <TextBlock Text="{Binding Path=Time}" FontSize="12" Margin="51,20,0,0"
+                                                   HorizontalAlignment="Left" />
                                     </Grid>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
@@ -73,22 +79,26 @@
                         <Expander.Header>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock>测试版 (</TextBlock>
-                                <TextBlock Text="{Binding ElementName=SnapshotVersionListBox, Path=ItemCount}"/>
+                                <TextBlock Text="{Binding ElementName=SnapshotVersionListBox, Path=ItemCount}" />
                                 <TextBlock>)</TextBlock>
                             </StackPanel>
                         </Expander.Header>
-                        <ListBox Name="SnapshotVersionListBox" ItemsSource="{Binding Source={x:Static class:GlobalVariable.SnapshotVersionDownloadList}}">
+                        <ListBox Name="SnapshotVersionListBox"
+                                 ItemsSource="{Binding Source={x:Static class:GlobalVariable.SnapshotVersionDownloadList}}">
                             <ListBox.ItemsPanel>
                                 <ItemsPanelTemplate>
-                                    <VirtualizingStackPanel/>
+                                    <VirtualizingStackPanel />
                                 </ItemsPanelTemplate>
                             </ListBox.ItemsPanel>
                             <ListBox.ItemTemplate>
                                 <DataTemplate x:DataType="listTemplate:DefaultDownloadList">
                                     <Grid>
-                                        <Image Source="\Assets\Icons\Impulse_Command_Block.gif" Margin="10,0,0,0" Height="35" HorizontalAlignment="Left"/>
-                                        <TextBlock Text="{Binding Path=Version}" FontSize="15" Margin="50,0,0,0" HorizontalAlignment="Left"/>
-                                        <TextBlock Text="{Binding Path=Time}" FontSize="12" Margin="51,20,0,0" HorizontalAlignment="Left"/>
+                                        <Image Source="\Assets\Icons\Impulse_Command_Block.gif" Margin="10,0,0,0"
+                                               Height="35" HorizontalAlignment="Left" />
+                                        <TextBlock Text="{Binding Path=Version}" FontSize="15" Margin="50,0,0,0"
+                                                   HorizontalAlignment="Left" />
+                                        <TextBlock Text="{Binding Path=Time}" FontSize="12" Margin="51,20,0,0"
+                                                   HorizontalAlignment="Left" />
                                     </Grid>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
@@ -98,22 +108,26 @@
                         <Expander.Header>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock>远古版 (</TextBlock>
-                                <TextBlock Text="{Binding ElementName=OldVersionListBox, Path=ItemCount}"/>
+                                <TextBlock Text="{Binding ElementName=OldVersionListBox, Path=ItemCount}" />
                                 <TextBlock>)</TextBlock>
                             </StackPanel>
                         </Expander.Header>
-                        <ListBox Name="OldVersionListBox" ItemsSource="{Binding Source={x:Static class:GlobalVariable.OldVersionDownloadList}}">
+                        <ListBox Name="OldVersionListBox"
+                                 ItemsSource="{Binding Source={x:Static class:GlobalVariable.OldVersionDownloadList}}">
                             <ListBox.ItemsPanel>
                                 <ItemsPanelTemplate>
-                                    <VirtualizingStackPanel/>
+                                    <VirtualizingStackPanel />
                                 </ItemsPanelTemplate>
                             </ListBox.ItemsPanel>
                             <ListBox.ItemTemplate>
                                 <DataTemplate x:DataType="listTemplate:DefaultDownloadList">
                                     <Grid>
-                                        <Image Source="\Assets\Icons\Badlands_Grass_Block.png" Margin="10,0,0,0" Height="35" HorizontalAlignment="Left"/>
-                                        <TextBlock Text="{Binding Path=Version}" FontSize="15" Margin="50,0,0,0" HorizontalAlignment="Left"/>
-                                        <TextBlock Text="{Binding Path=Time}" FontSize="12" Margin="51,20,0,0" HorizontalAlignment="Left"/>
+                                        <Image Source="\Assets\Icons\Badlands_Grass_Block.png" Margin="10,0,0,0"
+                                               Height="35" HorizontalAlignment="Left" />
+                                        <TextBlock Text="{Binding Path=Version}" FontSize="15" Margin="50,0,0,0"
+                                                   HorizontalAlignment="Left" />
+                                        <TextBlock Text="{Binding Path=Time}" FontSize="12" Margin="51,20,0,0"
+                                                   HorizontalAlignment="Left" />
                                     </Grid>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
