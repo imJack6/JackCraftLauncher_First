@@ -117,13 +117,13 @@ public partial class ViewLogWindow : Window
 
             warpPanel.Children.Add(textBlock);
         }
-
         LogListBox.Items.Add(warpPanel);
-        /*if (AutomaticScrollingToggleButton.IsChecked == true)
-            //LogListBox.ScrollIntoView(stackPanel);
-            LogListBox.ScrollIntoView(warpPanel);*/
+        
+        ScrollViewer listboxScroll = (ScrollViewer)LogListBox.Scroll!;
+        if (AutomaticScrollingToggleButton.IsChecked == true)
+            listboxScroll.ScrollToEnd();
+
         /*LogListBox.SelectedIndex = LogListBox.ItemCount - 1;
-        LogListBox.AutoScrollToSelectedItem = false;
         LogListBox.ScrollIntoView(warpPanel);*/
     }
 
@@ -133,7 +133,7 @@ public partial class ViewLogWindow : Window
             LogListBox.SelectedIndex = -1;
     }
 
-    private void CloseGameButton_OnClick(object? sender, RoutedEventArgs e)
+    private void CloseGame_OnClick(object? sender, RoutedEventArgs e)
     {
         LaunchResult.GameProcess!.Kill();
     }

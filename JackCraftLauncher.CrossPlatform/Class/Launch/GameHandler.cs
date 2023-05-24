@@ -90,7 +90,7 @@ public class GameHandler
                     logWindow.AddLog($"[ 启动器 ] {args.Item}");
             });
         };
-        core.GameLogEventDelegate += async (sender, args) =>
+        core.GameLogEventDelegate += (sender, args) =>
         {
             Dispatcher.UIThread.InvokeAsync(() =>
             {

@@ -51,23 +51,48 @@
                 </ListBox.Styles>
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <StackPanel
-                            Height="{Binding RelativeSource={RelativeSource AncestorType=StackPanel}, Path=Height}" />
+                        <!--<StackPanel
+                            Height="{Binding RelativeSource={RelativeSource AncestorType=StackPanel}, Path=Height}" />-->
+                        <WrapPanel Orientation="Vertical"/>
                     </ItemsPanelTemplate>
                 </ListBox.ItemsPanel>
             </ListBox>
+            <ToggleButton Content="自动滚动" 
+                          Margin="5"
+                          IsChecked="True" 
+                          HorizontalAlignment="Right"
+                          VerticalAlignment="Top"
+                          Name="AutomaticScrollingToggleButton" />
         </Grid>
         <Grid Grid.Row="2">
-            <!--<ToggleButton Content="自动滚动" 
-                          Margin="5,0"
-                          IsChecked="True" 
-                          Name="AutomaticScrollingToggleButton" />-->
-            <Button Click="CloseGameButton_OnClick"
+            <Menu Margin="10,0">
+                <MenuItem Header="进程" CornerRadius="5">
+                    <MenuItem Header="关闭游戏">
+                        <MenuItem.Icon>
+                            <Path Width="20" Height="20" Stretch="Fill" Fill="{DynamicResource DefaultForeground}"
+                                  Data="M390.095238 141.336381v78.019048C275.553524 267.068952 195.047619 380.123429 195.047619 512c0 175.055238 141.897143 316.952381 316.952381 316.952381s316.952381-141.897143 316.952381-316.952381c0-131.85219-80.505905-244.882286-195.047619-292.644571l0.024381-78.019048C789.650286 192.536381 902.095238 339.139048 902.095238 512c0 215.454476-174.640762 390.095238-390.095238 390.095238S121.904762 727.454476 121.904762 512C121.904762 339.139048 234.349714 192.512 390.095238 141.336381zM548.571429 85.333333v438.857143h-73.142858v-438.857143h73.142858z" />
+                        </MenuItem.Icon>
+                        <MenuItem Header="确认关闭" IsEnabled="False"/>
+                        <Separator/>
+                        <MenuItem Header="确认" Click="CloseGame_OnClick">
+                            <MenuItem.Icon>
+                                <Border CornerRadius="50" Width="10" Height="10" Background="#FF5F57" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="取消">
+                            <MenuItem.Icon>
+                                <Border CornerRadius="50" Width="10" Height="10" Background="#28C840" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </MenuItem>
+                </MenuItem>
+            </Menu>
+            <!--<Button Click="CloseGameButton_OnClick"
                     Background="#88FF0000"
                     Margin="10,0">
                 <Path Width="20" Height="20" Stretch="Fill" Fill="{DynamicResource DefaultForeground}"
                       Data="M390.095238 141.336381v78.019048C275.553524 267.068952 195.047619 380.123429 195.047619 512c0 175.055238 141.897143 316.952381 316.952381 316.952381s316.952381-141.897143 316.952381-316.952381c0-131.85219-80.505905-244.882286-195.047619-292.644571l0.024381-78.019048C789.650286 192.536381 902.095238 339.139048 902.095238 512c0 215.454476-174.640762 390.095238-390.095238 390.095238S121.904762 727.454476 121.904762 512C121.904762 339.139048 234.349714 192.512 390.095238 141.336381zM548.571429 85.333333v438.857143h-73.142858v-438.857143h73.142858z" />
-            </Button>
+            </Button>-->
         </Grid>
     </Grid>
 </Window>
