@@ -3,6 +3,22 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="300"
+             Foreground="{DynamicResource DefaultForeground}"
              x:Class="JackCraftLauncher.CrossPlatform.Views.Menu.DownloadUserControl">
-    <Grid />
+    <Grid>
+        <WrapPanel>
+            <Grid>
+                <Image Source="\Assets\Icons\Grass_Block.png"
+                       Margin="15,0,0,0"
+                       Height="100"
+                       VerticalAlignment="Top"
+                       HorizontalAlignment="Left"/>
+                <TextBlock Text="正式版版本号"
+                           Margin="115,15,0,0"/>
+            </Grid>
+            <Grid >
+                <Button Content="Test"/>
+            </Grid>
+        </WrapPanel>
+    </Grid>
 </UserControl>
