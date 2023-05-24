@@ -16,6 +16,7 @@
 ---------------------
 
 ![Codefactor Grade](https://img.shields.io/codefactor/grade/github/imJack6/JackCraftLauncher?logo=codefactor&style=for-the-badge)
+
 ![Alt](https://repobeats.axiom.co/api/embed/993d2a1760013210fdb331dd9aff324a6b2ed82f.svg)
 
 > 若您对此项目感兴趣或想要做贡献，欢迎联系我或提交 Issues 和 Pull Requests
