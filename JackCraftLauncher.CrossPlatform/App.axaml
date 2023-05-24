@@ -1,7 +1,7 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="JackCraftLauncher.CrossPlatform.App"
-             RequestedThemeVariant="Dark">
+             RequestedThemeVariant="Light">
 
     <Application.Styles>
         <FluentTheme />
@@ -11,7 +11,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceInclude
-                    Source="avares://JackCraftLauncher.CrossPlatform/Views/Themes/DarkResourceDictionary.axaml" />
+                    Source="avares://JackCraftLauncher.CrossPlatform/Views/Themes/LightResourceDictionary.axaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

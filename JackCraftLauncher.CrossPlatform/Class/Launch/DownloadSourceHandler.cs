@@ -27,21 +27,31 @@ public class DownloadSourceHandler
         string? minecraftVersion = "1.0")
     {
         if (source == null)
-            switch (SettingsUserControl.Instance.DownloadSourceSelectComboBox.SelectedIndex)
+        {
+            if (SettingsUserControl.Instance != null)
             {
-                case 0:
-                    source = DownloadSourceEnum.MCBBS;
-                    break;
-                case 1:
-                    source = DownloadSourceEnum.BMCL;
-                    break;
-                case 2:
-                    source = DownloadSourceEnum.Official;
-                    break;
-                default:
-                    source = DownloadSourceEnum.BMCL;
-                    break;
+                switch (SettingsUserControl.Instance.DownloadSourceSelectComboBox.SelectedIndex)
+                {
+                    case 0:
+                        source = DownloadSourceEnum.MCBBS;
+                        break;
+                    case 1:
+                        source = DownloadSourceEnum.BMCL;
+                        break;
+                    case 2:
+                        source = DownloadSourceEnum.Official;
+                        break;
+                    default:
+                        source = DownloadSourceEnum.BMCL;
+                        break;
+                }
             }
+            else
+            {
+                source = DownloadSourceEnum.BMCL;
+            }
+        }
+
 
         var baseUrl = source switch
         {

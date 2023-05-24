@@ -8,7 +8,7 @@ namespace JackCraftLauncher.CrossPlatform.Views.Menu;
 
 public partial class SettingsUserControl : UserControl
 {
-    public static SettingsUserControl Instance;
+    public static SettingsUserControl? Instance;
 
     public SettingsUserControl()
     {

@@ -4,9 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Avalonia.Threading;
 using Flurl.Http;
+using JackCraftLauncher.CrossPlatform.Class.ListTemplate;
 using JackCraftLauncher.CrossPlatform.Views.Menu;
 using JackCraftLauncher.CrossPlatform.Views.MyWindow;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using ProjBobcat.Class.Helper;
 using ProjBobcat.Class.Model;
 using ProjBobcat.Class.Model.LauncherProfile;
@@ -38,6 +40,110 @@ public class GameHandler
         SettingsUserControl.Instance.StartJavaSelectComboBox.ItemsSource = GlobalVariable.LocalJavaList;
         SettingsUserControl.Instance.StartJavaSelectComboBox.PlaceholderText = "选择 Java";
         SettingsUserControl.Instance.RefreshLocalJavaComboBoxButton.IsEnabled = true;
+    }
+
+    public static async void RefreshLocalMinecraftDownloadList(bool updateUi = true)
+    {
+        #region 清空旧数组
+
+        GlobalVariable.MinecraftReleaseList.Clear();
+        GlobalVariable.MinecraftSnapshotList.Clear();
+        GlobalVariable.MinecraftOldList.Clear();
+
+        GlobalVariable.MinecraftIDList.Clear();
+        GlobalVariable.MinecraftTypeList.Clear();
+        GlobalVariable.MinecraftUrlList.Clear();
+        GlobalVariable.MinecraftTimeList.Clear();
+        GlobalVariable.MinecraftReleaseTimeList.Clear();
+
+        GlobalVariable.ReleaseVersionDownloadList.Clear();
+        GlobalVariable.SnapshotVersionDownloadList.Clear();
+        GlobalVariable.OldVersionDownloadList.Clear();
+
+        #endregion
+
+        #region 获取版本列表
+
+        var result = await DownloadSourceHandler
+            .GetDownloadSource(DownloadSourceHandler.DownloadTargetEnum.VersionInfoV1, null).GetStringAsync();
+
+        #endregion
+
+        #region 解析版本列表
+
+        var jObject = JObject.Parse(result);
+        GlobalVariable.LastetMinecraftReleaseVersion = jObject["latest"]!["release"]!.ToString();
+        GlobalVariable.LastetMinecraftSnapshotVersion = jObject["latest"]!["snapshot"]!.ToString();
+        var allMinecraftList = JArray.Parse(jObject["versions"]!.ToString());
+        foreach (var mc in allMinecraftList)
+        {
+            var MinecraftList = JObject.Parse(mc.ToString());
+            var MinecraftId = MinecraftList["id"].ToString();
+            var MinecraftType = MinecraftList["type"].ToString();
+            var MinecraftUrl = MinecraftList["url"].ToString();
+            var MinecraftTime = MinecraftList["time"].ToString();
+            var MinecraftReleaseTime = MinecraftList["releaseTime"].ToString();
+            // 4.添加到数组
+            GlobalVariable.MinecraftIDList.Add(MinecraftId);
+            GlobalVariable.MinecraftTypeList.Add(MinecraftType);
+            GlobalVariable.MinecraftUrlList.Add(MinecraftUrl);
+            GlobalVariable.MinecraftTimeList.Add(MinecraftTime);
+            GlobalVariable.MinecraftReleaseTimeList.Add(MinecraftReleaseTime);
+
+            if (MinecraftType == "release")
+            {
+                GlobalVariable.MinecraftReleaseList.Add(MinecraftId);
+                var ReleaseTime = "正式版  发布日期: " + MinecraftReleaseTime;
+                GlobalVariable.ReleaseVersionDownloadList.Add(new DefaultDownloadList(MinecraftId, ReleaseTime));
+            }
+            else if (MinecraftType == "snapshot")
+            {
+                GlobalVariable.MinecraftSnapshotList.Add(MinecraftId);
+                var ReleaseTime = "测试版  发布日期: " + MinecraftReleaseTime;
+                GlobalVariable.SnapshotVersionDownloadList.Add(new DefaultDownloadList(MinecraftId, ReleaseTime));
+            }
+            else if (MinecraftType == "old_alpha")
+            {
+                GlobalVariable.MinecraftOldList.Add(MinecraftId);
+                var ReleaseTime = "远古版  发布日期: " + MinecraftReleaseTime;
+                GlobalVariable.OldVersionDownloadList.Add(new DefaultDownloadList(MinecraftId, ReleaseTime));
+            }
+            else if (MinecraftType == "old_beta")
+            {
+                GlobalVariable.MinecraftOldList.Add(MinecraftId);
+                var ReleaseTime = "远古版  发布日期: " + MinecraftReleaseTime;
+                GlobalVariable.OldVersionDownloadList.Add(new DefaultDownloadList(MinecraftId, ReleaseTime));
+            }
+        }
+
+        if (updateUi)
+        {
+            DownloadUserControl.Instance.ReleaseVersionListBox.ItemsSource = GlobalVariable.ReleaseVersionDownloadList;
+            DownloadUserControl.Instance.SnapshotVersionListBox.ItemsSource =
+                GlobalVariable.SnapshotVersionDownloadList;
+            DownloadUserControl.Instance.OldVersionListBox.ItemsSource = GlobalVariable.OldVersionDownloadList;
+
+            if (GlobalVariable.LastetMinecraftReleaseVersion == GlobalVariable.LastetMinecraftSnapshotVersion)
+                DownloadUserControl.Instance.LatestSnapshotVersionButton.IsVisible = false;
+            DownloadUserControl.Instance.LatestReleaseVersionTextBlock.Text =
+                GlobalVariable.LastetMinecraftReleaseVersion;
+            DownloadUserControl.Instance.LatestSnapshotVersionTextBlock.Text =
+                GlobalVariable.LastetMinecraftSnapshotVersion;
+
+            var LatestReleaseVersionIndex =
+                GlobalVariable.MinecraftIDList.IndexOf(GlobalVariable.LastetMinecraftReleaseVersion);
+            if (LatestReleaseVersionIndex != -1)
+                DownloadUserControl.Instance.LatestReleaseVersionTextBlock.Text += "\n正式版  发布日期: " +
+                    GlobalVariable.MinecraftReleaseTimeList[LatestReleaseVersionIndex];
+
+            var LatestSnapshotVersionIndex =
+                GlobalVariable.MinecraftIDList.IndexOf(GlobalVariable.LastetMinecraftSnapshotVersion);
+            if (LatestSnapshotVersionIndex != -1)
+                DownloadUserControl.Instance.LatestSnapshotVersionTextBlock.Text += "\n测试版  发布日期: " +
+                    GlobalVariable.MinecraftReleaseTimeList[LatestSnapshotVersionIndex];
+        }
+
+        #endregion
     }
 
     public static async void StartGame(VersionInfo versionInfo)
