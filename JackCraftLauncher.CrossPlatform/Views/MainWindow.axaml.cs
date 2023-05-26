@@ -1,3 +1,4 @@
+using System;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
@@ -70,4 +71,9 @@ public partial class MainWindow : Window
     }
 
     #endregion
+
+    private void CrashTest_OnClick(object? sender, RoutedEventArgs e)
+    {
+        throw new Exception("这是一个测试异常 - throw new Exception 测试");
+    }
 }
