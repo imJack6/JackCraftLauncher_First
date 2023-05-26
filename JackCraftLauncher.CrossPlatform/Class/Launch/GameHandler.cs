@@ -156,7 +156,7 @@ public class GameHandler
             GameLogResolver = new DefaultGameLogResolver()
         };
         var resourceCompletion = await GetResourceCompletion(versionInfo);
-        
+
         var launchSettings = new LaunchSettings
         {
             FallBackGameArguments =
@@ -213,7 +213,7 @@ public class GameHandler
                     logWindow.AddLog("[ 启动器 ] 游戏已退出");
             });
         };
-        
+
         logWindow.Show();
         resourceCompletion.DownloadFileCompletedEvent += (sender, args) =>
         {
@@ -230,8 +230,8 @@ public class GameHandler
                         : $"<Retry - {file.RetryCount}>";
                     var fileName = file.FileType switch
                     {
-                        ProjBobcat.Class.Model.ResourceType.Asset => file.FileName.AsSpan()[..10],
-                        ProjBobcat.Class.Model.ResourceType.LibraryOrNative => file.FileName,
+                        ResourceType.Asset => file.FileName.AsSpan()[..10],
+                        ResourceType.LibraryOrNative => file.FileName,
                         _ => file.FileName
                     };
                     var pD =

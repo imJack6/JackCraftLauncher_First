@@ -8,7 +8,7 @@
              mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="300"
              Foreground="{DynamicResource DefaultForeground}"
              x:Class="JackCraftLauncher.CrossPlatform.Views.Menu.DownloadUserControl">
-    
+
     <ScrollViewer>
         <myControls:AnimateTabControl Name="DownloadTabControl" SelectedIndex="0">
             <TabItem IsVisible="False">
@@ -62,7 +62,8 @@
                                         <TextBlock>)</TextBlock>
                                     </StackPanel>
                                 </Expander.Header>
-                                <ListBox Name="ReleaseVersionListBox" SelectionChanged="VersionListBox_OnSelectionChanged"
+                                <ListBox Name="ReleaseVersionListBox"
+                                         SelectionChanged="VersionListBox_OnSelectionChanged"
                                          ItemsSource="{Binding Source={x:Static class:GlobalVariable.ReleaseVersionDownloadList}}">
                                     <ListBox.ItemsPanel>
                                         <ItemsPanelTemplate>
@@ -93,7 +94,8 @@
                                         <TextBlock>)</TextBlock>
                                     </StackPanel>
                                 </Expander.Header>
-                                <ListBox Name="SnapshotVersionListBox" SelectionChanged="VersionListBox_OnSelectionChanged"
+                                <ListBox Name="SnapshotVersionListBox"
+                                         SelectionChanged="VersionListBox_OnSelectionChanged"
                                          ItemsSource="{Binding Source={x:Static class:GlobalVariable.SnapshotVersionDownloadList}}">
                                     <ListBox.ItemsPanel>
                                         <ItemsPanelTemplate>
@@ -153,8 +155,10 @@
             </TabItem>
             <TabItem IsVisible="False">
                 <StackPanel>
-                    <Button Click="BackToSelectVersionTabItem_Click" Margin="10" Width="50" Height="30" Background="Transparent" CornerRadius="50" HorizontalAlignment="Left">
-                        <Path Fill="{DynamicResource DefaultForeground}" Stretch="Uniform" Data="M710.153924 8.980397L266.007127 460.692524a81.118646 81.118646 0 0 0 0.861532 114.476097l446.192936 441.050666a26.922883 26.922883 0 0 0 37.853573-38.284339L304.722232 536.884282a27.27288 27.27288 0 0 1-0.323074-38.445877L748.545955 46.726278A26.922883 26.922883 0 1 0 710.180847 9.00732z"/>
+                    <Button Click="BackToSelectVersionTabItem_Click" Margin="10" Width="50" Height="30"
+                            Background="Transparent" CornerRadius="50" HorizontalAlignment="Left">
+                        <Path Fill="{DynamicResource DefaultForeground}" Stretch="Uniform"
+                              Data="M710.153924 8.980397L266.007127 460.692524a81.118646 81.118646 0 0 0 0.861532 114.476097l446.192936 441.050666a26.922883 26.922883 0 0 0 37.853573-38.284339L304.722232 536.884282a27.27288 27.27288 0 0 1-0.323074-38.445877L748.545955 46.726278A26.922883 26.922883 0 1 0 710.180847 9.00732z" />
                     </Button>
                     <Grid Margin="10,0">
                         <Grid.ColumnDefinitions>
@@ -175,14 +179,16 @@
                                        Margin="5,0,0,0" />
                         </StackPanel>
                         <TextBox Grid.Column="1" Margin="10,0,0,0" Text="" CornerRadius="5" Watermark="版本名称"
-                                 Name="DownloadSaveVersionNameTextBox" HorizontalAlignment="Stretch" TextChanged="DownloadSaveVersionNameTextBox_OnTextChanged"
+                                 Name="DownloadSaveVersionNameTextBox" HorizontalAlignment="Stretch"
+                                 TextChanged="DownloadSaveVersionNameTextBox_OnTextChanged"
                                  VerticalAlignment="Center" />
                         <TextBlock Grid.Column="1" Margin="10,45,0,0" Foreground="Gray" Text="安装在 ..."
                                    Name="DownloadSavePathTextBlock" HorizontalAlignment="Stretch"
                                    FontSize="10"
                                    VerticalAlignment="Center" />
                         <Button Grid.Column="2" Margin="25" CornerRadius="5" Width="30" Height="30"
-                                Name="InstallStartButton" Click="InstallStartButton_OnClick" HorizontalAlignment="Right" VerticalAlignment="Center">
+                                Name="InstallStartButton" Click="InstallStartButton_OnClick"
+                                HorizontalAlignment="Right" VerticalAlignment="Center">
                             <Path Fill="{DynamicResource DefaultForeground}" Stretch="Uniform"
                                   VerticalAlignment="Center" HorizontalAlignment="Center"
                                   Data="M885.113 489.373L628.338 232.599c-12.496-12.497-32.758-12.497-45.254 0-12.497 12.497-12.497 32.758 0 45.255l203.3 203.3H158.025c-17.036 0-30.846 13.811-30.846 30.846 0 17.036 13.811 30.846 30.846 30.846h628.36L583.084 746.147c-12.497 12.496-12.497 32.758 0 45.255 6.248 6.248 14.438 9.372 22.627 9.372s16.379-3.124 22.627-9.372l256.775-256.775a31.999 31.999 0 0 0 0-45.254z" />
@@ -193,11 +199,14 @@
             </TabItem>
             <TabItem IsVisible="False">
                 <Grid>
-                    <TextBox Name="InstallStatusLogTextBox" IsReadOnly="True" Padding="10" Margin="10,45,10,45" CornerRadius="15"/>
-                    <TextBlock Text="状态" Name="InstallStatusTextBlock" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10" />
-                    <TextBlock Text="安装" Margin="10,0,10,15" FontSize="30"/>
-                    <ProgressBar Name="InstallStatusProgressBar" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" CornerRadius="50" Margin="10" Height="20"/>
-					
+                    <TextBox Name="InstallStatusLogTextBox" IsReadOnly="True" Padding="10" Margin="10,45,10,45"
+                             CornerRadius="15" />
+                    <TextBlock Text="状态" Name="InstallStatusTextBlock" HorizontalAlignment="Center"
+                               VerticalAlignment="Bottom" Margin="10" />
+                    <TextBlock Text="安装" Margin="10,0,10,15" FontSize="30" />
+                    <ProgressBar Name="InstallStatusProgressBar" HorizontalAlignment="Stretch"
+                                 VerticalAlignment="Bottom" CornerRadius="50" Margin="10" Height="20" />
+
                 </Grid>
             </TabItem>
         </myControls:AnimateTabControl>

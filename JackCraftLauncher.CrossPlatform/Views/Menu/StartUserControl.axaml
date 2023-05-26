@@ -43,7 +43,7 @@
             </TabItem>
             <TabItem Header="Bedrock">
                 <Grid>
-                    
+
                     <Button Content="启动 Bedrock 版本"
                             FontSize="16"
                             Name="StartBedrockGameButton"

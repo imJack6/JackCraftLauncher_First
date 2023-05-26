@@ -39,6 +39,11 @@ public partial class MainWindow : Window
 
     #endregion
 
+    private void CrashTest_OnClick(object? sender, RoutedEventArgs e)
+    {
+        throw new Exception("这是一个测试异常 - throw new Exception 测试");
+    }
+
     #region 窗体控制按钮事件
 
     private void TitleBar_PointerPressed(object sender, PointerPressedEventArgs e)
@@ -71,9 +76,4 @@ public partial class MainWindow : Window
     }
 
     #endregion
-
-    private void CrashTest_OnClick(object? sender, RoutedEventArgs e)
-    {
-        throw new Exception("这是一个测试异常 - throw new Exception 测试");
-    }
 }

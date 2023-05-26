@@ -12,6 +12,12 @@ public class GlobalVariable
     public static List<VersionInfo> LocalGameList = new();
     public static List<string> LocalJavaList = new();
 
+    public class ConfigVariable
+    {
+        public static DownloadSourceHandler.DownloadSourceEnum ConfigDownloadSourceEnum { get; set; } =
+            DownloadSourceHandler.DownloadSourceEnum.MCBBS; // 下载源
+    }
+
     #region 下载列表等
 
     public static ObservableCollection<DefaultDownloadList> ReleaseVersionDownloadList = new(); // 正式版下载列表
@@ -32,9 +38,4 @@ public class GlobalVariable
     public static List<string> MinecraftOldList = new(); // Minecraft 远古列表
 
     #endregion
-    
-    public class ConfigVariable
-    {
-        public static DownloadSourceHandler.DownloadSourceEnum ConfigDownloadSourceEnum { get; set; } = DownloadSourceHandler.DownloadSourceEnum.MCBBS; // 下载源
-    }
 }

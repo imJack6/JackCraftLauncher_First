@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using JackCraftLauncher.CrossPlatform.Views.Menu;
 
 namespace JackCraftLauncher.CrossPlatform.Class.Launch;
 
@@ -26,11 +25,8 @@ public class DownloadSourceHandler
     public static string GetDownloadSource(DownloadTargetEnum target, DownloadSourceEnum? source,
         string? minecraftVersion = "1.0")
     {
-        if (source == null)
-        {
-            source = GlobalVariable.ConfigVariable.ConfigDownloadSourceEnum;
-        }
-        
+        if (source == null) source = GlobalVariable.ConfigVariable.ConfigDownloadSourceEnum;
+
         var baseUrl = source switch
         {
             DownloadSourceEnum.MCBBS => "https://download.mcbbs.net",

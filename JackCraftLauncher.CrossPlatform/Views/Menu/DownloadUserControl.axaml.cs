@@ -16,7 +16,7 @@ public partial class DownloadUserControl : UserControl
 {
     public static DownloadUserControl? Instance;
     public string InstallVersionName = "1.0";
-    
+
     public DownloadUserControl()
     {
         Instance = this;
@@ -35,16 +35,17 @@ public partial class DownloadUserControl : UserControl
         GoToDownloadInstallTabItem(GlobalVariable.LastetMinecraftSnapshotVersion);
         InstallVersionName = GlobalVariable.LastetMinecraftSnapshotVersion;
     }
-    
+
     private async void InstallStartButton_OnClick(object? sender, RoutedEventArgs e)
     {
         DownloadTabControl.SelectedIndex = 2;
 
         #region 初始化
-        
-        InstallStatusLogTextBox.Text = $"[初始化] 开始安装 {DownloadSaveVersionNameTextBox.Text} ({InstallVersionName}){Environment.NewLine}";
-        string folderPath =
-            $"{GlobalVariable.LaunchCore.GetCore().RootPath}{System.IO.Path.DirectorySeparatorChar}versions{System.IO.Path.DirectorySeparatorChar}{DownloadSaveVersionNameTextBox.Text}";
+
+        InstallStatusLogTextBox.Text =
+            $"[初始化] 开始安装 {DownloadSaveVersionNameTextBox.Text} ({InstallVersionName}){Environment.NewLine}";
+        var folderPath =
+            $"{GlobalVariable.LaunchCore.GetCore().RootPath}{Path.DirectorySeparatorChar}versions{Path.DirectorySeparatorChar}{DownloadSaveVersionNameTextBox.Text}";
         InstallStatusLogTextBox.Text += $"[初始化] 创建文件夹 {folderPath}{Environment.NewLine}";
         DirectoryUtils.CreateDirectory(folderPath);
 
@@ -52,18 +53,21 @@ public partial class DownloadUserControl : UserControl
 
         #region 下载Json
 
-        InstallStatusLogTextBox.Text += $"[下载] - [开始] JSON - {DownloadSaveVersionNameTextBox.Text}.json {Environment.NewLine}";
-        int versionIndexOf = GlobalVariable.MinecraftIDList.IndexOf(InstallVersionName);
-        string minecraftJsonUrl = GlobalVariable.MinecraftUrlList[versionIndexOf];
-        minecraftJsonUrl = DownloadSourceHandler.PistonMetaUrlHandle(GlobalVariable.ConfigVariable.ConfigDownloadSourceEnum, minecraftJsonUrl);
-        DownloadSettings downloadSettings = new DownloadSettings
+        InstallStatusLogTextBox.Text +=
+            $"[下载] - [开始] JSON - {DownloadSaveVersionNameTextBox.Text}.json {Environment.NewLine}";
+        var versionIndexOf = GlobalVariable.MinecraftIDList.IndexOf(InstallVersionName);
+        var minecraftJsonUrl = GlobalVariable.MinecraftUrlList[versionIndexOf];
+        minecraftJsonUrl =
+            DownloadSourceHandler.PistonMetaUrlHandle(GlobalVariable.ConfigVariable.ConfigDownloadSourceEnum,
+                minecraftJsonUrl);
+        var downloadSettings = new DownloadSettings
         {
             DownloadParts = 32,
             RetryCount = 2,
             CheckFile = true,
-            Timeout = (int)TimeSpan.FromMinutes(5).TotalMilliseconds,
+            Timeout = (int)TimeSpan.FromMinutes(5).TotalMilliseconds
         };
-        DownloadFile downloadFile = new DownloadFile
+        var downloadFile = new DownloadFile
         {
             DownloadUri = minecraftJsonUrl,
             FileName = $"{DownloadSaveVersionNameTextBox.Text}.json",
@@ -71,22 +75,25 @@ public partial class DownloadUserControl : UserControl
             RetryCount = 2
         };
         await DownloadHelper.AdvancedDownloadFile(downloadFile, downloadSettings);
-        InstallStatusLogTextBox.Text += $"[下载] - [完成] JSON - {DownloadSaveVersionNameTextBox.Text}.json 下载完成 {Environment.NewLine}";
+        InstallStatusLogTextBox.Text +=
+            $"[下载] - [完成] JSON - {DownloadSaveVersionNameTextBox.Text}.json 下载完成 {Environment.NewLine}";
 
         #endregion
-        
+
         #region 安装完成
-        
+
         GameHandler.RefreshLocalGameList();
-        InstallStatusLogTextBox.Text += $"[安装] - [完成] {DownloadSaveVersionNameTextBox.Text} ({InstallVersionName}) 安装完成 {Environment.NewLine}";
-        int timeBack = 3;
-        for (int i = timeBack; i > 0; i--)
+        InstallStatusLogTextBox.Text +=
+            $"[安装] - [完成] {DownloadSaveVersionNameTextBox.Text} ({InstallVersionName}) 安装完成 {Environment.NewLine}";
+        var timeBack = 3;
+        for (var i = timeBack; i > 0; i--)
         {
             InstallStatusLogTextBox.Text += $">>> {i} 秒后返回 <<< {Environment.NewLine}";
             await Task.Delay(1000);
         }
+
         DownloadTabControl.SelectedIndex = 0;
-        
+
         #endregion
     }
 
@@ -101,8 +108,8 @@ public partial class DownloadUserControl : UserControl
     {
         if (DownloadSaveVersionNameTextBox.Text!.Length > 0)
         {
-            string folderPath =
-                $"{GlobalVariable.LaunchCore.GetCore().RootPath}{System.IO.Path.DirectorySeparatorChar}versions{System.IO.Path.DirectorySeparatorChar}{DownloadSaveVersionNameTextBox.Text}";
+            var folderPath =
+                $"{GlobalVariable.LaunchCore.GetCore().RootPath}{Path.DirectorySeparatorChar}versions{Path.DirectorySeparatorChar}{DownloadSaveVersionNameTextBox.Text}";
             if (Directory.Exists(folderPath))
             {
                 DownloadSavePathTextBlock.Text = $"文件夹 {DownloadSaveVersionNameTextBox.Text} 已存在";
@@ -116,20 +123,23 @@ public partial class DownloadUserControl : UserControl
         }
         else
         {
-            DownloadSavePathTextBlock.Text = $"请键入版本名字";
+            DownloadSavePathTextBlock.Text = "请键入版本名字";
             InstallStartButton.IsEnabled = false;
         }
     }
 
-    private void BackToSelectVersionTabItem_Click(object sender, RoutedEventArgs e) => DownloadTabControl.SelectedIndex = 0;
+    private void BackToSelectVersionTabItem_Click(object sender, RoutedEventArgs e)
+    {
+        DownloadTabControl.SelectedIndex = 0;
+    }
 
     private void VersionListBox_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
-        ListBox listBox = (ListBox)sender!;
+        var listBox = (ListBox)sender!;
         if (listBox.SelectedIndex != -1)
         {
-            DefaultDownloadList defaultDownloadList = (DefaultDownloadList)listBox.SelectedItem!;
-            string selectVersion = defaultDownloadList.Version;
+            var defaultDownloadList = (DefaultDownloadList)listBox.SelectedItem!;
+            var selectVersion = defaultDownloadList.Version;
             GoToDownloadInstallTabItem(selectVersion);
             InstallVersionName = selectVersion;
             listBox.SelectedIndex = -1;

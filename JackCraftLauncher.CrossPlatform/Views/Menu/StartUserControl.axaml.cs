@@ -28,14 +28,11 @@ public partial class StartUserControl : UserControl
         else
             GameHandler.StartGame(GlobalVariable.LocalGameList[SelectJavaGameVersionComboBox.SelectedIndex]);
     }
-    
+
     private void StartBedrockGameButton_OnClick(object? sender, RoutedEventArgs e)
     {
-        var launchsettings = new LaunchSettings()
-        {
-            
-        };
-        DefaultMineCraftUWPCore core = new DefaultMineCraftUWPCore();
+        var launchsettings = new LaunchSettings();
+        var core = new DefaultMineCraftUWPCore();
         core.Launch(launchsettings);
     }
 
@@ -43,5 +40,4 @@ public partial class StartUserControl : UserControl
     {
         GameHandler.RefreshLocalGameList();
     }
-
 }

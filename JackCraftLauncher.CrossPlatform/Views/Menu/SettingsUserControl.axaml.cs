@@ -31,7 +31,13 @@ public partial class SettingsUserControl : UserControl
             }
     }
 
-    private void RefreshLocalJavaComboBoxFullSearch_OnClick(object? sender, RoutedEventArgs e) => GameHandler.RefreshLocalJavaList(true);
-    private void RefreshLocalJavaComboBoxNormalSearch_OnClick(object? sender, RoutedEventArgs e) => GameHandler.RefreshLocalJavaList(false);
+    private void RefreshLocalJavaComboBoxFullSearch_OnClick(object? sender, RoutedEventArgs e)
+    {
+        GameHandler.RefreshLocalJavaList(true);
+    }
 
+    private void RefreshLocalJavaComboBoxNormalSearch_OnClick(object? sender, RoutedEventArgs e)
+    {
+        GameHandler.RefreshLocalJavaList();
+    }
 }

@@ -2,41 +2,31 @@
 using System.IO;
 using System.Runtime.InteropServices;
 
-namespace JackCraftLauncher.CrossPlatform.Class.Utils
-{
-    public class DirectoryUtils
-    {
-        public static void CreateDirectory(string path)
-        {
-            if (!Directory.Exists(path))
-                try
-                {
-                    Directory.CreateDirectory(path);
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception($"创建文件夹 {path} 失败: {ex}");
-                }
-        }
+namespace JackCraftLauncher.CrossPlatform.Class.Utils;
 
-        public static string GetSystemUserDirectory()
-        {
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+public class DirectoryUtils
+{
+    public static void CreateDirectory(string path)
+    {
+        if (!Directory.Exists(path))
+            try
             {
-                return Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+                Directory.CreateDirectory(path);
             }
-            else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+            catch (Exception ex)
             {
-                return "/Users/" + Environment.UserName;
+                throw new Exception($"创建文件夹 {path} 失败: {ex}");
             }
-            else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-            {
-                return "/home/" + Environment.UserName;
-            }
-            else
-            {
-                throw new PlatformNotSupportedException();
-            }
-        }
+    }
+
+    public static string GetSystemUserDirectory()
+    {
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            return Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+            return "/Users/" + Environment.UserName;
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            return "/home/" + Environment.UserName;
+        throw new PlatformNotSupportedException();
     }
 }
