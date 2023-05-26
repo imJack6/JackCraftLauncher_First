@@ -28,27 +28,9 @@ public class DownloadSourceHandler
     {
         if (source == null)
         {
-            if (SettingsUserControl.Instance != null)
-                switch (SettingsUserControl.Instance.DownloadSourceSelectComboBox.SelectedIndex)
-                {
-                    case 0:
-                        source = DownloadSourceEnum.MCBBS;
-                        break;
-                    case 1:
-                        source = DownloadSourceEnum.BMCL;
-                        break;
-                    case 2:
-                        source = DownloadSourceEnum.Official;
-                        break;
-                    default:
-                        source = DownloadSourceEnum.BMCL;
-                        break;
-                }
-            else
-                source = DownloadSourceEnum.BMCL;
+            source = GlobalVariable.ConfigVariable.ConfigDownloadSourceEnum;
         }
-
-
+        
         var baseUrl = source switch
         {
             DownloadSourceEnum.MCBBS => "https://download.mcbbs.net",
@@ -151,7 +133,7 @@ public class DownloadSourceHandler
                 throw new InvalidDataException($"Selected mirror field {source} does not found");
         }
 
-        HandleString.Replace("https://piston-meta.mojang.com", baseUrl);
+        HandleString = HandleString.Replace("https://piston-meta.mojang.com", baseUrl);
         return HandleString;
     }
 }
