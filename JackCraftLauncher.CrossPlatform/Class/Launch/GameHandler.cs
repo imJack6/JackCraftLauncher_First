@@ -31,11 +31,11 @@ public class GameHandler
             GlobalVariable.LocalGameList.Select(x => x.Name ?? x.Id);
     }
 
-    public static async void RefreshLocalJavaList()
+    public static async void RefreshLocalJavaList(bool fullSearch = false)
     {
         SettingsUserControl.Instance.StartJavaSelectComboBox.PlaceholderText = "正在搜寻Java，此过程可能需要花费较长时间";
         SettingsUserControl.Instance.RefreshLocalJavaComboBoxButton.IsEnabled = false;
-        var javaList = SystemInfoHelper.FindJava();
+        var javaList = SystemInfoHelper.FindJava(fullSearch);
         GlobalVariable.LocalJavaList = await javaList.ToListAsync();
         SettingsUserControl.Instance.StartJavaSelectComboBox.ItemsSource = GlobalVariable.LocalJavaList;
         SettingsUserControl.Instance.StartJavaSelectComboBox.PlaceholderText = "选择 Java";
@@ -155,7 +155,8 @@ public class GameHandler
             VersionLocator = GlobalVariable.LaunchCore.GetCore().VersionLocator,
             GameLogResolver = new DefaultGameLogResolver()
         };
-
+        var resourceCompletion = await GetResourceCompletion(versionInfo);
+        
         var launchSettings = new LaunchSettings
         {
             FallBackGameArguments =
@@ -212,11 +213,46 @@ public class GameHandler
                     logWindow.AddLog("[ 启动器 ] 游戏已退出");
             });
         };
+        
         logWindow.Show();
+        resourceCompletion.DownloadFileCompletedEvent += (sender, args) =>
+        {
+            Dispatcher.UIThread.InvokeAsync(() =>
+            {
+                if (sender is not DownloadFile file) return;
+                if (logWindow.IsVisible)
+                {
+                    var isSuccess = args.Success == null
+                        ? string.Empty
+                        : $"[{(args.Success.Value ? "成功" : "失败")}]";
+                    var retry = file.RetryCount == 0
+                        ? string.Empty
+                        : $"<Retry - {file.RetryCount}>";
+                    var fileName = file.FileType switch
+                    {
+                        ProjBobcat.Class.Model.ResourceType.Asset => file.FileName.AsSpan()[..10],
+                        ProjBobcat.Class.Model.ResourceType.LibraryOrNative => file.FileName,
+                        _ => file.FileName
+                    };
+                    var pD =
+                        //$"[{file.FileType} 已完成] - {retry}{isSuccess} {fileName.ToString()} ({resourceCompletion.TotalDownloaded} / {resourceCompletion.NeedToDownload}) [{args.AverageSpeed:F} Kb / s]";
+                        $"[{file.FileType} 已完成] - {retry}{isSuccess} - {fileName.ToString()} - ({resourceCompletion.TotalDownloaded} / {resourceCompletion.NeedToDownload})";
+                    logWindow.AddLog($"[ 资源补全 ] {pD}");
+                }
+            });
+        };
+
+        await resourceCompletion.CheckAndDownloadTaskAsync().ConfigureAwait(false);
         var result = await core.LaunchTaskAsync(launchSettings).ConfigureAwait(true); // 返回游戏启动结果，以及异常信息（如果存在）
-        logWindow.LaunchResult = result;
-        logWindow.Title = $"日志显示 (PID:{result.GameProcess!.Id})";
-        logWindow.TitleTextBlock.Text = $"日志显示 (PID:{result.GameProcess!.Id})";
+        Dispatcher.UIThread.InvokeAsync(() =>
+        {
+            if (logWindow.IsVisible)
+            {
+                logWindow.LaunchResult = result;
+                logWindow.Title = $"日志显示 (PID:{result.GameProcess!.Id})";
+                logWindow.TitleTextBlock.Text = $"日志显示 (PID:{result.GameProcess!.Id})";
+            }
+        });
     }
 
     public static async Task<DefaultResourceCompleter> GetResourceCompletion(VersionInfo versionInfo)
