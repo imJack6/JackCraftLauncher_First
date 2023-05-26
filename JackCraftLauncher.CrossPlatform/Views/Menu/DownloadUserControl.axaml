@@ -4,12 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:class="clr-namespace:JackCraftLauncher.CrossPlatform.Class"
              xmlns:listTemplate="clr-namespace:JackCraftLauncher.CrossPlatform.Class.ListTemplate"
+             xmlns:myControls="clr-namespace:JackCraftLauncher.CrossPlatform.Views.MyControls"
              mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="300"
              Foreground="{DynamicResource DefaultForeground}"
              x:Class="JackCraftLauncher.CrossPlatform.Views.Menu.DownloadUserControl">
     
     <ScrollViewer>
-        <TabControl Name="DownloadTabControl" SelectedIndex="2">
+        <myControls:AnimateTabControl Name="DownloadTabControl" SelectedIndex="0">
             <TabItem IsVisible="False">
                 <StackPanel Spacing="5">
                     <Border Margin="10,10,10,0" Background="#11000000" CornerRadius="15" Padding="10,10"
@@ -61,7 +62,7 @@
                                         <TextBlock>)</TextBlock>
                                     </StackPanel>
                                 </Expander.Header>
-                                <ListBox Name="ReleaseVersionListBox"
+                                <ListBox Name="ReleaseVersionListBox" SelectionChanged="VersionListBox_OnSelectionChanged"
                                          ItemsSource="{Binding Source={x:Static class:GlobalVariable.ReleaseVersionDownloadList}}">
                                     <ListBox.ItemsPanel>
                                         <ItemsPanelTemplate>
@@ -92,7 +93,7 @@
                                         <TextBlock>)</TextBlock>
                                     </StackPanel>
                                 </Expander.Header>
-                                <ListBox Name="SnapshotVersionListBox"
+                                <ListBox Name="SnapshotVersionListBox" SelectionChanged="VersionListBox_OnSelectionChanged"
                                          ItemsSource="{Binding Source={x:Static class:GlobalVariable.SnapshotVersionDownloadList}}">
                                     <ListBox.ItemsPanel>
                                         <ItemsPanelTemplate>
@@ -123,7 +124,7 @@
                                         <TextBlock>)</TextBlock>
                                     </StackPanel>
                                 </Expander.Header>
-                                <ListBox Name="OldVersionListBox"
+                                <ListBox Name="OldVersionListBox" SelectionChanged="VersionListBox_OnSelectionChanged"
                                          ItemsSource="{Binding Source={x:Static class:GlobalVariable.OldVersionDownloadList}}">
                                     <ListBox.ItemsPanel>
                                         <ItemsPanelTemplate>
@@ -152,6 +153,9 @@
             </TabItem>
             <TabItem IsVisible="False">
                 <StackPanel>
+                    <Button Click="BackToSelectVersionTabItem_Click" Margin="10" Width="50" Height="30" Background="Transparent" CornerRadius="50" HorizontalAlignment="Left">
+                        <Path Fill="{DynamicResource DefaultForeground}" Stretch="Uniform" Data="M710.153924 8.980397L266.007127 460.692524a81.118646 81.118646 0 0 0 0.861532 114.476097l446.192936 441.050666a26.922883 26.922883 0 0 0 37.853573-38.284339L304.722232 536.884282a27.27288 27.27288 0 0 1-0.323074-38.445877L748.545955 46.726278A26.922883 26.922883 0 1 0 710.180847 9.00732z"/>
+                    </Button>
                     <Grid Margin="10,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
@@ -171,7 +175,7 @@
                                        Margin="5,0,0,0" />
                         </StackPanel>
                         <TextBox Grid.Column="1" Margin="10,0,0,0" Text="" CornerRadius="5" Watermark="版本名称"
-                                 Name="DownloadSaveVersionNameTextBox" HorizontalAlignment="Stretch"
+                                 Name="DownloadSaveVersionNameTextBox" HorizontalAlignment="Stretch" TextChanged="DownloadSaveVersionNameTextBox_OnTextChanged"
                                  VerticalAlignment="Center" />
                         <TextBlock Grid.Column="1" Margin="10,45,0,0" Foreground="Gray" Text="安装在 ..."
                                    Name="DownloadSavePathTextBlock" HorizontalAlignment="Stretch"
@@ -192,10 +196,10 @@
                     <TextBox Name="InstallStatusLogTextBox" IsReadOnly="True" Padding="10" Margin="10,45,10,45" CornerRadius="15"/>
                     <TextBlock Text="状态" Name="InstallStatusTextBlock" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10" />
                     <TextBlock Text="安装" Margin="10,0,10,15" FontSize="30"/>
-                    <ProgressBar Name="InstallStatusProgressBar" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" CornerRadius="50" Margin="10" Height="15"/>
+                    <ProgressBar Name="InstallStatusProgressBar" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" CornerRadius="50" Margin="10" Height="20"/>
 					
                 </Grid>
             </TabItem>
-        </TabControl>
+        </myControls:AnimateTabControl>
     </ScrollViewer>
 </UserControl>
