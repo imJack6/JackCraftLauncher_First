@@ -42,7 +42,19 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Bedrock">
-                test2
+                <Grid>
+                    
+                    <Button Content="启动 Bedrock 版本"
+                            FontSize="16"
+                            Name="StartBedrockGameButton"
+                            CornerRadius="10"
+                            Margin="20"
+                            Click="StartBedrockGameButton_OnClick"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch" />
+                </Grid>
             </TabItem>
         </myControls:AnimateTabControl>
     </Grid>
