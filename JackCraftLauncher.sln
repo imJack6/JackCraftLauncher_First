@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JackCraftLauncher.Windows", "JackCraftLauncher.Windows\JackCraftLauncher.Windows.csproj", "{215319A9-142A-4626-B0A3-28E4471D4848}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JackCraftLauncher.CrossPlatform", "JackCraftLauncher.CrossPlatform\JackCraftLauncher.CrossPlatform.csproj", "{C7959055-8CAC-4A49-9383-E08937F97CF3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JackCraftLauncher.Desktop", "JackCraftLauncher.Desktop\JackCraftLauncher.Desktop.csproj", "{C7959055-8CAC-4A49-9383-E08937F97CF3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjBobcat", "ProjBobcat\ProjBobcat\ProjBobcat\ProjBobcat.csproj", "{258816E0-F495-4254-9FDA-EE55ADCD1E3A}"
 EndProject
