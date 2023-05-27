@@ -1,0 +1,57 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="650" d:DesignHeight="400" Width="650" Height="400"
+        MinHeight="300" MinWidth="650"
+        Foreground="{DynamicResource DefaultForeground}"
+        Background="#0177D7"
+        x:Class="JackCraftLauncher.Desktop.Views.MyWindow.MyErrorWindow"
+        Title="MyErrorWindow">
+    <Grid Margin="20,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <WrapPanel Grid.Row="0"
+                   Margin="0,5"
+                   Orientation="Horizontal">
+            <TextBlock Text=":("
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"
+                       FontSize="70"
+                       Margin="0,0"/>
+            <TextBlock Text="程序出现了错误，但并非致命错误，您可以根据提示进行自我修复"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Bottom"
+                       FontSize="20"/>
+        </WrapPanel>
+        <Grid Grid.Row="1">
+            <TextBox IsReadOnly="True"
+                     Name="ErrorMessageTextBox"
+                     CornerRadius="10"/>
+        </Grid>
+        <Grid Grid.Row="2"
+              Margin="0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0"
+                    Content="复制"
+                    Click="Copy_OnClick"
+                    Margin="0,0,20,0"
+                    Background="#28C840"
+                    HorizontalContentAlignment="Center"
+                    HorizontalAlignment="Stretch"/>
+            <Button Grid.Column="1"
+                    Content="关闭"
+                    Click="Close_OnClick"
+                    Margin="20,0,0,0"
+                    Background="#FF5F57"
+                    HorizontalContentAlignment="Center"
+                    HorizontalAlignment="Stretch"/>
+        </Grid>
+    </Grid>
+</Window>
