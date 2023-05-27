@@ -33,21 +33,31 @@ public partial class SettingsUserControl : UserControl
                     ThemeHandler.SetTheme(ThemeVariant.Dark);
                     break;
             }
+
             GlobalVariable.ConfigVariable.ConfigThemeModel = (ThemeModel)ThemeSelectComboBox.SelectedIndex;
-            DefaultConfigHandler.SetConfig(GlobalConstants.ConfigThemeNode, GlobalVariable.ConfigVariable.ConfigThemeModel);
+            DefaultConfigHandler.SetConfig(GlobalConstants.ConfigThemeNode,
+                GlobalVariable.ConfigVariable.ConfigThemeModel);
         }
     }
-    
+
     private void DownloadSourceSelectComboBox_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
         if (DownloadSourceSelectComboBox != null && DownloadSourceSelectComboBox.SelectedIndex >= 0)
         {
-            GlobalVariable.ConfigVariable.ConfigDownloadSourceEnum = (DownloadSourceHandler.DownloadSourceEnum)DownloadSourceSelectComboBox.SelectedIndex;
-            DefaultConfigHandler.SetConfig(GlobalConstants.ConfigDownloadSourceNode, GlobalVariable.ConfigVariable.ConfigDownloadSourceEnum);
+            GlobalVariable.ConfigVariable.ConfigDownloadSourceEnum =
+                (DownloadSourceHandler.DownloadSourceEnum)DownloadSourceSelectComboBox.SelectedIndex;
+            DefaultConfigHandler.SetConfig(GlobalConstants.ConfigDownloadSourceNode,
+                GlobalVariable.ConfigVariable.ConfigDownloadSourceEnum);
         }
     }
 
-    private void RefreshLocalJavaComboBoxFullSearch_OnClick(object? sender, RoutedEventArgs e) => GameHandler.RefreshLocalJavaList(true);
+    private void RefreshLocalJavaComboBoxFullSearch_OnClick(object? sender, RoutedEventArgs e)
+    {
+        GameHandler.RefreshLocalJavaList(true);
+    }
 
-    private void RefreshLocalJavaComboBoxNormalSearch_OnClick(object? sender, RoutedEventArgs e) => GameHandler.RefreshLocalJavaList();
+    private void RefreshLocalJavaComboBoxNormalSearch_OnClick(object? sender, RoutedEventArgs e)
+    {
+        GameHandler.RefreshLocalJavaList();
+    }
 }

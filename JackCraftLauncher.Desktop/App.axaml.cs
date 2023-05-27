@@ -3,7 +3,6 @@ using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using JackCraftLauncher.Desktop.Class.ConfigHandle;
-using JackCraftLauncher.Desktop.Class.Launch;
 using JackCraftLauncher.Desktop.Views;
 
 namespace JackCraftLauncher.Desktop;
@@ -14,7 +13,7 @@ public class App : Application
     {
         ServicePointManager.DefaultConnectionLimit = 512;
         AvaloniaXamlLoader.Load(this);
-        
+
         DefaultConfigHandler.LoadConfig();
     }
 

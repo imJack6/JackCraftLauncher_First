@@ -46,27 +46,29 @@ public partial class MainWindow : Window
     {
         throw new Exception("这是一个测试异常 - throw new Exception 测试");
     }
+
     private void Test_OnClick(object? sender, RoutedEventArgs e)
     {
         var dialog = new OpenFileDialog();
-        dialog.Filters.Add(new FileDialogFilter() { Name = "所有文件", Extensions = { "*" } });
-        dialog.Filters.Add(new FileDialogFilter() { Name = "文本文件", Extensions = { "txt" } });
-        dialog.Filters.Add(new FileDialogFilter() { Name = "图片文件", Extensions = { "png", "jpg", "jpeg", "bmp" } });
-        dialog.Filters.Add(new FileDialogFilter() { Name = "可执行文件", Extensions = { "exe" } });
-        dialog.Filters.Add(new FileDialogFilter() { Name = "压缩文件", Extensions = { "zip", "rar", "7z" } });
-        dialog.Filters.Add(new FileDialogFilter() { Name = "音频文件", Extensions = { "mp3", "wav", "flac" } });
-        dialog.Filters.Add(new FileDialogFilter() { Name = "视频文件", Extensions = { "mp4", "avi", "mkv" } });
-        dialog.Filters.Add(new FileDialogFilter() { Name = "其他文件", Extensions = { "dat", "bin", "iso" } });
-        dialog.Filters.Add(new FileDialogFilter() { Name = "所有文件", Extensions = { "*" } });
-        dialog.Filters.Add(new FileDialogFilter() { Name = "文本文件", Extensions = { "txt" } });
-        dialog.Filters.Add(new FileDialogFilter() { Name = "图片文件", Extensions = { "png", "jpg", "jpeg", "bmp" } });
-        dialog.Filters.Add(new FileDialogFilter() { Name = "可执行文件", Extensions = { "exe" } });
-        dialog.Filters.Add(new FileDialogFilter() { Name = "压缩文件", Extensions = { "zip", "rar", "7z" } });
-        dialog.Filters.Add(new FileDialogFilter() { Name = "音频文件", Extensions = { "mp3", "wav", "flac" } });
-        dialog.Filters.Add(new FileDialogFilter() { Name = "视频文件", Extensions = { "mp4", "avi", "mkv" } });
-        dialog.Filters.Add(new FileDialogFilter() { Name = "其他文件", Extensions = { "dat", "bin", "iso" } });
-        dialog.Filters.Add(new FileDialogFilter() { Name = "所有文件", Extensions = { "*" } });
-        dialog.Filters.Add(new FileDialogFilter() { Name = DirectoryUtils.GetSystemUserDirectory(), Extensions = { "*" } });
+        dialog.Filters.Add(new FileDialogFilter { Name = "所有文件", Extensions = { "*" } });
+        dialog.Filters.Add(new FileDialogFilter { Name = "文本文件", Extensions = { "txt" } });
+        dialog.Filters.Add(new FileDialogFilter { Name = "图片文件", Extensions = { "png", "jpg", "jpeg", "bmp" } });
+        dialog.Filters.Add(new FileDialogFilter { Name = "可执行文件", Extensions = { "exe" } });
+        dialog.Filters.Add(new FileDialogFilter { Name = "压缩文件", Extensions = { "zip", "rar", "7z" } });
+        dialog.Filters.Add(new FileDialogFilter { Name = "音频文件", Extensions = { "mp3", "wav", "flac" } });
+        dialog.Filters.Add(new FileDialogFilter { Name = "视频文件", Extensions = { "mp4", "avi", "mkv" } });
+        dialog.Filters.Add(new FileDialogFilter { Name = "其他文件", Extensions = { "dat", "bin", "iso" } });
+        dialog.Filters.Add(new FileDialogFilter { Name = "所有文件", Extensions = { "*" } });
+        dialog.Filters.Add(new FileDialogFilter { Name = "文本文件", Extensions = { "txt" } });
+        dialog.Filters.Add(new FileDialogFilter { Name = "图片文件", Extensions = { "png", "jpg", "jpeg", "bmp" } });
+        dialog.Filters.Add(new FileDialogFilter { Name = "可执行文件", Extensions = { "exe" } });
+        dialog.Filters.Add(new FileDialogFilter { Name = "压缩文件", Extensions = { "zip", "rar", "7z" } });
+        dialog.Filters.Add(new FileDialogFilter { Name = "音频文件", Extensions = { "mp3", "wav", "flac" } });
+        dialog.Filters.Add(new FileDialogFilter { Name = "视频文件", Extensions = { "mp4", "avi", "mkv" } });
+        dialog.Filters.Add(new FileDialogFilter { Name = "其他文件", Extensions = { "dat", "bin", "iso" } });
+        dialog.Filters.Add(new FileDialogFilter { Name = "所有文件", Extensions = { "*" } });
+        dialog.Filters.Add(
+            new FileDialogFilter { Name = DirectoryUtils.GetSystemUserDirectory(), Extensions = { "*" } });
         dialog.ShowAsync(this);
     }
 

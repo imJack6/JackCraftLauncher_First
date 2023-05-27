@@ -1,11 +1,8 @@
 ﻿using System;
 using System.IO;
-using System.Reflection;
-using Avalonia.Styling;
 using JackCraftLauncher.Desktop.Class.Launch;
 using JackCraftLauncher.Desktop.Class.Model;
 using JackCraftLauncher.Desktop.Class.Model.ErrorModels;
-using JackCraftLauncher.Desktop.Class.Utils;
 using JackCraftLauncher.Desktop.Views.Menu;
 using JackCraftLauncher.Desktop.Views.MyWindow;
 using Newtonsoft.Json;
@@ -16,7 +13,7 @@ namespace JackCraftLauncher.Desktop.Class.ConfigHandle;
 public class DefaultConfigHandler
 {
     private static readonly string ConfigFilePath = GlobalVariable.ConfigVariable.MainConfigPath;
-    
+
     public static void LoadSettingsConfig()
     {
         #region 启动器配置
@@ -24,11 +21,11 @@ public class DefaultConfigHandler
         #region 主题加载
 
         {
-            ThemeModel theme = (ThemeModel)GetConfig(GlobalConstants.ConfigThemeNode);
+            var theme = (ThemeModel)GetConfig(GlobalConstants.ConfigThemeNode);
             if (theme is not (ThemeModel.Light or ThemeModel.Dark))
             {
                 GlobalVariable.ConfigVariable.ConfigThemeModel = ThemeModel.Dark;
-                SetConfig(GlobalConstants.ConfigThemeNode,ThemeModel.Dark);
+                SetConfig(GlobalConstants.ConfigThemeNode, ThemeModel.Dark);
             }
             else
             {
@@ -40,15 +37,17 @@ public class DefaultConfigHandler
         #endregion
 
         #endregion
-        
+
         #region 下载源加载
-        
+
         {
-            DownloadSourceHandler.DownloadSourceEnum downloadSource = (DownloadSourceHandler.DownloadSourceEnum)GetConfig(GlobalConstants.ConfigDownloadSourceNode);
-            if (downloadSource is not (DownloadSourceHandler.DownloadSourceEnum.Official or DownloadSourceHandler.DownloadSourceEnum.BMCL or DownloadSourceHandler.DownloadSourceEnum.MCBBS))
+            var downloadSource =
+                (DownloadSourceHandler.DownloadSourceEnum)GetConfig(GlobalConstants.ConfigDownloadSourceNode);
+            if (downloadSource is not (DownloadSourceHandler.DownloadSourceEnum.Official
+                or DownloadSourceHandler.DownloadSourceEnum.BMCL or DownloadSourceHandler.DownloadSourceEnum.MCBBS))
             {
                 GlobalVariable.ConfigVariable.ConfigDownloadSourceEnum = DownloadSourceHandler.DownloadSourceEnum.BMCL;
-                SetConfig(GlobalConstants.ConfigDownloadSourceNode,DownloadSourceHandler.DownloadSourceEnum.BMCL);
+                SetConfig(GlobalConstants.ConfigDownloadSourceNode, DownloadSourceHandler.DownloadSourceEnum.BMCL);
             }
             else
             {
@@ -58,27 +57,24 @@ public class DefaultConfigHandler
         }
 
         #endregion
-    } 
-    
+    }
+
     #region 配置文件操作
 
     public static Config LoadConfig()
     {
-        if (!File.Exists(ConfigFilePath))
-        {
-            return new Config();
-        }
-        
+        if (!File.Exists(ConfigFilePath)) return new Config();
+
         try
         {
-            string json = File.ReadAllText(ConfigFilePath);
+            var json = File.ReadAllText(ConfigFilePath);
             if (string.IsNullOrWhiteSpace(json))
                 SaveConfig(new Config());
             return JsonConvert.DeserializeObject<Config>(json);
         }
         catch (Exception ex)
         {
-            MyErrorWindow errorWindow = new MyErrorWindow(new ErrorResult
+            var errorWindow = new MyErrorWindow(new ErrorResult
                 {
                     ErrorType = ErrorType.ConfigFailed,
                     ErrorMessage = new ErrorMessage
@@ -94,29 +90,31 @@ public class DefaultConfigHandler
             return new Config();
         }
     }
+
     public static void SaveConfig(Config config)
     {
         if (!File.Exists(ConfigFilePath))
         {
-            FileStream fileStream = File.Create(ConfigFilePath);
+            var fileStream = File.Create(ConfigFilePath);
             fileStream.Close();
         }
-            
-        string json = JsonConvert.SerializeObject(config);
+
+        var json = JsonConvert.SerializeObject(config);
         File.WriteAllText(ConfigFilePath, JObject.Parse(json).ToString());
     }
+
     public static object GetConfig(string propertyName)
     {
-        Config config = LoadConfig();
-        string[] propertyNames = propertyName.Split('.');
+        var config = LoadConfig();
+        var propertyNames = propertyName.Split('.');
         object obj = config;
-        Type type = typeof(Config);
-        for (int i = 0; i < propertyNames.Length; i++)
+        var type = typeof(Config);
+        for (var i = 0; i < propertyNames.Length; i++)
         {
-            PropertyInfo property = type.GetProperty(propertyNames[i]);
+            var property = type.GetProperty(propertyNames[i]);
             if (property == null)
             {
-                MyErrorWindow errorWindow = new MyErrorWindow(new ErrorResult
+                var errorWindow = new MyErrorWindow(new ErrorResult
                     {
                         ErrorType = ErrorType.InternalError,
                         ErrorMessage = new ErrorMessage
@@ -131,29 +129,33 @@ public class DefaultConfigHandler
                 errorWindow.Show();
                 return null;
             }
+
             obj = property.GetValue(obj);
             if (obj == null)
             {
                 obj = Activator.CreateInstance(property.PropertyType);
                 property.SetValue(obj, obj);
             }
+
             type = property.PropertyType;
         }
+
         SaveConfig(config);
         return obj;
     }
+
     public static void SetConfig(string propertyName, object value)
     {
-        Config config = LoadConfig();
-        string[] propertyNames = propertyName.Split('.');
+        var config = LoadConfig();
+        var propertyNames = propertyName.Split('.');
         object obj = config;
-        Type type = typeof(Config);
-        for (int i = 0; i < propertyNames.Length - 1; i++)
+        var type = typeof(Config);
+        for (var i = 0; i < propertyNames.Length - 1; i++)
         {
-            PropertyInfo property = type.GetProperty(propertyNames[i]);
+            var property = type.GetProperty(propertyNames[i]);
             if (property == null)
             {
-                MyErrorWindow errorWindow = new MyErrorWindow(new ErrorResult
+                var errorWindow = new MyErrorWindow(new ErrorResult
                     {
                         ErrorType = ErrorType.InternalError,
                         ErrorMessage = new ErrorMessage
@@ -168,32 +170,38 @@ public class DefaultConfigHandler
                 errorWindow.Show();
                 return;
             }
+
             obj = property.GetValue(obj);
             if (obj == null)
             {
                 obj = Activator.CreateInstance(property.PropertyType);
                 property.SetValue(obj, obj);
             }
+
             type = property.PropertyType;
         }
-        PropertyInfo lastProperty = type.GetProperty(propertyNames[propertyNames.Length - 1]);
+
+        var lastProperty = type.GetProperty(propertyNames[propertyNames.Length - 1]);
         if (lastProperty == null)
         {
-            MyErrorWindow errorWindow = new MyErrorWindow(new ErrorResult
+            var errorWindow = new MyErrorWindow(new ErrorResult
                 {
                     ErrorType = ErrorType.InternalError,
                     ErrorMessage = new ErrorMessage
                     {
                         Error = "内部错误",
-                        ErrorMsg = $"{type.Name} 类中找不到属性 {propertyNames[propertyNames.Length - 1]} - 可能原因 1.程序被篡改 2.开发者出错",
+                        ErrorMsg =
+                            $"{type.Name} 类中找不到属性 {propertyNames[propertyNames.Length - 1]} - 可能原因 1.程序被篡改 2.开发者出错",
                         Fix = "1.重试 2.联系开发者 2.重新下载程序",
-                        Exception = new ArgumentException($"{type.Name} 类中找不到属性 {propertyNames[propertyNames.Length - 1]}")
+                        Exception = new ArgumentException(
+                            $"{type.Name} 类中找不到属性 {propertyNames[propertyNames.Length - 1]}")
                     }
                 }
             );
             errorWindow.Show();
             return;
         }
+
         lastProperty.SetValue(obj, value);
         SaveConfig(config);
     }
@@ -204,28 +212,29 @@ public class DefaultConfigHandler
 
     public class Config
     {
-        public LauncherSettings LauncherSettings { get; set; } = new LauncherSettings();
-        public DownloadSettings DownloadSettings { get; set; } = new DownloadSettings();
-        public GlobalGameSettings GlobalGameSettings { get; set; } = new GlobalGameSettings();
+        public LauncherSettings LauncherSettings { get; set; } = new();
+        public DownloadSettings DownloadSettings { get; set; } = new();
+        public GlobalGameSettings GlobalGameSettings { get; set; } = new();
     }
 
     public class LauncherSettings
     {
         public ThemeModel Theme { get; set; } = ThemeModel.Dark;
     }
-    
+
     public class DownloadSettings
     {
-        public DownloadSourceHandler.DownloadSourceEnum  DownloadSource { get; set; } = DownloadSourceHandler.DownloadSourceEnum.BMCL;
+        public DownloadSourceHandler.DownloadSourceEnum DownloadSource { get; set; } =
+            DownloadSourceHandler.DownloadSourceEnum.BMCL;
+
         public int ParallelismCount { get; set; } = 8;
         public int ThreadCount { get; set; } = 16;
         public int RetryCount { get; set; } = 2;
     }
-    
+
     public class GlobalGameSettings
     {
-        
     }
-    #endregion
 
+    #endregion
 }

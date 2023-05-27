@@ -16,9 +16,12 @@ public class GlobalVariable
     public static List<string> LocalJavaList = new();
 
     public class ConfigVariable
-    { 
-        public static string MainConfigPath { get; } = $"{DirectoryUtils.GetSystemUserDirectory()}{Path.DirectorySeparatorChar}JackCraft{Path.DirectorySeparatorChar}Launcher{Path.DirectorySeparatorChar}Desktop{Path.DirectorySeparatorChar}config.json";
+    {
+        public static string MainConfigPath { get; } =
+            $"{DirectoryUtils.GetSystemUserDirectory()}{Path.DirectorySeparatorChar}JackCraft{Path.DirectorySeparatorChar}Launcher{Path.DirectorySeparatorChar}Desktop{Path.DirectorySeparatorChar}config.json";
+
         public static ThemeModel ConfigThemeModel { get; set; } = ThemeModel.Dark; // 主题
+
         public static DownloadSourceHandler.DownloadSourceEnum ConfigDownloadSourceEnum { get; set; } =
             DownloadSourceHandler.DownloadSourceEnum.BMCL; // 下载源
     }
