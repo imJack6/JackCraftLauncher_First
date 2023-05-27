@@ -2,6 +2,7 @@ using System;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
+using JackCraftLauncher.Desktop.Class.ConfigHandle;
 using JackCraftLauncher.Desktop.Class.Utils;
 
 namespace JackCraftLauncher.Desktop.Views;
@@ -14,6 +15,7 @@ public partial class MainWindow : Window
     {
         Instance = this;
         InitializeComponent();
+        DefaultConfigHandler.LoadSettingsConfig();
     }
 
     #region 菜单按钮事件
