@@ -29,5 +29,4 @@ public class DirectoryUtils
             return "/home/" + Environment.UserName;
         throw new PlatformNotSupportedException();
     }
-
 }
