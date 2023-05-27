@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using Avalonia;
 
-namespace JackCraftLauncher.Desktop
+namespace JackCraftLauncher.Desktop;
 
 internal class Program
 {

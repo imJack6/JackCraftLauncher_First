@@ -16,10 +16,10 @@ public class ThemeHandler
             var resourceDictionary = new ResourceDictionary();
             var resourceInclude =
                 new ResourceInclude(
-                    new Uri("avares://JackCraftLauncher.Desktop1/Views/Themes/LightResourceDictionary.axaml"))
+                    new Uri("avares://JackCraftLauncher.Desktop/Views/Themes/LightResourceDictionary.axaml"))
                 {
                     Source = new Uri(
-                        "avares://JackCraftLauncher.Desktop1/Views/Themes/DarkResourceDictionary.axaml") // 新的资源路径
+                        "avares://JackCraftLauncher.Desktop/Views/Themes/DarkResourceDictionary.axaml") // 新的资源路径
                 };
             resourceDictionary.MergedDictionaries.Add(resourceInclude);
             Application.Current.Resources = resourceDictionary;
@@ -30,10 +30,10 @@ public class ThemeHandler
             var resourceDictionary = new ResourceDictionary();
             var resourceInclude =
                 new ResourceInclude(
-                    new Uri("avares://JackCraftLauncher.Desktop1/Views/Themes/DarkResourceDictionary.axaml"))
+                    new Uri("avares://JackCraftLauncher.Desktop/Views/Themes/DarkResourceDictionary.axaml"))
                 {
                     Source = new Uri(
-                        "avares://JackCraftLauncher.Desktop1/Views/Themes/LightResourceDictionary.axaml") // 新的资源路径
+                        "avares://JackCraftLauncher.Desktop/Views/Themes/LightResourceDictionary.axaml") // 新的资源路径
                 };
             resourceDictionary.MergedDictionaries.Add(resourceInclude);
             Application.Current.Resources = resourceDictionary;
