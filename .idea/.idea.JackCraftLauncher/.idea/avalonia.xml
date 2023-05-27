@@ -20,6 +20,9 @@
         <entry key="JackCraftLauncher.CrossPlatform/Views/Themes/LightResourceDictionary.axaml" value="JackCraftLauncher.CrossPlatform/JackCraftLauncher.CrossPlatform.csproj" />
         <entry key="JackCraftLauncher.CrossPlatform/Views/Window/ViewLogWindow.axaml" value="JackCraftLauncher.CrossPlatform/JackCraftLauncher.CrossPlatform.csproj" />
         <entry key="JackCraftLauncher.Desktop/App.axaml" value="JackCraftLauncher.Desktop/JackCraftLauncher.Desktop.csproj" />
+        <entry key="JackCraftLauncher.Desktop/Views/MainWindow.axaml" value="JackCraftLauncher.Desktop/JackCraftLauncher.Desktop.csproj" />
+        <entry key="JackCraftLauncher.Desktop/Views/Menu/SettingsUserControl.axaml" value="JackCraftLauncher.Desktop/JackCraftLauncher.Desktop.csproj" />
+        <entry key="JackCraftLauncher.Desktop/Views/MyWindow/MyErrorWindow.axaml" value="JackCraftLauncher.Desktop/JackCraftLauncher.Desktop.csproj" />
       </map>
     </option>
   </component>
