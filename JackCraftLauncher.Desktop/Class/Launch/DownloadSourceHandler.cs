@@ -6,8 +6,8 @@ public class DownloadSourceHandler
 {
     public enum DownloadSourceEnum
     {
-        BMCL,
         MCBBS,
+        BMCL,
         Official
     }
 
