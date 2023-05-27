@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Reflection;
 using JackCraftLauncher.Desktop.Class.Launch;
 using JackCraftLauncher.Desktop.Class.Model;
 using JackCraftLauncher.Desktop.Class.Model.ErrorModels;
@@ -70,19 +71,12 @@ public class DefaultConfigHandler
         }
         catch (Exception ex)
         {
-            var errorWindow = new MyErrorWindow(new ErrorResult
-                {
-                    ErrorType = ErrorType.ConfigFailed,
-                    ErrorMessage = new ErrorMessage
-                    {
-                        Error = "加载失败",
-                        ErrorMsg = "加载配置文件失败 - 可能原因 1.配置文件损坏 2.配置文件被篡改 3.没有权限",
-                        Fix = "1.删除配置文件后重启程序 2.给予权限",
-                        Exception = ex
-                    }
-                }
-            );
-            errorWindow.Show();
+            MyErrorWindow.CreateErrorWindow(
+                ErrorType.InternalError,
+                "加载失败",
+                $"加载配置文件失败 - 可能原因 1.配置文件损坏 2.配置文件被篡改 3.没有权限",
+                "1.删除配置文件后重启程序 2.给予权限",
+                ex);
             return new Config();
         }
     }
@@ -110,29 +104,16 @@ public class DefaultConfigHandler
             var property = type.GetProperty(propertyNames[i]);
             if (property == null)
             {
-                var errorWindow = new MyErrorWindow(new ErrorResult
-                    {
-                        ErrorType = ErrorType.InternalError,
-                        ErrorMessage = new ErrorMessage
-                        {
-                            Error = "内部错误",
-                            ErrorMsg = $"{type.Name} 类中找不到属性 {propertyNames[i]} - 可能原因 1.程序被篡改 2.开发者出错",
-                            Fix = "1.重试 2.联系开发者 2.重新下载程序",
-                            Exception = new ArgumentException($"{type.Name} 类中找不到属性 {propertyNames[i]}")
-                        }
-                    }
-                );
-                errorWindow.Show();
+                MyErrorWindow.CreateErrorWindow(
+                    ErrorType.InternalError,
+                    "内部错误",
+                    $"{type.Name} 类中找不到属性 {propertyNames[i]} - 可能原因 1.程序被篡改 2.开发者出错",
+                    "1.重试 2.联系开发者 2.重新下载程序",
+                    new ArgumentException($"{type.Name} 类中找不到属性 {propertyNames[i]}"));
                 return null;
             }
 
-            obj = property.GetValue(obj);
-            if (obj == null)
-            {
-                obj = Activator.CreateInstance(property.PropertyType);
-                property.SetValue(obj, obj);
-            }
-
+            obj = GetConfigValue(obj, property);
             type = property.PropertyType;
         }
 
@@ -151,57 +132,46 @@ public class DefaultConfigHandler
             var property = type.GetProperty(propertyNames[i]);
             if (property == null)
             {
-                var errorWindow = new MyErrorWindow(new ErrorResult
-                    {
-                        ErrorType = ErrorType.InternalError,
-                        ErrorMessage = new ErrorMessage
-                        {
-                            Error = "内部错误",
-                            ErrorMsg = $"{type.Name} 类中找不到属性 {propertyNames[i]} - 可能原因 1.程序被篡改 2.开发者出错",
-                            Fix = "1.重试 2.联系开发者 2.重新下载程序",
-                            Exception = new ArgumentException($"{type.Name} 类中找不到属性 {propertyNames[i]}")
-                        }
-                    }
-                );
-                errorWindow.Show();
+                MyErrorWindow.CreateErrorWindow(
+                    ErrorType.InternalError,
+                    "内部错误",
+                    $"{type.Name} 类中找不到属性 {propertyNames[i]} - 可能原因 1.程序被篡改 2.开发者出错",
+                    "1.重试 2.联系开发者 2.重新下载程序",
+                    new ArgumentException($"{type.Name} 类中找不到属性 {propertyNames[i]}"));
                 return;
             }
 
-            obj = property.GetValue(obj);
-            if (obj == null)
-            {
-                obj = Activator.CreateInstance(property.PropertyType);
-                property.SetValue(obj, obj);
-            }
-
+            obj = GetConfigValue(obj, property);
             type = property.PropertyType;
         }
 
         var lastProperty = type.GetProperty(propertyNames[propertyNames.Length - 1]);
         if (lastProperty == null)
         {
-            var errorWindow = new MyErrorWindow(new ErrorResult
-                {
-                    ErrorType = ErrorType.InternalError,
-                    ErrorMessage = new ErrorMessage
-                    {
-                        Error = "内部错误",
-                        ErrorMsg =
-                            $"{type.Name} 类中找不到属性 {propertyNames[propertyNames.Length - 1]} - 可能原因 1.程序被篡改 2.开发者出错",
-                        Fix = "1.重试 2.联系开发者 2.重新下载程序",
-                        Exception = new ArgumentException(
-                            $"{type.Name} 类中找不到属性 {propertyNames[propertyNames.Length - 1]}")
-                    }
-                }
-            );
-            errorWindow.Show();
+            MyErrorWindow.CreateErrorWindow(
+                ErrorType.InternalError,
+                "内部错误",
+                $"{type.Name} 类中找不到属性 {propertyNames[propertyNames.Length - 1]} - 可能原因 1.程序被篡改 2.开发者出错",
+                "1.重试 2.联系开发者 2.重新下载程序",
+                new ArgumentException($"{type.Name} 类中找不到属性 {propertyNames[propertyNames.Length - 1]}"));
             return;
         }
 
         lastProperty.SetValue(obj, value);
         SaveConfig(config);
     }
-
+    
+    private static object GetConfigValue(object obj, PropertyInfo property)
+    {
+        var value = property.GetValue(obj);
+        if (value == null)
+        {
+            value = Activator.CreateInstance(property.PropertyType);
+            property.SetValue(obj, value);
+        }
+        return value;
+    }
+    
     #endregion
 
     #region 配置文件模型

@@ -29,6 +29,24 @@ public partial class MyErrorWindow : Window
         return output;
     }
 
+    public static MyErrorWindow CreateErrorWindow(ErrorType errorType, string error, string errorMsg, string fix, Exception ex)
+    {
+        var errorWindow = new MyErrorWindow(new ErrorResult
+            {
+                ErrorType = errorType,
+                ErrorMessage = new ErrorMessage
+                {
+                    Error = error,
+                    ErrorMsg = errorMsg,
+                    Fix = fix,
+                    Exception = ex
+                }
+            }
+        );
+        errorWindow.Show();
+        return errorWindow;
+    }
+    
     private void Close_OnClick(object? sender, RoutedEventArgs e)
     {
         Close();
