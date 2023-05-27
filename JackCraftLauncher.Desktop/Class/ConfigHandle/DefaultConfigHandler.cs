@@ -20,18 +20,16 @@ public class DefaultConfigHandler
 
         #region 主题加载
 
+        var theme = (ThemeModel)GetConfig(GlobalConstants.ConfigThemeNode);
+        if (theme is not (ThemeModel.Light or ThemeModel.Dark))
         {
-            var theme = (ThemeModel)GetConfig(GlobalConstants.ConfigThemeNode);
-            if (theme is not (ThemeModel.Light or ThemeModel.Dark))
-            {
-                GlobalVariable.ConfigVariable.ConfigThemeModel = ThemeModel.Dark;
-                SetConfig(GlobalConstants.ConfigThemeNode, ThemeModel.Dark);
-            }
-            else
-            {
-                GlobalVariable.ConfigVariable.ConfigThemeModel = theme;
-                SettingsUserControl.Instance.ThemeSelectComboBox.SelectedIndex = (int)theme;
-            }
+            GlobalVariable.ConfigVariable.ConfigThemeModel = ThemeModel.Dark;
+            SetConfig(GlobalConstants.ConfigThemeNode, ThemeModel.Dark);
+        }
+        else
+        {
+            GlobalVariable.ConfigVariable.ConfigThemeModel = theme;
+            SettingsUserControl.Instance.ThemeSelectComboBox.SelectedIndex = (int)theme;
         }
 
         #endregion
@@ -40,20 +38,18 @@ public class DefaultConfigHandler
 
         #region 下载源加载
 
+        var downloadSource =
+            (DownloadSourceHandler.DownloadSourceEnum)GetConfig(GlobalConstants.ConfigDownloadSourceNode);
+        if (downloadSource is not (DownloadSourceHandler.DownloadSourceEnum.Official
+            or DownloadSourceHandler.DownloadSourceEnum.BMCL or DownloadSourceHandler.DownloadSourceEnum.MCBBS))
         {
-            var downloadSource =
-                (DownloadSourceHandler.DownloadSourceEnum)GetConfig(GlobalConstants.ConfigDownloadSourceNode);
-            if (downloadSource is not (DownloadSourceHandler.DownloadSourceEnum.Official
-                or DownloadSourceHandler.DownloadSourceEnum.BMCL or DownloadSourceHandler.DownloadSourceEnum.MCBBS))
-            {
-                GlobalVariable.ConfigVariable.ConfigDownloadSourceEnum = DownloadSourceHandler.DownloadSourceEnum.BMCL;
-                SetConfig(GlobalConstants.ConfigDownloadSourceNode, DownloadSourceHandler.DownloadSourceEnum.BMCL);
-            }
-            else
-            {
-                GlobalVariable.ConfigVariable.ConfigDownloadSourceEnum = downloadSource;
-                SettingsUserControl.Instance.DownloadSourceSelectComboBox.SelectedIndex = (int)downloadSource;
-            }
+            GlobalVariable.ConfigVariable.ConfigDownloadSourceEnum = DownloadSourceHandler.DownloadSourceEnum.BMCL;
+            SetConfig(GlobalConstants.ConfigDownloadSourceNode, DownloadSourceHandler.DownloadSourceEnum.BMCL);
+        }
+        else
+        {
+            GlobalVariable.ConfigVariable.ConfigDownloadSourceEnum = downloadSource;
+            SettingsUserControl.Instance.DownloadSourceSelectComboBox.SelectedIndex = (int)downloadSource;
         }
 
         #endregion
