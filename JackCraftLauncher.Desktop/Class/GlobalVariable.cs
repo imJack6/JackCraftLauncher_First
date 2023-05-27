@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using JackCraftLauncher.Desktop.Class.Launch;
 using JackCraftLauncher.Desktop.Class.ListTemplate;
+using JackCraftLauncher.Desktop.Class.Model;
 using JackCraftLauncher.Desktop.Class.Utils;
 using ProjBobcat.Class.Model;
 
@@ -15,10 +16,11 @@ public class GlobalVariable
     public static List<string> LocalJavaList = new();
 
     public class ConfigVariable
-    {
-        public static string MainConfigPath { get; } = $"{DirectoryUtils.GetSystemUserDirectory()}{Path.DirectorySeparatorChar}JackCraftLauncher{Path.DirectorySeparatorChar}Desktop{Path.DirectorySeparatorChar}config.json"; // 配置文件路径
+    { 
+        public static string MainConfigPath { get; } = $"{DirectoryUtils.GetSystemUserDirectory()}{Path.DirectorySeparatorChar}JackCraft{Path.DirectorySeparatorChar}Launcher{Path.DirectorySeparatorChar}Desktop{Path.DirectorySeparatorChar}config.json";
+        public static ThemeModel ConfigThemeModel { get; set; } = ThemeModel.Dark; // 主题
         public static DownloadSourceHandler.DownloadSourceEnum ConfigDownloadSourceEnum { get; set; } =
-            DownloadSourceHandler.DownloadSourceEnum.MCBBS; // 下载源
+            DownloadSourceHandler.DownloadSourceEnum.BMCL; // 下载源
     }
 
     #region 下载列表等
