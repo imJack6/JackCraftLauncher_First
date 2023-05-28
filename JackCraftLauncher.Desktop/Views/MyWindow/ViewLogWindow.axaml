@@ -14,7 +14,7 @@
     <Window.Styles>
         <StyleInclude Source="/Views/MyControls/MenuRadioButton.axaml" />
     </Window.Styles>
-    <Grid>
+    <Grid Name="RootGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
             <RowDefinition />
@@ -53,7 +53,8 @@
                     <ItemsPanelTemplate>
                         <!--<StackPanel
                             Height="{Binding RelativeSource={RelativeSource AncestorType=StackPanel}, Path=Height}" />-->
-                        <WrapPanel Orientation="Vertical" />
+                        <!--<WrapPanel Orientation="Vertical" />-->
+                        <VirtualizingStackPanel/>
                     </ItemsPanelTemplate>
                 </ListBox.ItemsPanel>
             </ListBox>

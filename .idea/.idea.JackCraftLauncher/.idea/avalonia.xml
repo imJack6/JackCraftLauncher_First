@@ -23,6 +23,7 @@
         <entry key="JackCraftLauncher.Desktop/Views/MainWindow.axaml" value="JackCraftLauncher.Desktop/JackCraftLauncher.Desktop.csproj" />
         <entry key="JackCraftLauncher.Desktop/Views/Menu/SettingsUserControl.axaml" value="JackCraftLauncher.Desktop/JackCraftLauncher.Desktop.csproj" />
         <entry key="JackCraftLauncher.Desktop/Views/MyWindow/MyErrorWindow.axaml" value="JackCraftLauncher.Desktop/JackCraftLauncher.Desktop.csproj" />
+        <entry key="JackCraftLauncher.Desktop/Views/MyWindow/ViewLogWindow.axaml" value="JackCraftLauncher.Desktop/JackCraftLauncher.Desktop.csproj" />
       </map>
     </option>
   </component>
