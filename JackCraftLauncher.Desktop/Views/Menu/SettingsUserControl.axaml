@@ -2,7 +2,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:launchModel="clr-namespace:ProjBobcat.Class.Model;assembly=ProjBobcat"
              mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="300"
              Foreground="{DynamicResource DefaultForeground}"
              x:Class="JackCraftLauncher.Desktop.Views.Menu.SettingsUserControl">
@@ -65,21 +64,21 @@
                                        FontSize="16" />
                             <Grid Margin="100,0,50,0">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
                                 <TextBox Grid.Column="0"
                                          Text="800"
                                          Name="GameResolutionWidthTextBox"
                                          TextChanging="ResolutionDigitsOnly_OnTextChanging"
                                          Watermark="长度 - 默认 800"
-                                         Margin="0,0,10,0"/>
+                                         Margin="0,0,10,0" />
                                 <TextBox Grid.Column="1"
                                          Text="450"
                                          Name="GameResolutionHeightTextBox"
                                          TextChanging="ResolutionDigitsOnly_OnTextChanging"
                                          Watermark="高度 - 默认 450"
-                                         Margin="10,0,0,0"/>
+                                         Margin="10,0,0,0" />
                             </Grid>
                         </Grid>
                     </StackPanel>

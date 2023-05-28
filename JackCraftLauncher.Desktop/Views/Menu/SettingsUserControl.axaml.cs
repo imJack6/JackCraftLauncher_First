@@ -9,6 +9,7 @@ using JackCraftLauncher.Desktop.Class.ConfigHandle;
 using JackCraftLauncher.Desktop.Class.Launch;
 using JackCraftLauncher.Desktop.Class.Model;
 using JackCraftLauncher.Desktop.Views.Themes;
+using ProjBobcat.Class.Model;
 
 namespace JackCraftLauncher.Desktop.Views.Menu;
 
@@ -42,13 +43,14 @@ public partial class SettingsUserControl : UserControl
                 GlobalVariable.ConfigVariable.ConfigThemeModel);
         }
     }
-    
+
     private void StartJavaSelectComboBox_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
         if (StartJavaSelectComboBox != null)
         {
             GlobalVariable.ConfigVariable.ConfigGameStartJavaIndex = StartJavaSelectComboBox.SelectedIndex;
-            DefaultConfigHandler.SetConfig(GlobalConstants.ConfigSelectedJavaIndexNode, GlobalVariable.ConfigVariable.ConfigGameStartJavaIndex);
+            DefaultConfigHandler.SetConfig(GlobalConstants.ConfigSelectedJavaIndexNode,
+                GlobalVariable.ConfigVariable.ConfigGameStartJavaIndex);
         }
     }
 
@@ -72,7 +74,7 @@ public partial class SettingsUserControl : UserControl
     {
         GameHandler.RefreshLocalJavaList();
     }
-    
+
     private void DownloadParallelismCountSlider_OnPointerCaptureLost(object? sender, PointerCaptureLostEventArgs e)
     {
         if (DownloadParallelismCountSlider != null)
@@ -82,6 +84,7 @@ public partial class SettingsUserControl : UserControl
                 GlobalVariable.ConfigVariable.ConfigDownloadParallelismCount);
         }
     }
+
     private void DownloadSegmentsForLargeFileSlider_OnPointerCaptureLost(object? sender, PointerCaptureLostEventArgs e)
     {
         if (DownloadSegmentsForLargeFileSlider != null)
@@ -91,7 +94,7 @@ public partial class SettingsUserControl : UserControl
                 GlobalVariable.ConfigVariable.ConfigDownloadThreadCount);
         }
     }
-    
+
     private void DownloadTotalRetrySlider_OnPointerCaptureLost(object? sender, PointerCaptureLostEventArgs e)
     {
         if (DownloadTotalRetrySlider != null)
@@ -106,7 +109,7 @@ public partial class SettingsUserControl : UserControl
     {
         if (GameGcTypeSelectComboBox != null)
         {
-            GlobalVariable.ConfigVariable.ConfigGameGcType = (ProjBobcat.Class.Model.GcType)GameGcTypeSelectComboBox.SelectedIndex;
+            GlobalVariable.ConfigVariable.ConfigGameGcType = (GcType)GameGcTypeSelectComboBox.SelectedIndex;
             DefaultConfigHandler.SetConfig(GlobalConstants.ConfigGameGcTypeNode,
                 GlobalVariable.ConfigVariable.ConfigGameGcType);
         }
@@ -114,7 +117,7 @@ public partial class SettingsUserControl : UserControl
 
     private void ResolutionDigitsOnly_OnTextChanging(object? sender, TextChangingEventArgs e)
     {
-        TextBox textBox = (sender as TextBox)!;
+        var textBox = (sender as TextBox)!;
         textBox.Text = Regex.Replace(textBox.Text!, "[^0-9]", "");
         if (textBox.Text.Equals(""))
             textBox.Text = "1";

@@ -54,7 +54,7 @@
                         <!--<StackPanel
                             Height="{Binding RelativeSource={RelativeSource AncestorType=StackPanel}, Path=Height}" />-->
                         <!--<WrapPanel Orientation="Vertical" />-->
-                        <VirtualizingStackPanel/>
+                        <VirtualizingStackPanel />
                     </ItemsPanelTemplate>
                 </ListBox.ItemsPanel>
             </ListBox>

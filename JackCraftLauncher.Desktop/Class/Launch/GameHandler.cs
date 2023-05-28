@@ -144,7 +144,7 @@ public class GameHandler
                 DownloadUserControl.Instance.LatestSnapshotVersionTextBlock.Text += "\n测试版  发布日期: " +
                     GlobalVariable.MinecraftReleaseTimeList[LatestSnapshotVersionIndex];
         }
-        
+
         #endregion
     }
 

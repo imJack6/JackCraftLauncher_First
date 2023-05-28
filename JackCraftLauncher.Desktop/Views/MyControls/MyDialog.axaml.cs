@@ -10,6 +10,7 @@ public partial class MyDialog : UserControl
     public enum Result
     {
         Yes,
+
         No
         //Cancel
     }

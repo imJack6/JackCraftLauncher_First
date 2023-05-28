@@ -73,7 +73,7 @@ public class DefaultConfigHandler
             GlobalVariable.ConfigVariable.ConfigDownloadParallelismCount = parallelismCount;
             SettingsUserControl.Instance!.DownloadParallelismCountSlider.Value = parallelismCount;
         }
-        
+
         #endregion
 
         #region 下载线程(分片)数加载
@@ -107,7 +107,7 @@ public class DefaultConfigHandler
         }
 
         #endregion
-        
+
         #endregion
 
         #region 游戏配置
@@ -152,7 +152,7 @@ public class DefaultConfigHandler
         SettingsUserControl.Instance!.GameResolutionHeightTextBox.Text = resolutionHeight.ToString();
 
         #endregion
-        
+
         #endregion
     }
 
@@ -175,7 +175,7 @@ public class DefaultConfigHandler
             MyErrorWindow.CreateErrorWindow(
                 ErrorType.InternalError,
                 "加载失败",
-                $"加载配置文件失败 - 可能原因 1.配置文件损坏 2.配置文件被篡改 3.没有权限",
+                "加载配置文件失败 - 可能原因 1.配置文件损坏 2.配置文件被篡改 3.没有权限",
                 "1.删除配置文件后重启程序 2.给予权限",
                 ex);
             return new Config();
@@ -261,7 +261,7 @@ public class DefaultConfigHandler
         lastProperty.SetValue(obj, value);
         SaveConfig(config);
     }
-    
+
     private static object GetConfigValue(object obj, PropertyInfo property)
     {
         var value = property.GetValue(obj);
@@ -270,9 +270,10 @@ public class DefaultConfigHandler
             value = Activator.CreateInstance(property.PropertyType);
             property.SetValue(obj, value);
         }
+
         return value!;
     }
-    
+
     #endregion
 
     #region 配置文件模型
@@ -293,6 +294,7 @@ public class DefaultConfigHandler
     {
         public DownloadSourceHandler.DownloadSourceEnum DownloadSource { get; set; } =
             DownloadSourceHandler.DownloadSourceEnum.BMCL;
+
         public int ParallelismCount { get; set; } = 8;
         public int ThreadCount { get; set; } = 8;
         public int RetryCount { get; set; } = 2;

@@ -5,7 +5,6 @@ using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Media;
-using JackCraftLauncher.Desktop.Views.MyControls;
 using ProjBobcat.Class.Model;
 
 namespace JackCraftLauncher.Desktop.Views.MyWindow;
@@ -137,10 +136,7 @@ public partial class ViewLogWindow : Window
 
     private void CloseGame_OnClick(object? sender, RoutedEventArgs e)
     {
-        if (LaunchResult != null && LaunchResult.GameProcess != null)
-        {
-            LaunchResult.GameProcess.Kill();
-        }
+        if (LaunchResult != null && LaunchResult.GameProcess != null) LaunchResult.GameProcess.Kill();
     }
 
     #region 窗体控制按钮事件
