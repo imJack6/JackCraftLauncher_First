@@ -18,143 +18,112 @@ public class DefaultConfigHandler
 {
     private static readonly string ConfigFilePath = GlobalVariable.ConfigVariable.MainConfigPath;
 
+    #region 加载配置文件
+
     public static void LoadSettingsConfig()
     {
-        #region 启动器配置
+        LoadLauncherConfig();
+        LoadDownloadConfig();
+        LoadGameConfig();
+    }
 
-        #region 主题加载
+    private static void LoadLauncherConfig()
+    {
+        LoadThemeConfig();
+    }
 
+    private static void LoadDownloadConfig()
+    {
+        LoadDownloadSourceConfig();
+        LoadDownloadParallelismCountConfig();
+        LoadDownloadThreadCountConfig();
+        LoadDownloadRetryCountConfig();
+    }
+
+    private static void LoadGameConfig()
+    {
+        LoadStartJavaConfig();
+        LoadGameGcTypeConfig();
+        LoadGameResolutionConfig();
+    }
+
+    #region 启动器配置
+
+    private static void LoadThemeConfig()
+    {
         var theme = (ThemeModel)GetConfig(GlobalConstants.ConfigThemeNode);
-        if (theme is not (ThemeModel.Light or ThemeModel.Dark))
-        {
-            GlobalVariable.ConfigVariable.ConfigThemeModel = ThemeModel.Dark;
-            SetConfig(GlobalConstants.ConfigThemeNode, ThemeModel.Dark);
-        }
-        else
-        {
-            GlobalVariable.ConfigVariable.ConfigThemeModel = theme;
-            SettingsUserControl.Instance!.ThemeSelectComboBox.SelectedIndex = (int)theme;
-        }
+        GlobalVariable.ConfigVariable.ConfigThemeModel = theme;
+        SettingsUserControl.Instance!.ThemeSelectComboBox.SelectedIndex = (int)theme;
+    }
 
-        #endregion
+    #endregion
 
-        #endregion
+    #region 下载配置
 
-        #region 下载配置
+    private static void LoadDownloadSourceConfig()
+    {
+        var downloadSource = (DownloadSourceHandler.DownloadSourceEnum)GetConfig(
+            GlobalConstants.ConfigDownloadSourceNode);
+        GlobalVariable.ConfigVariable.ConfigDownloadSourceEnum = downloadSource;
+        SettingsUserControl.Instance!.DownloadSourceSelectComboBox.SelectedIndex = (int)downloadSource;
+    }
 
-        #region 下载源加载
-
-        var downloadSource =
-            (DownloadSourceHandler.DownloadSourceEnum)GetConfig(GlobalConstants.ConfigDownloadSourceNode);
-        if (downloadSource is not (DownloadSourceHandler.DownloadSourceEnum.Official
-            or DownloadSourceHandler.DownloadSourceEnum.BMCL or DownloadSourceHandler.DownloadSourceEnum.MCBBS))
-        {
-            GlobalVariable.ConfigVariable.ConfigDownloadSourceEnum = DownloadSourceHandler.DownloadSourceEnum.BMCL;
-            SetConfig(GlobalConstants.ConfigDownloadSourceNode, DownloadSourceHandler.DownloadSourceEnum.BMCL);
-        }
-        else
-        {
-            GlobalVariable.ConfigVariable.ConfigDownloadSourceEnum = downloadSource;
-            SettingsUserControl.Instance!.DownloadSourceSelectComboBox.SelectedIndex = (int)downloadSource;
-        }
-
-        #endregion
-
-        #region 下载并行数加载
-
+    private static void LoadDownloadParallelismCountConfig()
+    {
         var parallelismCount = (int)GetConfig(GlobalConstants.ConfigDownloadParallelismCountNode);
-        if (parallelismCount < 1 || parallelismCount > 16)
-        {
-            GlobalVariable.ConfigVariable.ConfigDownloadParallelismCount = 8;
-            SetConfig(GlobalConstants.ConfigDownloadParallelismCountNode, 8);
-        }
-        else
-        {
-            GlobalVariable.ConfigVariable.ConfigDownloadParallelismCount = parallelismCount;
-            SettingsUserControl.Instance!.DownloadParallelismCountSlider.Value = parallelismCount;
-        }
+        GlobalVariable.ConfigVariable.ConfigDownloadParallelismCount = parallelismCount;
+        SettingsUserControl.Instance!.DownloadParallelismCountSlider.Value = parallelismCount;
+    }
 
-        #endregion
-
-        #region 下载线程(分片)数加载
-
+    private static void LoadDownloadThreadCountConfig()
+    {
         var downloadThreadCount = (int)GetConfig(GlobalConstants.ConfigDownloadThreadCountNode);
-        if (downloadThreadCount < 1 || downloadThreadCount > 32)
-        {
-            GlobalVariable.ConfigVariable.ConfigDownloadThreadCount = 8;
-            SetConfig(GlobalConstants.ConfigDownloadThreadCountNode, 8);
-        }
-        else
-        {
-            GlobalVariable.ConfigVariable.ConfigDownloadThreadCount = downloadThreadCount;
-            SettingsUserControl.Instance!.DownloadSegmentsForLargeFileSlider.Value = downloadThreadCount;
-        }
+        GlobalVariable.ConfigVariable.ConfigDownloadThreadCount = downloadThreadCount;
+        SettingsUserControl.Instance!.DownloadSegmentsForLargeFileSlider.Value = downloadThreadCount;
+    }
 
-        #endregion
-
-        #region 下载重试次数加载
-
+    private static void LoadDownloadRetryCountConfig()
+    {
         var downloadRetryCount = (int)GetConfig(GlobalConstants.ConfigDownloadRetryCountNode);
-        if (downloadRetryCount < 0 || downloadRetryCount > 10)
-        {
-            GlobalVariable.ConfigVariable.ConfigDownloadRetryCount = 2;
-            SetConfig(GlobalConstants.ConfigDownloadRetryCountNode, 2);
-        }
-        else
-        {
-            GlobalVariable.ConfigVariable.ConfigDownloadRetryCount = downloadRetryCount;
-            SettingsUserControl.Instance!.DownloadTotalRetrySlider.Value = downloadRetryCount;
-        }
+        GlobalVariable.ConfigVariable.ConfigDownloadRetryCount = downloadRetryCount;
+        SettingsUserControl.Instance!.DownloadTotalRetrySlider.Value = downloadRetryCount;
+    }
 
-        #endregion
+    #endregion
 
-        #endregion
+    #region 游戏配置
 
-        #region 游戏配置
-
-        #region 启动Java加载
-
-        var startJavaPathList =
-            (List<string>)GetConfig(GlobalConstants.ConfigJavaPathListNode);
-        var startJavaIndex =
-            (int)GetConfig(GlobalConstants.ConfigSelectedJavaIndexNode);
+    private static void LoadStartJavaConfig()
+    {
+        var startJavaPathList = (List<string>)GetConfig(GlobalConstants.ConfigJavaPathListNode);
+        var startJavaIndex = (int)GetConfig(GlobalConstants.ConfigSelectedJavaIndexNode);
         GlobalVariable.LocalJavaList = startJavaPathList;
         GlobalVariable.ConfigVariable.ConfigGameStartJavaIndex = startJavaIndex;
         GlobalVariable.ConfigVariable.ConfigGameStartJavaPath = startJavaPathList[startJavaIndex];
         SettingsUserControl.Instance!.StartJavaSelectComboBox.ItemsSource = startJavaPathList;
         SettingsUserControl.Instance!.StartJavaSelectComboBox.SelectedIndex = startJavaIndex;
+    }
 
-        #endregion
-
-        #region GcType加载
-
+    private static void LoadGameGcTypeConfig()
+    {
         var gameGcType = (GcType)GetConfig(GlobalConstants.ConfigGameGcTypeNode);
-        if ((int)gameGcType < 0 || (int)gameGcType > 5)
-        {
-            GlobalVariable.ConfigVariable.ConfigGameGcType = GcType.G1Gc;
-            SetConfig(GlobalConstants.ConfigGameGcTypeNode, GcType.G1Gc);
-        }
-        else
-        {
-            GlobalVariable.ConfigVariable.ConfigGameGcType = gameGcType;
-            SettingsUserControl.Instance!.GameGcTypeSelectComboBox.SelectedIndex = (int)gameGcType;
-        }
+        GlobalVariable.ConfigVariable.ConfigGameGcType = gameGcType;
+        SettingsUserControl.Instance!.GameGcTypeSelectComboBox.SelectedIndex = (int)gameGcType;
+    }
 
-        #endregion
-
-        #region 分辨率加载
-
+    private static void LoadGameResolutionConfig()
+    {
         var resolutionWidth = (uint)GetConfig(GlobalConstants.ConfigGameResolutionWidthNode);
         var resolutionHeight = (uint)GetConfig(GlobalConstants.ConfigGameResolutionHeightNode);
         GlobalVariable.ConfigVariable.ConfigGameResolutionWidth = resolutionWidth;
         GlobalVariable.ConfigVariable.ConfigGameResolutionHeight = resolutionHeight;
         SettingsUserControl.Instance!.GameResolutionWidthTextBox.Text = resolutionWidth.ToString();
         SettingsUserControl.Instance!.GameResolutionHeightTextBox.Text = resolutionHeight.ToString();
-
-        #endregion
-
-        #endregion
     }
+
+    #endregion
+
+    #endregion
 
     #region 配置文件操作
 
