@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Avalonia.Threading;
 using Flurl.Http;
+using JackCraftLauncher.Desktop.Class.ConfigHandle;
 using JackCraftLauncher.Desktop.Class.ListTemplate;
 using JackCraftLauncher.Desktop.Views.Menu;
 using JackCraftLauncher.Desktop.Views.MyWindow;
@@ -40,6 +41,7 @@ public class GameHandler
         SettingsUserControl.Instance.StartJavaSelectComboBox.ItemsSource = GlobalVariable.LocalJavaList;
         SettingsUserControl.Instance.StartJavaSelectComboBox.PlaceholderText = "选择 Java";
         SettingsUserControl.Instance.RefreshLocalJavaComboBoxButton.IsEnabled = true;
+        DefaultConfigHandler.SetConfig(GlobalConstants.ConfigJavaPathListNode, GlobalVariable.LocalJavaList);
     }
 
     public static async void RefreshLocalMinecraftDownloadList(bool updateUi = true)
@@ -142,7 +144,7 @@ public class GameHandler
                 DownloadUserControl.Instance.LatestSnapshotVersionTextBlock.Text += "\n测试版  发布日期: " +
                     GlobalVariable.MinecraftReleaseTimeList[LatestSnapshotVersionIndex];
         }
-
+        
         #endregion
     }
 
@@ -162,13 +164,12 @@ public class GameHandler
             FallBackGameArguments =
                 new GameArguments // 游戏启动参数缺省值，适用于以该启动设置启动的所有游戏，对于具体的某个游戏，可以设置（见下）具体的启动参数，如果所设置的具体参数出现缺失，将使用这个补全
                 {
-                    GcType = GcType.G1Gc, // GC类型
-                    JavaExecutable =
-                        SettingsUserControl.Instance.StartJavaSelectComboBox.SelectedItem!.ToString()!, // Java路径
+                    GcType = GlobalVariable.ConfigVariable.ConfigGameGcType, // GC类型
+                    JavaExecutable = GlobalVariable.ConfigVariable.ConfigGameStartJavaPath, // Java路径
                     Resolution = new ResolutionModel // 游戏窗口分辨率
                     {
-                        Height = 600, // 高度
-                        Width = 800 // 宽度
+                        Height = GlobalVariable.ConfigVariable.ConfigGameResolutionHeight, // 高度
+                        Width = GlobalVariable.ConfigVariable.ConfigGameResolutionWidth // 宽度
                     },
                     MinMemory = 2048, // 最小内存
                     MaxMemory = 4196 // 最大内存
@@ -304,7 +305,7 @@ public class GameHandler
         // 资源补全器
         var completer = new DefaultResourceCompleter
         {
-            MaxDegreeOfParallelism = Convert.ToInt16(SettingsUserControl.Instance.MaxDegreeOfParallelismSlider.Value),
+            MaxDegreeOfParallelism = GlobalVariable.ConfigVariable.ConfigDownloadParallelismCount,
             ResourceInfoResolvers = new List<IResourceInfoResolver>
             {
                 resolverAsset,
@@ -312,9 +313,9 @@ public class GameHandler
                 resolverLibrary,
                 resolverVersion
             },
-            TotalRetry = Convert.ToInt16(SettingsUserControl.Instance.TotalRetrySlider.Value),
+            TotalRetry = GlobalVariable.ConfigVariable.ConfigDownloadRetryCount,
             CheckFile = true,
-            DownloadParts = Convert.ToInt16(SettingsUserControl.Instance.TotalDownloadSegmentsForLargeFileSlider.Value)
+            DownloadParts = GlobalVariable.ConfigVariable.ConfigDownloadThreadCount
         };
 
         return completer;

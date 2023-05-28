@@ -15,21 +15,21 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectCapability Include="Avalonia"/>
-        <TrimmerRootAssembly Include="Avalonia.Themes.Fluent"/>
+        <ProjectCapability Include="Avalonia" />
+        <TrimmerRootAssembly Include="Avalonia.Themes.Fluent" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Avalonia" Version="11.0.0-preview8"/>
-        <PackageReference Include="Avalonia.Desktop" Version="11.0.0-preview8"/>
+        <PackageReference Include="Avalonia" Version="11.0.0-preview8" />
+        <PackageReference Include="Avalonia.Desktop" Version="11.0.0-preview8" />
         <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
-        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.0-preview8"/>
-        <PackageReference Include="Avalonia.Native" Version="11.0.0-preview8"/>
-        <PackageReference Include="Avalonia.Skia" Version="11.0.0-preview8"/>
-        <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.0-preview8"/>
-        <PackageReference Include="Flurl.Http" Version="3.2.4"/>
-        <PackageReference Include="Newtonsoft.Json" Version="13.0.3"/>
-        <PackageReference Include="System.Reactive" Version="6.0.0"/>
+        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.0-preview8" />
+        <PackageReference Include="Avalonia.Native" Version="11.0.0-preview8" />
+        <PackageReference Include="Avalonia.Skia" Version="11.0.0-preview8" />
+        <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.0-preview8" />
+        <PackageReference Include="Flurl.Http" Version="3.2.4" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+        <PackageReference Include="System.Reactive" Version="6.0.0" />
     </ItemGroup>
 
     <ItemGroup>
@@ -37,47 +37,51 @@
             <DependentUpon>MainWindow.axaml</DependentUpon>
             <SubType>Code</SubType>
         </Compile>
-        <Compile Remove="Views\Window\**"/>
+        <Compile Remove="Views\Window\**" />
     </ItemGroup>
 
     <ItemGroup>
-        <AvaloniaResource Include="Assets\Logo\JackCraft-2-64p.png"/>
-        <AvaloniaResource Remove="Views\Window\**"/>
-        <None Remove="Assets\Icons\Anvil.png"/>
-        <AvaloniaResource Include="Assets\Icons\Anvil.png"/>
-        <None Remove="Assets\Icons\Badlands_Grass_Block.png"/>
-        <AvaloniaResource Include="Assets\Icons\Badlands_Grass_Block.png"/>
-        <None Remove="Assets\Icons\Chicken.png"/>
-        <AvaloniaResource Include="Assets\Icons\Chicken.png"/>
-        <None Remove="Assets\Icons\fabric.png"/>
-        <AvaloniaResource Include="Assets\Icons\fabric.png"/>
-        <None Remove="Assets\Icons\Grass_Block.png"/>
-        <AvaloniaResource Include="Assets\Icons\Grass_Block.png"/>
-        <None Remove="Assets\Icons\Impulse_Command_Block.gif"/>
-        <AvaloniaResource Include="Assets\Icons\Impulse_Command_Block.gif"/>
-        <None Remove="Assets\Icons\quilt.png"/>
-        <AvaloniaResource Include="Assets\Icons\quilt.png"/>
-        <None Remove="Assets\Icons\Redstone_Lamp.png"/>
-        <AvaloniaResource Include="Assets\Icons\Redstone_Lamp.png"/>
+        <AvaloniaResource Include="Assets\Logo\JackCraft-2-64p.png" />
+        <AvaloniaResource Remove="Views\Window\**" />
+        <None Remove="Assets\Icons\Anvil.png" />
+        <AvaloniaResource Include="Assets\Icons\Anvil.png" />
+        <None Remove="Assets\Icons\Badlands_Grass_Block.png" />
+        <AvaloniaResource Include="Assets\Icons\Badlands_Grass_Block.png" />
+        <None Remove="Assets\Icons\Chicken.png" />
+        <AvaloniaResource Include="Assets\Icons\Chicken.png" />
+        <None Remove="Assets\Icons\fabric.png" />
+        <AvaloniaResource Include="Assets\Icons\fabric.png" />
+        <None Remove="Assets\Icons\Grass_Block.png" />
+        <AvaloniaResource Include="Assets\Icons\Grass_Block.png" />
+        <None Remove="Assets\Icons\Impulse_Command_Block.gif" />
+        <AvaloniaResource Include="Assets\Icons\Impulse_Command_Block.gif" />
+        <None Remove="Assets\Icons\quilt.png" />
+        <AvaloniaResource Include="Assets\Icons\quilt.png" />
+        <None Remove="Assets\Icons\Redstone_Lamp.png" />
+        <AvaloniaResource Include="Assets\Icons\Redstone_Lamp.png" />
+        <None Remove="Assets\Fonts\MSYHMONO.ttf" />
+        <AvaloniaResource Include="Assets\Fonts\MSYHMONO.ttf" />
+        <None Remove="Assets\Fonts\JetBrainsMono-Medium.ttf" />
+        <AvaloniaResource Include="Assets\Fonts\JetBrainsMono-Medium.ttf" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\ProjBobcat\ProjBobcat\ProjBobcat\ProjBobcat.csproj"/>
+        <ProjectReference Include="..\ProjBobcat\ProjBobcat\ProjBobcat\ProjBobcat.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-        <AvaloniaXaml Remove="Views\Window\**"/>
+        <AvaloniaXaml Remove="Views\Window\**" />
     </ItemGroup>
 
     <ItemGroup>
-        <EmbeddedResource Remove="Views\Window\**"/>
+        <EmbeddedResource Remove="Views\Window\**" />
     </ItemGroup>
 
     <ItemGroup>
-        <AdditionalFiles Remove="Views\Window\**"/>
+        <AdditionalFiles Remove="Views\Window\**" />
     </ItemGroup>
 
     <ItemGroup>
-        <None Remove="Views\Window\**"/>
+        <None Remove="Views\Window\**" />
     </ItemGroup>
 </Project>

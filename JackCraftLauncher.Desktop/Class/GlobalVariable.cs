@@ -19,11 +19,27 @@ public class GlobalVariable
     {
         public static string MainConfigPath { get; } =
             $"{DirectoryUtils.GetSystemUserDirectory()}{Path.DirectorySeparatorChar}JackCraft{Path.DirectorySeparatorChar}Launcher{Path.DirectorySeparatorChar}Desktop{Path.DirectorySeparatorChar}config.json";
-
         public static ThemeModel ConfigThemeModel { get; set; } = ThemeModel.Dark; // 主题
+
+        #region 下载配置
 
         public static DownloadSourceHandler.DownloadSourceEnum ConfigDownloadSourceEnum { get; set; } =
             DownloadSourceHandler.DownloadSourceEnum.BMCL; // 下载源
+        public static int ConfigDownloadParallelismCount { get; set; } = 8; // 下载并行数
+        public static int ConfigDownloadThreadCount { get; set; } = 8; // 下载线程数
+        public static int ConfigDownloadRetryCount { get; set; } = 3; // 下载重试次数
+        
+        #endregion
+
+        #region 游戏配置
+
+        public static int ConfigGameStartJavaIndex { get; set; } = -1; // 游戏启动 Java 索引
+        public static string ConfigGameStartJavaPath { get; set; } = ""; // 游戏启动 Java 路径
+        public static GcType ConfigGameGcType { get; set; } = GcType.G1Gc; // 游戏 GC 类型
+        public static uint ConfigGameResolutionWidth { get; set; } = 800; // 游戏分辨率宽度
+        public static uint ConfigGameResolutionHeight { get; set; } = 450; // 游戏分辨率高度
+
+        #endregion
     }
 
     #region 下载列表等
