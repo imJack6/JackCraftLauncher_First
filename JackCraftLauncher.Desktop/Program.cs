@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using Avalonia;
+using Avalonia.Media;
 
 namespace JackCraftLauncher.Desktop;
 
@@ -55,6 +57,17 @@ internal class Program
     {
         return AppBuilder.Configure<App>()
             .UsePlatformDetect()
-            .LogToTrace();
+            .LogToTrace()
+            .With(new FontManagerOptions
+            {
+                DefaultFamilyName = "avares://JackCraftLauncher.Desktop/Assets/Fonts/JetBrainsMono-Medium.ttf#",
+                FontFallbacks = new[]
+                {
+                    new FontFallback
+                    {
+                        FontFamily = new FontFamily("avares://AvaloniaTest/Assets/Fonts/MSYHMONO.ttf#")
+                    }
+                }
+            });
     }
 }
