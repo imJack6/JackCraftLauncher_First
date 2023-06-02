@@ -14,7 +14,7 @@ using ProjBobcat.Class.Model;
 
 namespace JackCraftLauncher.Desktop.Class.ConfigHandle;
 
-public class DefaultConfigHandler
+public abstract class DefaultConfigHandler
 {
     private static readonly string ConfigFilePath = GlobalVariable.ConfigVariable.MainConfigPath;
 
