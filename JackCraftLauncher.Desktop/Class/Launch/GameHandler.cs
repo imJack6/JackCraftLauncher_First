@@ -6,6 +6,7 @@ using Avalonia.Threading;
 using Flurl.Http;
 using JackCraftLauncher.Desktop.Class.ConfigHandle;
 using JackCraftLauncher.Desktop.Class.ListTemplate;
+using JackCraftLauncher.Desktop.Class.MicrosoftLogin;
 using JackCraftLauncher.Desktop.Views.Menu;
 using JackCraftLauncher.Desktop.Views.MyWindow;
 using Newtonsoft.Json;
@@ -13,6 +14,7 @@ using Newtonsoft.Json.Linq;
 using ProjBobcat.Class.Helper;
 using ProjBobcat.Class.Model;
 using ProjBobcat.Class.Model.LauncherProfile;
+using ProjBobcat.Class.Model.Microsoft.Graph;
 using ProjBobcat.Class.Model.Mojang;
 using ProjBobcat.DefaultComponent;
 using ProjBobcat.DefaultComponent.Authenticator;
@@ -189,13 +191,30 @@ public class GameHandler
             Username = "JCLTest",
             LauncherAccountParser = core.VersionLocator.LauncherAccountParser // launcher_profiles.json解析组件
         };
+        var getToken = await MicrosoftLogger.GetMicrosoftOAuthToken(await MicrosoftLogger.OpenLoginView());
+        launchSettings.Authenticator = new MicrosoftAuthenticator
+        {
+            CacheTokenProvider = async () =>
+            {
+                GraphAuthResultModel graphAuthResult = new GraphAuthResultModel
+                {
+                    AccessToken = getToken[0],
+                    RefreshToken = getToken[1],
+                    ExpiresIn = Convert.ToInt32(getToken[2]),
+                    Scope = getToken[3],
+                    TokenType = getToken[4]
+                };
+                return (true, graphAuthResult);
+            },
+            LauncherAccountParser = core.VersionLocator.LauncherAccountParser
+        };
         var logWindow = new ViewLogWindow();
         core.LaunchLogEventDelegate += (sender, args) =>
         {
             Dispatcher.UIThread.InvokeAsync(() =>
             {
                 if (logWindow.IsVisible)
-                    logWindow.AddLog($"[ 启动器 ] {args.Item}");
+                    logWindow.AddLog($"[启动器] {args.Item}");
             });
         };
         core.GameLogEventDelegate += (sender, args) =>
@@ -203,7 +222,7 @@ public class GameHandler
             Dispatcher.UIThread.InvokeAsync(() =>
             {
                 if (logWindow.IsVisible)
-                    logWindow.AddLog($"[ 游戏 ] {args.RawContent}");
+                    logWindow.AddLog($"[游戏] {args.RawContent}");
             });
         };
         core.GameExitEventDelegate += (sender, args) =>
@@ -211,7 +230,7 @@ public class GameHandler
             Dispatcher.UIThread.InvokeAsync(() =>
             {
                 if (logWindow.IsVisible)
-                    logWindow.AddLog("[ 启动器 ] 游戏已退出");
+                    logWindow.AddLog("[启动器] 游戏已退出");
             });
         };
 
@@ -245,13 +264,27 @@ public class GameHandler
 
         await resourceCompletion.CheckAndDownloadTaskAsync().ConfigureAwait(false);
         var result = await core.LaunchTaskAsync(launchSettings).ConfigureAwait(true); // 返回游戏启动结果，以及异常信息（如果存在）
+        
         Dispatcher.UIThread.InvokeAsync(() =>
         {
-            if (logWindow.IsVisible)
+            if (result.Error != null)
             {
-                logWindow.LaunchResult = result;
-                logWindow.Title = $"日志显示 (PID:{result.GameProcess!.Id})";
-                logWindow.TitleTextBlock.Text = $"日志显示 (PID:{result.GameProcess!.Id})";
+                if (logWindow.IsVisible)
+                {
+                    logWindow.AddLog($"[启动器] [ERROR] {result.Error.Error}");
+                    logWindow.AddLog($"[启动器] [ERROR] {result.Error.ErrorMessage}");
+                    logWindow.AddLog($"[启动器] [ERROR] {result.Error.Cause}");
+                    //logWindow.AddLog(result.Error.Exception.ToString());
+                }
+            }
+            else
+            {
+                if (logWindow.IsVisible)
+                {
+                    logWindow.LaunchResult = result;
+                    logWindow.Title = $"日志显示 (PID:{result.GameProcess!.Id})";
+                    logWindow.TitleTextBlock.Text = $"日志显示 (PID:{result.GameProcess!.Id})";
+                }
             }
         });
     }
