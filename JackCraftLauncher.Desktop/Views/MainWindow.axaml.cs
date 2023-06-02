@@ -3,7 +3,9 @@ using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using JackCraftLauncher.Desktop.Class.ConfigHandle;
+using JackCraftLauncher.Desktop.Class.MicrosoftLogin;
 using JackCraftLauncher.Desktop.Class.Utils;
+using JackCraftLauncher.Desktop.Views.MyWindow;
 
 namespace JackCraftLauncher.Desktop.Views;
 
@@ -47,9 +49,10 @@ public partial class MainWindow : Window
         throw new Exception("这是一个测试异常 - throw new Exception 测试");
     }
 
-    private void Test_OnClick(object? sender, RoutedEventArgs e)
+    private async void Test_OnClick(object? sender, RoutedEventArgs e)
     {
-        var dialog = new OpenFileDialog();
+        
+        /*var dialog = new OpenFileDialog();
         dialog.Filters.Add(new FileDialogFilter { Name = "所有文件", Extensions = { "*" } });
         dialog.Filters.Add(new FileDialogFilter { Name = "文本文件", Extensions = { "txt" } });
         dialog.Filters.Add(new FileDialogFilter { Name = "图片文件", Extensions = { "png", "jpg", "jpeg", "bmp" } });
@@ -69,7 +72,7 @@ public partial class MainWindow : Window
         dialog.Filters.Add(new FileDialogFilter { Name = "所有文件", Extensions = { "*" } });
         dialog.Filters.Add(
             new FileDialogFilter { Name = DirectoryUtils.GetSystemUserDirectory(), Extensions = { "*" } });
-        dialog.ShowAsync(this);
+        dialog.ShowAsync(this);*/
     }
 
     #region 窗体控制按钮事件
