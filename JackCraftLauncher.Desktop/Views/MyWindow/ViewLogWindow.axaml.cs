@@ -22,12 +22,12 @@ public partial class ViewLogWindow : Window
     {
         var warpPanel = new WrapPanel();
 
-        var prefixInput = log.Split(new char[] { ' ' }, 2);
+        var prefixInput = log.Split(new[] { ' ' }, 2);
         var logContent = log;
         if (prefixInput.Length > 1 && prefixInput[0].StartsWith("[") && prefixInput[0].EndsWith("]"))
         {
             logContent = prefixInput[1];
-            string prefix = prefixInput[0] + " ";
+            var prefix = prefixInput[0] + " ";
             var prefixOutput = Regex.Split(prefix, @"(\[)|(\] )")
                 .Where(match => !string.IsNullOrWhiteSpace(match))
                 .ToList();
@@ -97,11 +97,12 @@ public partial class ViewLogWindow : Window
         }
 
         LogListBox.Items.Add(warpPanel);
-        
+
         var listboxScroll = (ScrollViewer)LogListBox.Scroll!;
         if (AutomaticScrollingToggleButton.IsChecked == true)
             listboxScroll.ScrollToEnd();
     }
+
     private void LogListBox_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
         if (LogListBox.SelectedIndex != -1)

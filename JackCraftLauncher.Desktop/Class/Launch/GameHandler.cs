@@ -196,7 +196,7 @@ public class GameHandler
         {
             CacheTokenProvider = async () =>
             {
-                GraphAuthResultModel graphAuthResult = new GraphAuthResultModel
+                var graphAuthResult = new GraphAuthResultModel
                 {
                     AccessToken = getToken[0],
                     RefreshToken = getToken[1],
@@ -264,7 +264,7 @@ public class GameHandler
 
         await resourceCompletion.CheckAndDownloadTaskAsync().ConfigureAwait(false);
         var result = await core.LaunchTaskAsync(launchSettings).ConfigureAwait(true); // 返回游戏启动结果，以及异常信息（如果存在）
-        
+
         Dispatcher.UIThread.InvokeAsync(() =>
         {
             if (result.Error != null)

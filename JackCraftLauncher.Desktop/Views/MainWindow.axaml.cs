@@ -3,9 +3,6 @@ using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using JackCraftLauncher.Desktop.Class.ConfigHandle;
-using JackCraftLauncher.Desktop.Class.MicrosoftLogin;
-using JackCraftLauncher.Desktop.Class.Utils;
-using JackCraftLauncher.Desktop.Views.MyWindow;
 
 namespace JackCraftLauncher.Desktop.Views;
 
@@ -51,7 +48,6 @@ public partial class MainWindow : Window
 
     private async void Test_OnClick(object? sender, RoutedEventArgs e)
     {
-        
         /*var dialog = new OpenFileDialog();
         dialog.Filters.Add(new FileDialogFilter { Name = "所有文件", Extensions = { "*" } });
         dialog.Filters.Add(new FileDialogFilter { Name = "文本文件", Extensions = { "txt" } });
