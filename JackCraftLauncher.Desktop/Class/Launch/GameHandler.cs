@@ -257,7 +257,7 @@ public class GameHandler
                     var pD =
                         //$"[{file.FileType} 已完成] - {retry}{isSuccess} {fileName.ToString()} ({resourceCompletion.TotalDownloaded} / {resourceCompletion.NeedToDownload}) [{args.AverageSpeed:F} Kb / s]";
                         $"[{file.FileType} 已完成] - {retry}{isSuccess} - {fileName.ToString()} - ({resourceCompletion.TotalDownloaded} / {resourceCompletion.NeedToDownload})";
-                    logWindow.AddLog($"[ 资源补全 ] {pD}");
+                    logWindow.AddLog($"[资源补全] {pD}");
                 }
             });
         };
