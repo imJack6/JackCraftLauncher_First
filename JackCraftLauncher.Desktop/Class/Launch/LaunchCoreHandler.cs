@@ -1,4 +1,6 @@
 ﻿using System;
+using ProjBobcat.Class.Model.MicrosoftAuth;
+using ProjBobcat.DefaultComponent.Authenticator;
 using ProjBobcat.DefaultComponent.Launch;
 using ProjBobcat.DefaultComponent.Launch.GameCore;
 using ProjBobcat.DefaultComponent.Logging;
@@ -29,6 +31,12 @@ public class LaunchCoreHandler
             },
             GameLogResolver = new DefaultGameLogResolver()
         };
+        MicrosoftAuthenticator.Configure(new MicrosoftAuthenticatorAPISettings
+        {
+            ClientId = "7a5e9883-e204-45da-8e98-b47c5370c5c8",
+            TenentId = "consumers",
+            Scopes = new[] { "XboxLive.signin", "offline_access", "openid", "profile", "email" }
+        });
     }
 
     public DefaultGameCore GetCore()

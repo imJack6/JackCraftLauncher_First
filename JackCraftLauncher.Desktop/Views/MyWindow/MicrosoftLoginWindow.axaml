@@ -1,0 +1,18 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:gif="http://wpfanimatedgif.codeplex.com"
+        mc:Ignorable="d" d:DesignWidth="550" d:DesignHeight="450"
+        x:Class="JackCraftLauncher.Desktop.Views.MyWindow.MicrosoftLoginWindow"
+        Height="700" Width="550" MinHeight="650" MinWidth="500" 
+        Loaded="MicrosoftLoginWindow_OnLoaded"
+        Title="MicrosoftLoginWindow">
+    <Grid>
+        <Decorator Name="WebBrowserWrapper"/>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" >
+            <TextBlock Text="加载速度取决于您的网络是否连通微软服务器" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource DefaultForeground}"/>
+            <TextBlock Text="您可以继续等待或使用离线登录" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource DefaultForeground}"/>
+        </StackPanel>
+    </Grid>
+</Window>
