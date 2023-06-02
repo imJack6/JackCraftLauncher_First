@@ -99,7 +99,8 @@ public abstract class DefaultConfigHandler
         var startJavaIndex = (int)GetConfig(GlobalConstants.ConfigSelectedJavaIndexNode);
         GlobalVariable.LocalJavaList = startJavaPathList;
         GlobalVariable.ConfigVariable.ConfigGameStartJavaIndex = startJavaIndex;
-        GlobalVariable.ConfigVariable.ConfigGameStartJavaPath = startJavaPathList[startJavaIndex];
+        if (startJavaIndex > -1)
+            GlobalVariable.ConfigVariable.ConfigGameStartJavaPath = startJavaPathList[startJavaIndex];
         SettingsUserControl.Instance!.StartJavaSelectComboBox.ItemsSource = startJavaPathList;
         SettingsUserControl.Instance!.StartJavaSelectComboBox.SelectedIndex = startJavaIndex;
     }
